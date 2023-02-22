@@ -2,6 +2,7 @@
 
 Game::Game()
 : mWindow(sf::VideoMode(640, 480), "Algorithm Visualizer"),
+mTexture(),
 mPlayer(),
 mIsMovingUp(false),
 mIsMovingDown(false),
@@ -9,16 +10,20 @@ mIsMovingLeft(false),
 mIsMovingRight(false),
 playerSpeed(100.0)
 {
-    mPlayer.setRadius(40.f);
+    if(!mTexture.loadFromFile("./textures/game_flag.bmp"))
+    {
+        // Handle loading error
+    }
+    
+    mPlayer.setTexture(mTexture);
     mPlayer.setPosition(100.f, 100.f);
-    mPlayer.setFillColor(sf::Color::Cyan);
+
+    mWindow.setFramerateLimit(60);
+    mWindow.setVerticalSyncEnabled(true);
 }
 
 void Game::run()
 {
-    mWindow.setFramerateLimit(60);
-    mWindow.setVerticalSyncEnabled(true);
-
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
     while (mWindow.isOpen())

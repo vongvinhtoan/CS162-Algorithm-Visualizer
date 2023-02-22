@@ -11,8 +11,9 @@ private:
     void render();
     void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 private:
-    sf::RenderWindow  mWindow;
-    sf::CircleShape   mPlayer;
+    sf::RenderWindow    mWindow;
+    sf::Texture         mTexture;
+    sf::Sprite          mPlayer;
     bool mIsMovingUp;
     bool mIsMovingDown;
     bool mIsMovingLeft;
