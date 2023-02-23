@@ -1,4 +1,5 @@
 #include "textureHolder.h"
+#include <assert.h>
 
 void TextureHolder::load(Textures::ID id, const std::string& filename)
 {
@@ -7,8 +8,7 @@ void TextureHolder::load(Textures::ID id, const std::string& filename)
         throw std::runtime_error("TextureHolder::load - Failed to load "  + filename);
 
     auto inserted = mTextureMap.insert(std::make_pair(id, std::move(texture)));
-    if(inserted.second == false) 
-        throw std::logic_error("TextureHolder::load - Inserted multiple times");
+    assert(inserted.second);
 }
 
 sf::Texture& TextureHolder::get(Textures::ID id)
