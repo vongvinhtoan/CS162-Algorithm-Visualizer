@@ -10,7 +10,7 @@ mIsMovingLeft(false),
 mIsMovingRight(false),
 playerSpeed(200.f)
 {
-    if(!mTexture.load(Textures::Flag, "./textures/game_flag.bmp"))
+    if(!mTexture.load(Textures::Flag, "Media/Textures/game_flag.bmp"))
     {
         // Handle loading error
     }
