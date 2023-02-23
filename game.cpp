@@ -8,7 +8,7 @@ mIsMovingUp(false),
 mIsMovingDown(false),
 mIsMovingLeft(false),
 mIsMovingRight(false),
-playerSpeed(100.0)
+playerSpeed(200.f)
 {
     if(!mTexture.loadFromFile("./textures/game_flag.bmp"))
     {
