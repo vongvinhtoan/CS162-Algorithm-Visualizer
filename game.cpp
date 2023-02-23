@@ -1,4 +1,4 @@
-#include "game.h"
+#include "game.hpp"
 
 Game::Game()
 : mWindow(sf::VideoMode(640, 480), "Algorithm Visualizer"),

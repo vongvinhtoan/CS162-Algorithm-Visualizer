@@ -1,5 +1,6 @@
 #pragma once
-#include "ResourceHolder.h"
+
+#include "ResourceHolder.hpp"
 #include<SFML/Graphics.hpp>
 
 namespace Textures
@@ -29,4 +30,3 @@ private:
 private:
     const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
 };
-
