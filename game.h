@@ -1,6 +1,11 @@
 #pragma once
-#include "textureHolder.h"
+#include "ResourceHolder.h"
 #include<SFML/Graphics.hpp>
+
+namespace Textures
+{
+    enum ID{Flag};  
+} 
 
 class Game
 {
@@ -13,14 +18,14 @@ private:
     void render();
     void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 private:
-    sf::RenderWindow    mWindow;
-    TextureHolder       mTexture;
-    sf::Sprite          mPlayer;
-    bool mIsMovingUp;
-    bool mIsMovingDown;
-    bool mIsMovingLeft;
-    bool mIsMovingRight;
-    float playerSpeed;
+    sf::RenderWindow                            mWindow;
+    ResourceHolder<sf::Texture, Textures::ID>   mTexture;
+    sf::Sprite                                  mPlayer;
+    bool    mIsMovingUp;
+    bool    mIsMovingDown;
+    bool    mIsMovingLeft;
+    bool    mIsMovingRight;
+    float   playerSpeed;
 private:
     const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
 };
