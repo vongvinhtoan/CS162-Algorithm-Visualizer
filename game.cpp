@@ -10,12 +10,12 @@ mIsMovingLeft(false),
 mIsMovingRight(false),
 playerSpeed(200.f)
 {
-    if(!mTexture.loadFromFile("./textures/game_flag.bmp"))
+    if(!mTexture.load(Textures::Flag, "./textures/game_flag.bmp"))
     {
         // Handle loading error
     }
     
-    mPlayer.setTexture(mTexture);
+    mPlayer.setTexture(mTexture.get(Textures::Flag));
     mPlayer.setPosition(100.f, 100.f);
 
     mWindow.setFramerateLimit(60);
