@@ -1,15 +1,8 @@
 #pragma once
 
 #include "ResourceHolder.hpp"
+#include "Textures.hpp"
 #include <SFML/Graphics.hpp>
-
-namespace Textures
-{
-    enum ID
-    {
-        Flag
-    };  
-} 
 
 class Game
 {
