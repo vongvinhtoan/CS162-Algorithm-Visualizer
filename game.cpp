@@ -11,6 +11,7 @@ mIsMovingRight(false),
 playerSpeed(200.f)
 {
     mTexture.load(Textures::Flag1, "Media/Textures/game_flag.bmp");
+    mTexture.load(Textures::Flag2, "Media/Textures/game_flag.bmp");
     
     mPlayer.setTexture(mTexture.get(Textures::Flag1));
     mPlayer.setPosition(100.f, 100.f);
