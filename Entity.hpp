@@ -1,8 +1,9 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "SceneNode.hpp"
 
-class Entity
+class Entity : public SceneNode
 {
 private:
     sf::Vector2f mVelocity;
