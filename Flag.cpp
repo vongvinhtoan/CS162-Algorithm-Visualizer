@@ -12,7 +12,7 @@ void Flag::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(mSprite, states);
 }
 
-Textures::ID toTextureID(Flag::Type type)
+Textures::ID Flag::toTextureID(Flag::Type type)
 {
     switch (type)
     {

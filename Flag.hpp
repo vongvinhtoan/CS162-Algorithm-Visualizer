@@ -29,4 +29,7 @@ private:
     bool    mIsMovingLeft;
     bool    mIsMovingRight;
     float   playerSpeed;
+
+private:
+    Textures::ID toTextureID(Type type);
 };
