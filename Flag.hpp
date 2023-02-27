@@ -24,12 +24,5 @@ private:
     sf::Sprite mSprite;
 
 private:
-    bool    mIsMovingUp;
-    bool    mIsMovingDown;
-    bool    mIsMovingLeft;
-    bool    mIsMovingRight;
-    float   playerSpeed;
-
-private:
     Textures::ID toTextureID(Type type);
 };
