@@ -1,10 +1,16 @@
 #include "game.hpp"
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 int main()
 {
-    Game game;
-    game.run();
-
-    return 0;
+    try
+    {
+        Game game;
+        game.run();
+    }
+    catch (std::exception& e)
+    {
+        std::cout << "\nEXCEPTION: " << e.what() << std::endl;
+    }
 }
