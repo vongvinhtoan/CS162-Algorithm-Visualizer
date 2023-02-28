@@ -2,7 +2,8 @@
 
 Game::Game() : 
 mWindow(sf::VideoMode(640, 480), "Algorithm Visualizer"),
-mWorld(mWindow)
+mWorld(mWindow),
+mIsPaused(false)
 {
     mWindow.setFramerateLimit(60);
     mWindow.setVerticalSyncEnabled(true);
@@ -20,7 +21,7 @@ void Game::run()
         {
             timeSinceLastUpdate -= TimePerFrame;
             processEvents();
-            update(TimePerFrame);
+            if(!mIsPaused) update(TimePerFrame);
         }
         render();
     }
@@ -35,6 +36,12 @@ void Game::processEvents()
         {
             case sf::Event::Closed:
                 mWindow.close();
+                break;
+            case sf::Event::GainedFocus:
+                mIsPaused = false;
+                break;
+            case sf::Event::LostFocus:
+                mIsPaused = true;
                 break;
         }
     }

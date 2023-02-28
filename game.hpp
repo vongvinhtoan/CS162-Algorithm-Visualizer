@@ -10,7 +10,7 @@ class Game
 public:
     Game();
     void run();
-    
+
 private:
     void processEvents();
     void update(sf::Time deltaTime);
@@ -20,6 +20,7 @@ private:
 private:
     sf::RenderWindow    mWindow;
     World               mWorld;
+    bool                mIsPaused;
 
 private:
     const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
