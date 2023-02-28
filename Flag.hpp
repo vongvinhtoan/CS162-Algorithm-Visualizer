@@ -3,6 +3,7 @@
 #include "ResourceHolder.hpp"
 #include "Textures.hpp"
 #include "Entity.hpp"
+#include "Category.hpp"
 #include <SFML/Graphics.hpp>
 
 class Flag : public Entity
@@ -14,8 +15,9 @@ public:
         Flag2
     };
 
-    explicit        Flag(Type type, const TextureHolder &texture);
-    virtual void    drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
+    explicit                Flag(Type type, const TextureHolder &texture);
+    virtual void            drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
+    virtual unsigned int    getCategory() const;
 
 private:
     Type mType;

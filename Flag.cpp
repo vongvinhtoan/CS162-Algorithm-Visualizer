@@ -7,6 +7,24 @@ mSprite(texture.get(toTextureID(type)))
 
 }
 
+unsigned int Flag::getCategory() const
+{
+    switch (mType)
+    {
+    case Flag1:
+        return Category::PlayerFlag;
+        break;
+
+    case Flag2:
+        return Category::AlliedFlag;
+        break;
+    
+    default:
+        return Category::EnemyFlag;
+        break;
+    }
+}
+
 void Flag::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(mSprite, states);

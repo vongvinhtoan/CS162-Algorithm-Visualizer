@@ -8,6 +8,11 @@ SceneNode::SceneNode()
     
 }
 
+unsigned int SceneNode::getCategory() const
+{
+    return Category::Scene;
+}
+
 void SceneNode::attachChild(Ptr child)
 {
     child->mParent = this;

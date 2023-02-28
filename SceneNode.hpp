@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <vector>
+#include "Category.hpp"
 
 class SceneNode : 
 public sf::Drawable,
@@ -19,6 +20,7 @@ public:
     void update(sf::Time dt);
     sf::Vector2f getWorldPosition() const;
     sf::Transform getWorldTransform() const;
+    virtual unsigned int getCategory() const;
 
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
