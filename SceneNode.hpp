@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include "Category.hpp"
+#include "Command.hpp"
 
 class SceneNode : 
 public sf::Drawable,
@@ -21,6 +22,8 @@ public:
     sf::Vector2f getWorldPosition() const;
     sf::Transform getWorldTransform() const;
     virtual unsigned int getCategory() const;
+    void onCommand(const Command& command, sf::Time dt);
+
 
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -33,3 +36,4 @@ private:
     std::vector<Ptr> mChildren;
     SceneNode* mParent;
 };
+

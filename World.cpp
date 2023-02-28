@@ -81,5 +81,8 @@ void World::update(sf::Time dt)
         mPlayerFlag->setVelocity(velocity);
     }
 
+    while (!mCommandQueue.isEmpty())
+        mSceneGraph.onCommand(mCommandQueue.pop(), dt);
+
     mSceneGraph.update(dt);
 }

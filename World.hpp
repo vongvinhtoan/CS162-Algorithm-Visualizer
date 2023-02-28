@@ -5,6 +5,7 @@
 #include "SceneNode.hpp"
 #include "SpriteNode.hpp"
 #include "Flag.hpp"
+#include "CommandQueue.hpp"
 #include <array>
 
 class World : private sf::NonCopyable
@@ -30,6 +31,7 @@ private:
     TextureHolder                        mTextures;
     SceneNode                            mSceneGraph;
     std::array<SceneNode*, LayerCount>   mSceneLayers;
+    CommandQueue                         mCommandQueue;
     
     sf::FloatRect                        mWorldBounds;
     sf::Vector2f                         mSpawnPosition;
