@@ -1,7 +1,7 @@
 #include "game.hpp"
 
 Game::Game() : 
-mWindow(sf::VideoMode(640, 480), "Algorithm Visualizer"),
+mWindow(sf::VideoMode(640, 480), "Algorithm Visualizer", sf::Style::Close),
 mWorld(mWindow),
 mIsPaused(false)
 {
@@ -15,23 +15,26 @@ void Game::run()
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
     while (mWindow.isOpen())
     {
-        processEvents();
+        processInput();
         timeSinceLastUpdate += clock.restart();
         while (timeSinceLastUpdate > TimePerFrame)
         {
             timeSinceLastUpdate -= TimePerFrame;
-            processEvents();
+            processInput();
             if(!mIsPaused) update(TimePerFrame);
         }
         render();
     }
 }
 
-void Game::processEvents()
+void Game::processInput()
 {
+    CommandQueue& commandQueue = mWorld.getCommandQueue();
+
     sf::Event event;
     while(mWindow.pollEvent(event))
     {
+        mPlayer.handleEvent(event, commandQueue);
         switch (event.type)
         {
             case sf::Event::Closed:
@@ -45,6 +48,8 @@ void Game::processEvents()
                 break;
         }
     }
+
+    mPlayer.handleRealtimeInput(commandQueue);
 }
 
 void Game::update(sf::Time dt)
