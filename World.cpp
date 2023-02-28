@@ -24,9 +24,9 @@ mPlayerFlag(nullptr)
 
 void World::loadTextures()
 {
-    mTextures.load(Textures::Flag1,  "Media/Textures/game_flag.bmp");
-    mTextures.load(Textures::Flag2,  "Media/Textures/game_flag.bmp");
-    mTextures.load(Textures::Tile, "Media/Textures/tile.jpg");
+    mTextures.load(Textures::Flag1, "Media/Textures/game_flag.bmp");
+    mTextures.load(Textures::Flag2, "Media/Textures/game_flag.bmp");
+    mTextures.load(Textures::Tile , "Media/Textures/tile.jpg");
 }
 
 void World::buildScene()
@@ -49,7 +49,7 @@ void World::buildScene()
     std::unique_ptr<Flag> leader(new Flag(Flag::Flag1, mTextures));
     mPlayerFlag = leader.get();
     mPlayerFlag->setPosition(mSpawnPosition);
-    mPlayerFlag->setVelocity(40.f, mScrollSpeed);
+    mPlayerFlag->setVelocity(0.f, mScrollSpeed);
     mSceneLayers[Air]->attachChild(std::move(leader));
 
     std::unique_ptr<Flag> rightFlag(new Flag(Flag::Flag2, mTextures));
