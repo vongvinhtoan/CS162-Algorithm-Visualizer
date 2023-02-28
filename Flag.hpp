@@ -5,8 +5,6 @@
 #include "Entity.hpp"
 #include <SFML/Graphics.hpp>
 
-typedef ResourceHolder<sf::Texture, Textures::ID>  TextureHolder;
-
 class Flag : public Entity
 {
 public:
