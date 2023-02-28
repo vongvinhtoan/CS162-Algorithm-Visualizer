@@ -7,13 +7,13 @@ mWorldBounds(
     0.f,
     0.f,
     mWorldView.getSize().x,
-    2000.f
+    4000.f
 ),
 mSpawnPosition(
     mWorldView.getSize().x / 2.f,
     mWorldBounds.height - mWorldView.getSize().y / 2.f
 ),
-mScrollSpeed(-20.f),
+mScrollSpeed(-400.f),
 mPlayerFlag(nullptr)
 {
     loadTextures();
@@ -52,13 +52,13 @@ void World::buildScene()
     mPlayerFlag->setVelocity(40.f, mScrollSpeed);
     mSceneLayers[Air]->attachChild(std::move(leader));
 
-    std::unique_ptr<Flag> rightEscort(new Flag(Flag::Flag2, mTextures));
-    rightEscort->setPosition(80.f, 50.f); 
-    mPlayerFlag->attachChild(std::move(rightEscort));
+    std::unique_ptr<Flag> rightFlag(new Flag(Flag::Flag2, mTextures));
+    rightFlag->setPosition(80.f, 50.f); 
+    mPlayerFlag->attachChild(std::move(rightFlag));
 
-    std::unique_ptr<Flag> leftEscort(new Flag(Flag::Flag2, mTextures));
-    leftEscort->setPosition(-80.f, 50.f); 
-    mPlayerFlag->attachChild(std::move(leftEscort));
+    std::unique_ptr<Flag> leftFlag(new Flag(Flag::Flag2, mTextures));
+    leftFlag->setPosition(-80.f, 50.f);
+    mPlayerFlag->attachChild(std::move(leftFlag));
 }
 
 void World::draw()
@@ -74,7 +74,7 @@ void World::update(sf::Time dt)
     sf::Vector2f position = mPlayerFlag->getPosition();
     sf::Vector2f velocity = mPlayerFlag->getVelocity();
 
-    if (position.x <= mWorldBounds.left + 150 
+    if(position.x <= mWorldBounds.left + 150 
     || position.x >= mWorldBounds.left + mWorldBounds.width - 150)
     {
         velocity.x = -velocity.x;
