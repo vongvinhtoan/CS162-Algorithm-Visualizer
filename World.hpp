@@ -19,6 +19,7 @@ public:
 private:
     void loadTextures();
     void buildScene();
+
 private:
     enum Layer
     {
@@ -26,6 +27,7 @@ private:
         Air,
         LayerCount
     };
+    
 private:
     sf::RenderWindow&                    mWindow;
     sf::View                             mWorldView;
