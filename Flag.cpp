@@ -4,7 +4,7 @@ Flag::Flag(Type type, const TextureHolder &texture) :
 mType(type),
 mSprite(texture.get(toTextureID(type)))
 {
-
+    mSprite.setOrigin(sf::Vector2f(texture.get(toTextureID(type)).getSize()) / 2.f);
 }
 
 unsigned int Flag::getCategory() const
