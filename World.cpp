@@ -1,4 +1,5 @@
 #include "World.hpp"
+#include <math.h>
 
 World::World(sf::RenderWindow& window) :
 mWindow(window),
@@ -71,18 +72,17 @@ void World::update(sf::Time dt)
 {
     mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());
 
-    sf::Vector2f position = mPlayerFlag->getPosition();
-    sf::Vector2f velocity = mPlayerFlag->getVelocity();
-
-    if(position.x <= mWorldBounds.left + 150 
-    || position.x >= mWorldBounds.left + mWorldBounds.width - 150)
-    {
-        velocity.x = -velocity.x;
-        mPlayerFlag->setVelocity(velocity);
-    }
+    mPlayerFlag->setVelocity(0, 0);
 
     while (!mCommandQueue.isEmpty())
         mSceneGraph.onCommand(mCommandQueue.pop(), dt);
+
+    sf::Vector2f velocity = mPlayerFlag->getVelocity();
+    if (velocity.x != 0.f && velocity.y != 0.f)
+        mPlayerFlag->setVelocity(velocity / std::sqrt(2.f));
+
+    mPlayerFlag->accelerate(0, mScrollSpeed);
+
 
     mSceneGraph.update(dt);
 }
