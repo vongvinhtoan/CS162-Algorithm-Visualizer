@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "Textures.hpp"
 #include "SceneNode.hpp"
 #include "SpriteNode.hpp"
 #include "Flag.hpp"

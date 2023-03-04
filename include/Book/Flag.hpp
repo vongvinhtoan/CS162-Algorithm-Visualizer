@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ResourceHolder.hpp"
-#include "Textures.hpp"
 #include "Entity.hpp"
 #include "Category.hpp"
 #include <SFML/Graphics.hpp>
