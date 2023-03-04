@@ -1,4 +1,4 @@
-#include <Book/game.hpp>
+#include <Book/Game.hpp>
 
 Game::Game() : 
 mWindow(sf::VideoMode(640, 480), "Algorithm Visualizer", sf::Style::Close),
