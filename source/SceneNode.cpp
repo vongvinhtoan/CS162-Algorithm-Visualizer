@@ -1,4 +1,4 @@
-#include "SceneNode.hpp"
+#include <Book/SceneNode.hpp>
 
 #include <assert.h>
 #include <algorithm>

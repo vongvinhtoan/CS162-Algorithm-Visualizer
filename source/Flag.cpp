@@ -1,4 +1,4 @@
-#include "Flag.hpp"
+#include <Book/Flag.hpp>
 
 Flag::Flag(Type type, const TextureHolder &texture) : 
 mType(type),

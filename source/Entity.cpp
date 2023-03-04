@@ -1,4 +1,4 @@
-#include "Entity.hpp"
+#include <Book/Entity.hpp>
 
 sf::Vector2f Entity::getVelocity() const
 {
