@@ -2,7 +2,6 @@
 
 #include "ResourceHolder.hpp"
 #include "Entity.hpp"
-#include "Category.hpp"
 #include <SFML/Graphics.hpp>
 
 class Flag : public Entity

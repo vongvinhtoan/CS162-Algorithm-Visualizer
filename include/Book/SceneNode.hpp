@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <vector>
-#include "Category.hpp"
 #include "Command.hpp"
 
 class SceneNode : 
