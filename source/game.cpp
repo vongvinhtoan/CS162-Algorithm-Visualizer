@@ -5,8 +5,7 @@ mWindow(sf::VideoMode(640, 480), "Algorithm Visualizer", sf::Style::Close),
 mWorld(mWindow),
 mIsPaused(false)
 {
-    mWindow.setFramerateLimit(60);
-    mWindow.setVerticalSyncEnabled(true);
+    
 }
 
 void Game::run()
