@@ -39,7 +39,7 @@ void World::buildScene()
         mSceneGraph.attachChild(std::move(layer));
     }
 
-    sf::Texture& texture = mTextures.get(Textures::Tile);
+    sf::Texture& texture = mTextures[Textures::Tile];
     sf::IntRect textureRect(mWorldBounds);
     texture.setRepeated(true);
 

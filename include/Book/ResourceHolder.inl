@@ -24,7 +24,7 @@ void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string
 }
 
 template<typename Resource, typename Identifier>
-Resource& ResourceHolder<Resource, Identifier>::get(Identifier id)
+Resource& ResourceHolder<Resource, Identifier>::operator[] (Identifier id)
 {
     auto found = mResourceMap.find(id);
     assert(found != mResourceMap.end());
@@ -33,7 +33,7 @@ Resource& ResourceHolder<Resource, Identifier>::get(Identifier id)
 }
 
 template<typename Resource, typename Identifier>
-const Resource& ResourceHolder<Resource, Identifier>::get(Identifier id) const
+const Resource& ResourceHolder<Resource, Identifier>::operator[] (Identifier id) const
 {
     auto found = mResourceMap.find(id);
     assert(found != mResourceMap.end());
