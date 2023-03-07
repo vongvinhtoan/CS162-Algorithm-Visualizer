@@ -1,11 +1,10 @@
 #include <Book/Player.hpp>
+#include <iostream>
 
 Player::Player()
 {
 
 }
-
-#include <iostream>
 
 void Player::handleEvent(const sf::Event& event, CommandQueue& commands)
 {
