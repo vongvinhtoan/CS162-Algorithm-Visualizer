@@ -91,7 +91,7 @@ void Game::updateStatistics(sf::Time elapsedTime)
 	if (mStatisticsUpdateTime >= sf::seconds(1.0f))
 	{
 		mStatisticsText.setString(
-			"Frames / Second = " + std::to_string(mStatisticsNumFrames) + "\n" +
+			"FPS = " + std::to_string(mStatisticsNumFrames) + "\n" +
 			"Time / Update = " + std::to_string(mStatisticsUpdateTime.asMicroseconds() / mStatisticsNumFrames) + "us");
 							 
 		mStatisticsUpdateTime -= sf::seconds(1.0f);
