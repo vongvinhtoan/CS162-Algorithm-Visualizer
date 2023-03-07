@@ -31,4 +31,13 @@ namespace Textures
     };  
 } 
 
+namespace Fonts
+{
+    enum ID
+    {
+
+    };
+}
+
 typedef ResourceHolder<sf::Texture, Textures::ID> TextureHolder;
+typedef ResourceHolder<sf::Font, Fonts::ID> FontHolder;
