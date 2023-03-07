@@ -16,7 +16,6 @@ private:
     void update(sf::Time deltaTime);
     void updateStatistics(sf::Time elapsedTime);
     void render();
-    void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 
 private:
     sf::RenderWindow    mWindow;

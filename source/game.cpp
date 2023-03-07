@@ -78,11 +78,6 @@ void Game::render()
     mWindow.display();
 }
 
-void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
-{
-    
-}
-
 void Game::updateStatistics(sf::Time elapsedTime)
 {
 	mStatisticsUpdateTime += elapsedTime;
