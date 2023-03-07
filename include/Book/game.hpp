@@ -26,7 +26,7 @@ private:
     Player              mPlayer;
     sf::Text            mStatisticsText;
     sf::Time            mStatisticsUpdateTime;
-	float               mStatisticsNumFrames;
+	int                 mStatisticsNumFrames;
 
 private:
     const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
