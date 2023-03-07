@@ -25,7 +25,7 @@ void Player::handleEvent(const sf::Event& event, CommandQueue& commands)
 
 void Player::handleRealtimeInput(CommandQueue& commands)
 {
-    float playerSpeed = 100.f;
+    float playerSpeed = 10.f;
     
     Command moveLeft;
     moveLeft.category = Category::PlayerFlag;
