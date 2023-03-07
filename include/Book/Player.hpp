@@ -19,9 +19,9 @@ struct FlagMover
     {
     }
 
-    void operator() (Flag& flag, sf::Time) const
+    void operator() (Flag& flag, sf::Time dt) const
     {
-        flag.accelerate(velocity);
+        flag.accelerate(velocity * dt.asSeconds());
     }
 
     sf::Vector2f velocity;
