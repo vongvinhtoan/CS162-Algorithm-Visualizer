@@ -17,7 +17,6 @@ public:
 
 private:
     void loadTextures();
-    void loadFonts();
     void buildScene();
 
 private:
