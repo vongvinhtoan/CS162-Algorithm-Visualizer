@@ -39,6 +39,7 @@ void World::buildScene()
         mSceneGraph.attachChild(std::move(layer));
     }
 
+    // Background layer
     sf::Texture& texture = mTextures[Textures::Tile];
     sf::IntRect textureRect(mWorldBounds);
     texture.setRepeated(true);
@@ -47,6 +48,7 @@ void World::buildScene()
     backgroundSprite->setPosition(mWorldBounds.left, mWorldBounds.top);
     mSceneLayers[Background]->attachChild(std::move(backgroundSprite));
 
+    // Air layer
     std::unique_ptr<Flag> leader(new Flag(Flag::Flag1, mTextures));
     mPlayerFlag = leader.get();
     mPlayerFlag->setPosition(mSpawnPosition);

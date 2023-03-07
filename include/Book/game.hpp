@@ -14,14 +14,19 @@ public:
 private:
     void processInput();
     void update(sf::Time deltaTime);
+    void updateStatistics(sf::Time elapsedTime);
     void render();
     void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 
 private:
     sf::RenderWindow    mWindow;
     World               mWorld;
+    FontHolder          mFonts;
     bool                mIsPaused;
     Player              mPlayer;
+    sf::Text            mStatisticsText;
+    sf::Time            mStatisticsUpdateTime;
+	float               mStatisticsNumFrames;
 
 private:
     const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);

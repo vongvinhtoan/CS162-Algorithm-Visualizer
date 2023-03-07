@@ -1,27 +1,39 @@
 #include <Book/Game.hpp>
+#include <iostream>
 
 Game::Game() : 
 mWindow(sf::VideoMode(640, 480), "Algorithm Visualizer", sf::Style::Close),
 mWorld(mWindow),
-mIsPaused(false)
+mIsPaused(false),
+mStatisticsNumFrames(0),
+mStatisticsUpdateTime()
 {
-    
+    mFonts.load(Fonts::Default, "Media/Fonts/Sansation.ttf");
+
+	mStatisticsText.setFont(mFonts[Fonts::Default]);
+	mStatisticsText.setPosition(5.f, 5.f);
+	mStatisticsText.setCharacterSize(10);
 }
 
 void Game::run()
 {
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
+    sf::Time elapsed = sf::Time::Zero;
+
     while (mWindow.isOpen())
     {
         processInput();
-        timeSinceLastUpdate += clock.restart();
+        elapsed = clock.restart();
+        timeSinceLastUpdate += elapsed;
         while (timeSinceLastUpdate > TimePerFrame)
         {
             timeSinceLastUpdate -= TimePerFrame;
+
             processInput();
             if(!mIsPaused) update(TimePerFrame);
         }
+        updateStatistics(elapsed);
         render();
     }
 }
@@ -62,10 +74,27 @@ void Game::render()
     mWorld.draw();
 
     mWindow.setView(mWindow.getDefaultView());
+    mWindow.draw(mStatisticsText);
     mWindow.display();
 }
 
 void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 {
     
+}
+
+void Game::updateStatistics(sf::Time elapsedTime)
+{
+	mStatisticsUpdateTime += elapsedTime;
+	mStatisticsNumFrames += 1;
+
+	if (mStatisticsUpdateTime >= sf::seconds(1.0f))
+	{
+		mStatisticsText.setString(
+			"Frames / Second = " + std::to_string(mStatisticsNumFrames) + "\n" +
+			"Time / Update = " + std::to_string(mStatisticsUpdateTime.asMicroseconds() / mStatisticsNumFrames) + "us");
+							 
+		mStatisticsUpdateTime -= sf::seconds(1.0f);
+		mStatisticsNumFrames = 0;
+	}
 }

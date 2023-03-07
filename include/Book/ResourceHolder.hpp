@@ -35,7 +35,7 @@ namespace Fonts
 {
     enum ID
     {
-
+        Default
     };
 }
 

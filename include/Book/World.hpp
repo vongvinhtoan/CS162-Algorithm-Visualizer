@@ -17,6 +17,7 @@ public:
 
 private:
     void loadTextures();
+    void loadFonts();
     void buildScene();
 
 private:
@@ -24,6 +25,7 @@ private:
     {
         Background,
         Air,
+        InfoText,
         LayerCount
     };
     
