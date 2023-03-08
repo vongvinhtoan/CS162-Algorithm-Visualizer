@@ -9,6 +9,7 @@ mStatisticsUpdateTime()
 {
     registerStates();
     mStateStack.pushState(States::Game);
+    mStateStack.draw();
     
     mFonts.load(Fonts::Default, "Media/Fonts/Sansation.ttf");
 
