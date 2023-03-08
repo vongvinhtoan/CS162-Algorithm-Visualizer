@@ -16,7 +16,7 @@ class StateStack : private sf::NonCopyable
         {
             Push,
             Pop,
-            Clear,
+            Clear
         };
     public:        
         explicit            StateStack(State::Context context);
@@ -29,6 +29,7 @@ class StateStack : private sf::NonCopyable
         void                popState();
         void                clearStates();
         bool                isEmpty() const;
+        unsigned int        size() const;
     private:
         State::Ptr          createState(States::ID stateID);
         void                applyPendingChanges();
