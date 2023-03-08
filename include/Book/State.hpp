@@ -27,10 +27,12 @@ class State
         {
             Context(sf::RenderWindow& window,
                     TextureHolder& textures,
-                    FontHolder& fonts);
+                    FontHolder& fonts,
+                    Player& player);
             sf::RenderWindow*  window;
             TextureHolder*     textures;
             FontHolder*        fonts;
+            Player*            player;
         };
     public:
                         State(StateStack& stack, Context context);
@@ -38,6 +40,7 @@ class State
         virtual void    draw() = 0;
         virtual bool    update(sf::Time dt) = 0;
         virtual bool    handleEvent(const sf::Event& event) = 0;
+        virtual bool    handleRealtimeInput() = 0;
     protected:
         void            requestStackPush(States::ID stateID);
         void            requestStackPop();

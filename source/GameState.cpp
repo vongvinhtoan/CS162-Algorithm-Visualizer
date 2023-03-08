@@ -18,7 +18,13 @@ bool GameState::update(sf::Time dt)
 bool GameState::handleEvent(const sf::Event& event)
 {
     CommandQueue& commandQueue = mWorld.getCommandQueue();
-    mPlayer.handleEvent(event, commandQueue);
-    mPlayer.handleRealtimeInput(commandQueue);
+    getContext().player->handleEvent(event, commandQueue);
+    return true;
+}
+
+bool GameState::handleRealtimeInput()
+{
+    CommandQueue& commandQueue = mWorld.getCommandQueue();
+    getContext().player->handleRealtimeInput(commandQueue);
     return true;
 }

@@ -5,12 +5,14 @@ State::Context::Context
 (
     sf::RenderWindow& window,
     TextureHolder& textures,
-    FontHolder& fonts
+    FontHolder& fonts,
+    Player& player
 ) 
 :
 window(&window),
 textures(&textures),
-fonts(&fonts) {}
+fonts(&fonts),
+player(&player) {}
 
 
 State::State(StateStack& stack, Context context) : 

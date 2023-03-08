@@ -21,6 +21,17 @@ void StateStack::handleEvent(const sf::Event& event)
     applyPendingChanges();
 }
 
+void StateStack::handleRealtimeInput()
+{
+    for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
+    {
+        if (!(*itr)->handleRealtimeInput())
+            return;
+    }
+ 
+    applyPendingChanges();
+}
+
 void StateStack::update(sf::Time dt)
 {
     for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)

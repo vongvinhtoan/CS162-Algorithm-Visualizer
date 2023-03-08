@@ -25,6 +25,7 @@ class StateStack : private sf::NonCopyable
         void                update(sf::Time dt);
         void                draw();
         void                handleEvent(const sf::Event& event);
+        void                handleRealtimeInput();
         void                pushState(States::ID stateID);
         void                popState();
         void                clearStates();

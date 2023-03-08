@@ -1,7 +1,7 @@
 #include <Book/Application.hpp>
 
 Application::Application() : 
-mStateStack(State::Context(mWindow, mTextures, mFonts)),
+mStateStack(State::Context(mWindow, mTextures, mFonts, mPlayer)),
 mWindow(sf::VideoMode(640, 480), "Algorithm Visualizer", sf::Style::Close),
 mIsPaused(false),
 mStatisticsNumFrames(0),
@@ -70,6 +70,7 @@ void Application::processInput()
                 break;
         }
     }
+    mStateStack.handleRealtimeInput();
 }
 
 void Application::update(sf::Time dt)

@@ -26,12 +26,12 @@ private:
     sf::RenderWindow    mWindow;
     TextureHolder       mTextures;
     FontHolder          mFonts;
-    Player              mPlayer;
     bool                mIsPaused;
     sf::Text            mStatisticsText;
     sf::Time            mStatisticsUpdateTime;
 	int                 mStatisticsNumFrames;
     StateStack          mStateStack;
+    Player              mPlayer;
 
 private:
     const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
