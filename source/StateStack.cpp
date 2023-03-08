@@ -1,13 +1,7 @@
 #include <Book/StateStack.hpp>
 
-template <typename T>
-void StateStack::registerState(States::ID stateID)
-{
-    mFactories[stateID] = [this] ()
-    {
-        return State::Ptr(new T(*this, mContext));
-    };
-}
+StateStack::StateStack(State::Context context) :
+mContext(context) {}
 
 State::Ptr StateStack::createState(States::ID stateID)
 {

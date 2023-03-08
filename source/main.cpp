@@ -1,4 +1,4 @@
-#include <Book/Game.hpp>
+#include <Book/Application.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -6,8 +6,8 @@ int main()
 {
     try
     {
-        Game game;
-        game.run();
+        Application application;
+        application.run();
     }
     catch (std::exception& e)
     {

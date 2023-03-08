@@ -11,7 +11,11 @@ namespace States
 {  
     enum ID
     {
-        NONE
+        NONE,
+        Title,
+        Menu,
+        Game,
+        Pause
     };
 } 
 
@@ -23,12 +27,10 @@ class State
         {
             Context(sf::RenderWindow& window,
                     TextureHolder& textures,
-                    FontHolder& fonts,
-                    Player& player);
+                    FontHolder& fonts);
             sf::RenderWindow*  window;
             TextureHolder*     textures;
             FontHolder*        fonts;
-            Player*            player;
         };
     public:
                         State(StateStack& stack, Context context);
