@@ -79,5 +79,10 @@ void StateStack::clearStates()
 
 bool StateStack::isEmpty() const
 {
-    return mPendingList.size() == 0;
+    return mStack.size() == 0;
+}
+
+unsigned int StateStack::size() const
+{
+    return mStack.size();
 }
