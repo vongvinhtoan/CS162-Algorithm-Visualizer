@@ -7,11 +7,11 @@ mIsPaused(false),
 mStatisticsNumFrames(0),
 mStatisticsUpdateTime()
 {
-    registerStates();
-    mStateStack.pushState(States::Game);
-    mStateStack.draw();
-    
     mFonts.load(Fonts::Default, "Media/Fonts/Sansation.ttf");
+    
+    registerStates();
+    mStateStack.pushState(States::Title);
+    mStateStack.draw();
 
 	mStatisticsText.setFont(mFonts[Fonts::Default]);
 	mStatisticsText.setPosition(5.f, 5.f);
@@ -20,7 +20,7 @@ mStatisticsUpdateTime()
 
 void Application::registerStates()
 {
-    // mStateStack.registerState<TitleState>(States::Title);
+    mStateStack.registerState<TitleState>(States::Title);
     // mStateStack.registerState<MenuState>(States::Menu);
     mStateStack.registerState<GameState>(States::Game);
     // mStateStack.registerState<PauseState>(States::Pause);
