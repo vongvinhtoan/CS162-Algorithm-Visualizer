@@ -24,7 +24,6 @@ private:
     {
         Background,
         Air,
-        InfoText,
         LayerCount
     };
     
