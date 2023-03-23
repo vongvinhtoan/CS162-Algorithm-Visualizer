@@ -15,5 +15,5 @@ class TitleState : public State
         sf::Text            mText;
         bool                mShowText;
         sf::Time            mTextEffectTime;
-        sf::RenderWindow    *mWindow;
+        sf::RenderWindow*   mWindow;
 };

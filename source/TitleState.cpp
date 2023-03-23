@@ -1,6 +1,5 @@
 #include <States/TitleState.hpp>
 
-
 TitleState::TitleState(StateStack& stack, Context context) : 
 State(stack, context),
 mWindow(context.window)
@@ -36,7 +35,7 @@ bool TitleState::handleEvent(const sf::Event& event)
     if (event.type == sf::Event::KeyPressed)
     {
         requestStackPop();
-        requestStackPush(States::Game);
+        requestStackPush(States::Menu);
     }
     return true;
 }
