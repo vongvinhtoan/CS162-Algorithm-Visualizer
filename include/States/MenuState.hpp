@@ -1,5 +1,6 @@
 #pragma once
 #include <Book/State.hpp>
+#include <Book/Button.hpp>
 
 class MenuState : public State
 {
@@ -12,4 +13,8 @@ class MenuState : public State
 
     private:
         sf::RenderWindow*   mWindow;
+        Button              bStaticArray;
+        Button              bDynamicArray;
+        Button              bSinglyLinkedList;
+        Button              bDoublyLinkedList;
 };

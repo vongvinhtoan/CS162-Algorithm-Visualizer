@@ -11,7 +11,6 @@ class TitleState : public State
         virtual bool        handleRealtimeInput();
         
     private:
-        sf::Sprite          mBackgroundSprite;
         sf::Text            mText;
         bool                mShowText;
         sf::Time            mTextEffectTime;
