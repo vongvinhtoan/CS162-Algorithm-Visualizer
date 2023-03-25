@@ -1,6 +1,7 @@
 #include <Book/Button.hpp>
 
-Button::Button(sf::Text text, sf::RectangleShape background): 
+Button::Button(Category category, sf::Text text, sf::RectangleShape background): 
+mCategory{category},
 mText{text},
 mBackground{background} 
 {
@@ -61,4 +62,14 @@ void Button::handleRealtimeInput(sf::RenderWindow* window)
 void Button::setPosition(float x, float y)
 {
     mBackground.setPosition(x, y);
+}
+
+sf::FloatRect Button::getGlobalBounds() const
+{
+    return mBackground.getGlobalBounds();
+}
+
+unsigned int Button::getCategory() const
+{
+    return mCategory;
 }

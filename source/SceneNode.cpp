@@ -19,7 +19,7 @@ void SceneNode::onCommand(const Command& command, sf::Time dt)
 
 unsigned int SceneNode::getCategory() const
 {
-    return Category::Scene;
+    return 0;
 }
 
 void SceneNode::attachChild(Ptr child)

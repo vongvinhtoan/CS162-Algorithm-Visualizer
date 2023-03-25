@@ -1,6 +1,8 @@
 #pragma once
 #include <Book/State.hpp>
 #include <Book/Button.hpp>
+#include <Book/CommandQueue.hpp>
+#include <array>
 
 class MenuState : public State
 {
@@ -12,9 +14,19 @@ class MenuState : public State
         virtual bool        handleRealtimeInput();
 
     private:
-        sf::RenderWindow*   mWindow;
-        Button              bStaticArray;
-        Button              bDynamicArray;
-        Button              bSinglyLinkedList;
-        Button              bDoublyLinkedList;
+        void                buildScenes();
+
+    private:
+        enum Layers 
+        {
+            Buttons,
+            LayerCount
+        };
+
+    private:
+        sf::RenderWindow*                   mWindow;
+        SceneNode                           mSceneGraph;
+        std::vector<Button*>                mButtons;
+        std::array<SceneNode*, LayerCount>  mSceneLayers;
+        CommandQueue                        mCommandQueue;
 };

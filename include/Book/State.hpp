@@ -15,6 +15,10 @@ namespace States
         Title,
         Menu,
         Game,
+        StaticArray,
+        DynamicArray,
+        SinglyLinkedList,
+        DoublyLinkedList,
         Pause
     };
 } 
