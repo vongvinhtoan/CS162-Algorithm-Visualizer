@@ -68,7 +68,25 @@ bool MenuState::update(sf::Time dt)
 
 bool MenuState::handleEvent(const sf::Event& event)
 {
-    
+    if(event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
+    {
+        sf::Vector2i pos(event.mouseButton.x, event.mouseButton.y);
+        for(auto button: mButtons)
+        {
+            auto rect = button->getGlobalBounds();
+            if(!rect.contains(pos.x, pos.y)) continue;
+            switch (button->getCategory())
+            {
+            case Button::Category::SinglyLinkedList:
+                requestStackPop();
+                requestStackPush(States::SinglyLinkedList);
+                break;
+            
+            default:
+                break;
+            }
+        }
+    }
     return true;
 }
 

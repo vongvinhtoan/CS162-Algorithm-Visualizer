@@ -10,7 +10,7 @@ mStatisticsUpdateTime()
     mFonts.load(Fonts::Default, "Media/Fonts/Sansation.ttf");
     
     registerStates();
-    mStateStack.pushState(States::Menu);
+    mStateStack.pushState(States::Title);
     mStateStack.draw();
 
 	mStatisticsText.setFont(mFonts[Fonts::Default]);
@@ -23,10 +23,10 @@ void Application::registerStates()
     mStateStack.registerState<TitleState>(States::Title);
     mStateStack.registerState<MenuState>(States::Menu);
     mStateStack.registerState<GameState>(States::Game);
-    // mStateStack.registerState<PauseState>(States::StaticArray);
-    // mStateStack.registerState<PauseState>(States::DynamicArray);
-    // mStateStack.registerState<PauseState>(States::SinglyLinkedList);
-    // mStateStack.registerState<PauseState>(States::DoublyLinkedList);
+    // mStateStack.registerState<StaticArray>(States::StaticArray);
+    // mStateStack.registerState<DynamicArray>(States::DynamicArray);
+    mStateStack.registerState<SinglyLinkedList>(States::SinglyLinkedList);
+    // mStateStack.registerState<DoublyLinkedList>(States::DoublyLinkedList);
     // mStateStack.registerState<PauseState>(States::Pause);
 }
 

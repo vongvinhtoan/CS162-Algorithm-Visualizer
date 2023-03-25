@@ -8,6 +8,10 @@
 #include <States/MenuState.hpp>
 #include <States/GameState.hpp>
 #include <States/PauseState.hpp>
+#include <States/DataStructures/StaticArray.hpp>
+#include <States/DataStructures/DynamicArray.hpp>
+#include <States/DataStructures/SinglyLinkedList.hpp>
+#include <States/DataStructures/DoublyLinkedList.hpp>
 
 class Application
 {
