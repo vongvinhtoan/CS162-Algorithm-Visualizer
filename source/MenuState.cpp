@@ -77,9 +77,24 @@ bool MenuState::handleEvent(const sf::Event& event)
             if(!rect.contains(pos.x, pos.y)) continue;
             switch (button->getCategory())
             {
+            case Button::Category::StaticArray:
+                requestStackPop();
+                requestStackPush(States::StaticArray);
+                break;
+
+            case Button::Category::DynamicArray:
+                requestStackPop();
+                requestStackPush(States::DynamicArray);
+                break;
+
             case Button::Category::SinglyLinkedList:
                 requestStackPop();
                 requestStackPush(States::SinglyLinkedList);
+                break;
+
+            case Button::Category::DoublyLinkedList:
+                requestStackPop();
+                requestStackPush(States::DoublyLinkedList);
                 break;
             
             default:

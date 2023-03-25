@@ -23,10 +23,10 @@ void Application::registerStates()
     mStateStack.registerState<TitleState>(States::Title);
     mStateStack.registerState<MenuState>(States::Menu);
     mStateStack.registerState<GameState>(States::Game);
-    // mStateStack.registerState<StaticArray>(States::StaticArray);
-    // mStateStack.registerState<DynamicArray>(States::DynamicArray);
+    mStateStack.registerState<StaticArray>(States::StaticArray);
+    mStateStack.registerState<DynamicArray>(States::DynamicArray);
     mStateStack.registerState<SinglyLinkedList>(States::SinglyLinkedList);
-    // mStateStack.registerState<DoublyLinkedList>(States::DoublyLinkedList);
+    mStateStack.registerState<DoublyLinkedList>(States::DoublyLinkedList);
     // mStateStack.registerState<PauseState>(States::Pause);
 }
 
