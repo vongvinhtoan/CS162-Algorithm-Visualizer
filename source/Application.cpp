@@ -1,7 +1,7 @@
 #include <Book/Application.hpp>
 
 Application::Application() : 
-mStateStack(State::Context(mWindow, mTextures, mFonts, mPlayer)),
+mStateStack(State::Context(mWindow, mTextures, mFonts)),
 mWindow(sf::VideoMode(640, 480), "Algorithm Visualizer", sf::Style::Close),
 mIsPaused(false),
 mStatisticsNumFrames(0),
@@ -22,7 +22,6 @@ void Application::registerStates()
 {
     mStateStack.registerState<TitleState>(States::Title);
     mStateStack.registerState<MenuState>(States::Menu);
-    mStateStack.registerState<GameState>(States::Game);
     mStateStack.registerState<StaticArray>(States::StaticArray);
     mStateStack.registerState<DynamicArray>(States::DynamicArray);
     mStateStack.registerState<SinglyLinkedList>(States::SinglyLinkedList);

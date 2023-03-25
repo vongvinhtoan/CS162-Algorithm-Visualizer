@@ -2,7 +2,6 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
-#include "Player.hpp"
 #include "ResourceHolder.hpp"
 
 class StateStack;
@@ -14,7 +13,6 @@ namespace States
         NONE,
         Title,
         Menu,
-        Game,
         StaticArray,
         DynamicArray,
         SinglyLinkedList,
@@ -31,12 +29,10 @@ class State
         {
             Context(sf::RenderWindow& window,
                     TextureHolder& textures,
-                    FontHolder& fonts,
-                    Player& player);
+                    FontHolder& fonts);
             sf::RenderWindow*  window;
             TextureHolder*     textures;
             FontHolder*        fonts;
-            Player*            player;
         };
     public:
                         State(StateStack& stack, Context context);

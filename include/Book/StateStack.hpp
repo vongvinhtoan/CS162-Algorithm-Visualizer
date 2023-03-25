@@ -6,7 +6,6 @@
 #include <functional>
 #include <cassert>
 #include "ResourceHolder.hpp"
-#include "Player.hpp"
 #include "State.hpp"
 
 class StateStack : private sf::NonCopyable
