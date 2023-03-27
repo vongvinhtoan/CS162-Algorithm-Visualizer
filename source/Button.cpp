@@ -3,7 +3,8 @@
 Button::Button(Category category, sf::Text text, sf::RectangleShape background): 
 mCategory{category},
 mText{text},
-mBackground{background} 
+mBackground{background},
+mIsLocked{false}
 {
     setBackgroundFillColor(sf::Color::Blue);
     
@@ -72,4 +73,14 @@ sf::FloatRect Button::getGlobalBounds() const
 unsigned int Button::getCategory() const
 {
     return mCategory;
+}
+
+void Button::setLocked(bool locked)
+{
+    mIsLocked = locked;
+}
+
+bool Button::isLocked() const
+{
+    return mIsLocked;
 }

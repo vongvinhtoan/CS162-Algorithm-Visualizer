@@ -68,13 +68,46 @@ bool MenuState::update(sf::Time dt)
 
 bool MenuState::handleEvent(const sf::Event& event)
 {
+    std::function<void(SceneNode&, sf::Time)> Lock;
+    std::function<void(SceneNode&, sf::Time)> Unlock;
+
+    Lock = [] (SceneNode& s, sf::Time)
+    {
+        auto S = static_cast<Button*>(&s);
+        S->setLocked(true);
+    };
+
+    Unlock = [] (SceneNode& s, sf::Time)
+    {
+        auto S = static_cast<Button*>(&s);
+        S->setLocked(false);
+    };
+
+    if(event.MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+    {
+        sf::Vector2i pos(event.mouseButton.x, event.mouseButton.y);
+        for(auto button: mButtons)
+        {
+            auto rect = button->getGlobalBounds();
+            if(rect.contains(pos.x, pos.y)) 
+            {
+                mCommandQueue.push(Command(Lock, button->getCategory()));
+                break;
+            }
+        }
+    }
     if(event.MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
     {
         sf::Vector2i pos(event.mouseButton.x, event.mouseButton.y);
         for(auto button: mButtons)
         {
             auto rect = button->getGlobalBounds();
-            if(!rect.contains(pos.x, pos.y)) continue;
+            if(!rect.contains(pos.x, pos.y)) 
+            {
+                mCommandQueue.push(Command(Unlock, button->getCategory()));
+                continue;
+            }
+            if(!button->isLocked()) continue;
             switch (button->getCategory())
             {
             case Button::Category::StaticArray:
@@ -109,6 +142,7 @@ bool MenuState::handleRealtimeInput()
 {
     std::function<void(SceneNode&, sf::Time)> Blued;
     std::function<void(SceneNode&, sf::Time)> Reded;
+    std::function<void(SceneNode&, sf::Time)> UnLock;
 
     Blued = [] (SceneNode& s, sf::Time)
     {
@@ -122,6 +156,12 @@ bool MenuState::handleRealtimeInput()
         S->setBackgroundFillColor(sf::Color::Red);
     };
 
+    UnLock = [] (SceneNode& s, sf::Time)
+    {
+        auto S = static_cast<Button*>(&s);
+        S->setLocked(false);
+    };
+
     auto pos = sf::Mouse::getPosition(*mWindow);
     for(auto &button: mButtons) 
     {
@@ -129,7 +169,10 @@ bool MenuState::handleRealtimeInput()
         if(rect.contains(pos.x, pos.y))
             mCommandQueue.push(Command(Reded, button->getCategory()));
         else
+        {
             mCommandQueue.push(Command(Blued, button->getCategory()));
+            mCommandQueue.push(Command(UnLock, button->getCategory()));
+        }
     }
     return true;
 }

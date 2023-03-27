@@ -24,6 +24,8 @@ public SceneNode
         void setPosition(float x, float y);
         sf::FloatRect getGlobalBounds() const;
         void handleRealtimeInput(sf::RenderWindow* window);
+        void setLocked(bool locked);
+        bool isLocked() const;
 
     public:
         virtual unsigned int getCategory() const;
@@ -32,6 +34,7 @@ public SceneNode
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     private:
+        bool                    mIsLocked;
         sf::RectangleShape      mBackground;
         sf::Text                mText;
         Category                mCategory;
