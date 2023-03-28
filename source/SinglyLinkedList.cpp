@@ -9,7 +9,7 @@ mWindow(context.window)
 
 void SinglyLinkedList::draw()
 {
-    
+    mWindow->draw(*mHead);
 }
 
 bool SinglyLinkedList::update(sf::Time dt)
@@ -31,5 +31,18 @@ bool SinglyLinkedList::handleRealtimeInput()
 
 void SinglyLinkedList::buildScenes()
 {
-    
+    mHead = new SLLNode("Head", sf::Vector2f(100, 100), 25.f, (*getContext().fonts)[Fonts::Default]);
+    mHead->setNext(new SLLNode("Next", sf::Vector2f(200, 100), 25.f, (*getContext().fonts)[Fonts::Default]));
+}
+
+void deleteNodes(SLLNode* node)
+{
+    if(node->getNext())
+        deleteNodes(node->getNext());
+    delete node;
+}
+
+SinglyLinkedList::~SinglyLinkedList()
+{
+    deleteNodes(mHead);
 }

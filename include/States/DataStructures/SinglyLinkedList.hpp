@@ -3,11 +3,14 @@
 #include <Book/CommandQueue.hpp>
 #include <Book/Button.hpp>
 #include <array>
+#include <DSEntity/SLLNode.hpp>
+#include <DSEntity/Arrow.hpp>
 
 class SinglyLinkedList : public State
 {
     public:
         SinglyLinkedList(StateStack& stack, Context context);
+        ~SinglyLinkedList();
         virtual void        draw();
         virtual bool        update(sf::Time dt);
         virtual bool        handleEvent(const sf::Event& event);
@@ -27,4 +30,5 @@ class SinglyLinkedList : public State
         SceneNode                           mSceneGraph;
         std::array<SceneNode*, LayerCount>  mSceneLayers;
         CommandQueue                        mCommandQueue;
+        SLLNode*                            mHead;
 };
