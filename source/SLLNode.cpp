@@ -1,4 +1,5 @@
 #include <DSEntity/SLLNode.hpp>
+#include <math.h>
 
 SLLNode::SLLNode(const std::string& data, const sf::Vector2f& position, float radius, const sf::Font& font)
 : mData(data, font, 20)
@@ -7,8 +8,8 @@ SLLNode::SLLNode(const std::string& data, const sf::Vector2f& position, float ra
 {
     mBackground.setRadius(radius);
     mBackground.setFillColor(sf::Color::Blue);
-    mBackground.setOutlineColor(sf::Color::White);
-    mBackground.setOutlineThickness(5);
+    mBackground.setOutlineColor(sf::Color::Red);
+    mBackground.setOutlineThickness(10);
     mBackground.setOrigin(mBackground.getRadius(), mBackground.getRadius());
     mBackground.setPosition(position);
     mArrow.setFillColor(sf::Color::White);
@@ -42,7 +43,13 @@ void SLLNode::setData(const std::string& data)
 void SLLNode::setNext(SLLNode* next)
 {
     mNext = next;
-    mArrow.setEnd(mNext->mBackground.getPosition());
+
+    sf::Vector2f direction = mNext->mBackground.getPosition() - mBackground.getPosition();
+    sf::Vector2f unitDirection = direction / std::sqrt(direction.x * direction.x + direction.y * direction.y);
+
+    sf::Vector2f offset = unitDirection * (mNext->mBackground.getRadius() + mNext->mBackground.getOutlineThickness());
+
+    mArrow.setEnd(mNext->mBackground.getPosition() - offset);
 }
 
 SLLNode* SLLNode::getNext() const
