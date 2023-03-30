@@ -1,4 +1,4 @@
-#include <Book/Button.hpp>
+#include <GUI/Button.hpp>
 
 Button::Button(Category category, sf::Text text, sf::RectangleShape background): 
 mCategory{category},

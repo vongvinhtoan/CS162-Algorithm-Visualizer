@@ -1,6 +1,6 @@
 #pragma once
 #include <Book/State.hpp>
-#include <Book/Button.hpp>
+#include <GUI/Button.hpp>
 #include <Book/CommandQueue.hpp>
 #include <array>
 

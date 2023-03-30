@@ -1,7 +1,7 @@
 #pragma once
 #include <Book/State.hpp>
 #include <Book/CommandQueue.hpp>
-#include <Book/Button.hpp>
+#include <GUI/Button.hpp>
 #include <array>
 #include <DSEntity/SLLNode.hpp>
 #include <DSEntity/Arrow.hpp>
