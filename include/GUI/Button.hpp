@@ -23,9 +23,11 @@ public SceneNode
         void setBackgroundFillColor(const sf::Color &color);
         void setPosition(float x, float y);
         sf::FloatRect getGlobalBounds() const;
+        void handleEvent(const sf::Event& event, sf::RenderWindow* window);
         void handleRealtimeInput(sf::RenderWindow* window);
         void setLocked(bool locked);
         bool isLocked() const;
+        bool isClicked() const;
 
     public:
         virtual unsigned int getCategory() const;
@@ -35,6 +37,7 @@ public SceneNode
 
     private:
         bool                    mIsLocked;
+        bool                    mIsClicked;
         sf::RectangleShape      mBackground;
         sf::Text                mText;
         Category                mCategory;

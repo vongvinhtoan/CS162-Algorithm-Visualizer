@@ -4,7 +4,8 @@ Button::Button(Category category, sf::Text text, sf::RectangleShape background):
 mCategory{category},
 mText{text},
 mBackground{background},
-mIsLocked{false}
+mIsLocked{false},
+mIsClicked{false}
 {
     setBackgroundFillColor(sf::Color::Blue);
     
@@ -46,6 +47,38 @@ void Button::setBackgroundFillColor(const sf::Color &color)
     mBackground.setFillColor(color);
 }
 
+#include <iostream>
+
+void Button::handleEvent(const sf::Event& event, sf::RenderWindow* window)
+{
+    sf::Vector2i pos(event.mouseButton.x, event.mouseButton.y);
+    auto rect = getGlobalBounds();
+
+
+    if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+    {
+        if(rect.contains(pos.x, pos.y)) 
+        {
+            mIsLocked = true;
+        }
+    }
+
+    if(event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
+    {
+        if(!mIsLocked) return;
+
+        if(!rect.contains(pos.x, pos.y)) {
+            mIsLocked = false;
+            mIsClicked = false;
+            return;
+        }
+
+        if(!mIsLocked) return;
+
+        mIsClicked = true;
+    }
+}
+
 void Button::handleRealtimeInput(sf::RenderWindow* window)
 {
     auto pos = sf::Mouse::getPosition(*window);
@@ -57,6 +90,7 @@ void Button::handleRealtimeInput(sf::RenderWindow* window)
     else
     {
         setBackgroundFillColor(sf::Color::Blue);
+        mIsLocked = false;
     }
 }
 
@@ -83,4 +117,9 @@ void Button::setLocked(bool locked)
 bool Button::isLocked() const
 {
     return mIsLocked;
+}
+
+bool Button::isClicked() const
+{
+    return mIsClicked;
 }
