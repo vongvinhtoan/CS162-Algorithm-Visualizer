@@ -14,6 +14,9 @@ public SceneNode
             DynamicArray        = 1 << 1,
             SinglyLinkedList    = 1 << 2,
             DoublyLinkedList    = 1 << 3,
+            CircularLinkedList  = 1 << 4,
+            Stack               = 1 << 5,
+            Queue               = 1 << 6,
         };
 
     public:

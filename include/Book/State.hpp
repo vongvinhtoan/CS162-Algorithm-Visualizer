@@ -17,6 +17,9 @@ namespace States
         DynamicArray,
         SinglyLinkedList,
         DoublyLinkedList,
+        CircularLinkedList,
+        Stack,
+        Queue,
         Pause
     };
 } 

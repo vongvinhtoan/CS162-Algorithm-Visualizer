@@ -2,7 +2,7 @@
 
 Application::Application() : 
 mStateStack(State::Context(mWindow, mTextures, mFonts)),
-mWindow(sf::VideoMode(640, 480), "Algorithm Visualizer", sf::Style::Close),
+mWindow(sf::VideoMode(800, 600), "Algorithm Visualizer", sf::Style::Close),
 mIsPaused(false),
 mStatisticsNumFrames(0),
 mStatisticsUpdateTime()
@@ -10,7 +10,7 @@ mStatisticsUpdateTime()
     mFonts.load(Fonts::Default, "Media/Fonts/Sansation.ttf");
     
     registerStates();
-    mStateStack.pushState(States::Title);
+    mStateStack.pushState(States::Menu);
     mStateStack.draw();
 
 	mStatisticsText.setFont(mFonts[Fonts::Default]);
@@ -26,6 +26,9 @@ void Application::registerStates()
     mStateStack.registerState<DynamicArray>(States::DynamicArray);
     mStateStack.registerState<SinglyLinkedList>(States::SinglyLinkedList);
     mStateStack.registerState<DoublyLinkedList>(States::DoublyLinkedList);
+    mStateStack.registerState<CircularLinkedList>(States::CircularLinkedList);
+    mStateStack.registerState<Stack>(States::Stack);
+    mStateStack.registerState<Queue>(States::Queue);
     // mStateStack.registerState<PauseState>(States::Pause);
 }
 

@@ -10,6 +10,9 @@
 #include <States/DataStructures/DynamicArray.hpp>
 #include <States/DataStructures/SinglyLinkedList.hpp>
 #include <States/DataStructures/DoublyLinkedList.hpp>
+#include <States/DataStructures/CircularLinkedList.hpp>
+#include <States/DataStructures/Stack.hpp>
+#include <States/DataStructures/Queue.hpp>
 
 class Application
 {
