@@ -32,10 +32,10 @@ bool SinglyLinkedList::handleRealtimeInput()
 void SinglyLinkedList::buildScenes()
 {
     mHead = new SLLNode("Head", sf::Vector2f(100, 100), 25.f, (*getContext().fonts)[Fonts::Default]);
-    mHead->setNext(new SLLNode("Next", sf::Vector2f(200, 100), 25.f, (*getContext().fonts)[Fonts::Default]));
+    mHead->setNext(new SLLNode("Next", sf::Vector2f(100, 0), 25.f, (*getContext().fonts)[Fonts::Default]));
 }
 
-void deleteNodes(SLLNode* node)
+void SinglyLinkedList::deleteNodes(SLLNode* node)
 {
     if(node->getNext())
         deleteNodes(node->getNext());

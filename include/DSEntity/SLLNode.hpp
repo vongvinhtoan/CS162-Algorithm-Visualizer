@@ -23,10 +23,9 @@ public:
 private:
     virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 
-
 private:
     sf::CircleShape             mBackground;
     sf::Text                    mData;
     SLLNode*                    mNext;
-    Arrow                       mArrow;
+    std::unique_ptr<Arrow>      mArrow;
 };

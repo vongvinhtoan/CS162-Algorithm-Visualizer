@@ -18,6 +18,7 @@ class SinglyLinkedList : public State
 
     private:
         void                buildScenes();
+        void                deleteNodes(SLLNode* node);
 
     private:
         enum Layers 

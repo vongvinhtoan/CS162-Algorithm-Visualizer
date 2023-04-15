@@ -9,7 +9,7 @@ mWindow(context.window)
 
 void Stack::draw()
 {
-    
+    mWindow->draw(*mHead);
 }
 
 bool Stack::update(sf::Time dt)
@@ -29,12 +29,31 @@ bool Stack::handleRealtimeInput()
     return true;
 }
 
+void Stack::push(std::string val) 
+{
+    if(mHead) mHead->setPosition(sf::Vector2f(100, 0));
+    auto tmp = new SLLNode(val, sf::Vector2f(100, 100), 25.f, (*getContext().fonts)[Fonts::Default]);
+    tmp->setNext(mHead);
+    mHead = tmp;
+}
+
 void Stack::buildScenes()
 {
-    for (int i = 0; i < LayerCount; ++i)
-    {
-        SceneNode::Ptr layer(new SceneNode());
-        mSceneLayers[i] = layer.get();
-        mSceneGraph.attachChild(std::move(layer));
-    }
+    push("1");
+    push("1");
+    push("1");
+    push("1");
+    push("Hello");
+}
+
+void Stack::deleteNodes(SLLNode* node)
+{
+    if(node->getNext())
+        deleteNodes(node->getNext());
+    delete node;
+}
+
+Stack::~Stack()
+{
+    deleteNodes(mHead);
 }

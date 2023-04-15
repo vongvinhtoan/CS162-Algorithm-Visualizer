@@ -10,7 +10,7 @@ mStatisticsUpdateTime()
     mFonts.load(Fonts::Default, "Media/Fonts/Sansation.ttf");
     
     registerStates();
-    mStateStack.pushState(States::Menu);
+    mStateStack.pushState(States::Stack);
     mStateStack.draw();
 
 	mStatisticsText.setFont(mFonts[Fonts::Default]);

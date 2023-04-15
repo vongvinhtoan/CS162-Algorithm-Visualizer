@@ -31,12 +31,10 @@ void Arrow::update()
     mHead.append(sf::Vertex(mEnd - unitDirection * mHeadLength - unitPerpendicular * mHeadWidth, mColor));
 }
 
-#include <iostream>
-
-void Arrow::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Arrow::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(mBody, states);
-    target.draw(mHead, states);
+    target.draw(mHead, states);    
 }
 
 void Arrow::setThickness(float thickness)

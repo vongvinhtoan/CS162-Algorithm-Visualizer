@@ -8,12 +8,11 @@ public SceneNode
 {
 public:
     Arrow(sf::Vector2f start, sf::Vector2f end, float thickness = 5.f, float headLength = 10.f, float headWidth = 10.f);
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-    void setThickness(float thickness);
     void setStart(sf::Vector2f start);
-    void setEnd(sf::Vector2f end);
     void setStart(float x, float y);
+    void setEnd(sf::Vector2f end);
     void setEnd(float x, float y);
+    void setThickness(float thickness);
     void setHeadLength(float length);
     void setHeadWidth(float width);
     void setFillColor(const sf::Color& color);
@@ -23,6 +22,9 @@ public:
     float getThickness() const;
     float getHeadLength() const;
     float getHeadWidth() const;
+    
+private:
+    virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
     sf::VertexArray     mBody;
