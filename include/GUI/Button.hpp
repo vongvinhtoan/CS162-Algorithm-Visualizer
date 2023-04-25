@@ -17,6 +17,8 @@ public SceneNode
             CircularLinkedList  = 1 << 4,
             Stack               = 1 << 5,
             Queue               = 1 << 6,
+            StackPush           = 1 << 7,
+            StackPop            = 1 << 8,
         };
 
     public:

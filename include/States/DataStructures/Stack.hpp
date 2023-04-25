@@ -9,21 +9,21 @@ class Stack : public State
 {
     public:
         Stack(StateStack& stack, Context context);
-        ~Stack();
         virtual void        draw();
         virtual bool        update(sf::Time dt);
         virtual bool        handleEvent(const sf::Event& event);
         virtual bool        handleRealtimeInput();
         void                push(std::string val);
+        void                pop();
 
     private:
         void                buildScenes();
-        void                deleteNodes(SLLNode* node);
 
     private:
         enum Layers 
         {
             Nodes,
+            Buttons,
             LayerCount
         };
 
@@ -33,5 +33,5 @@ class Stack : public State
         std::array<SceneNode*, LayerCount>  mSceneLayers;
         CommandQueue                        mCommandQueue;
         SLLNode*                            mHead;
-        
+        std::vector<Button*>                mButtons;
 };

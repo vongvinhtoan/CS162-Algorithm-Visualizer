@@ -17,6 +17,7 @@ public:
     );
     void setData(const std::string& data);
     void setNext(SLLNode* next);
+    void setDontDraw(bool dontDraw);
     SLLNode* getNext() const;
     std::string getData() const;
 
@@ -28,4 +29,5 @@ private:
     sf::Text                    mData;
     SLLNode*                    mNext;
     std::unique_ptr<Arrow>      mArrow;
+    bool                        mDontDraw;
 };

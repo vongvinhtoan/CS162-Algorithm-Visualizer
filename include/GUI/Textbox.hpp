@@ -1,8 +1,10 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <Book/SceneNode.hpp>
 
-class Textbox : public sf::Drawable
+class Textbox
+: public SceneNode
 {
     
 };

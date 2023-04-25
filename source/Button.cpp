@@ -51,9 +51,10 @@ void Button::setBackgroundFillColor(const sf::Color &color)
 
 void Button::handleEvent(const sf::Event& event, sf::RenderWindow* window)
 {
+    mIsClicked = false;
+
     sf::Vector2i pos(event.mouseButton.x, event.mouseButton.y);
     auto rect = getGlobalBounds();
-
 
     if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
     {
@@ -82,7 +83,7 @@ void Button::handleEvent(const sf::Event& event, sf::RenderWindow* window)
 void Button::handleRealtimeInput(sf::RenderWindow* window)
 {
     auto pos = sf::Mouse::getPosition(*window);
-    auto rect = mBackground.getGlobalBounds();
+    auto rect = getGlobalBounds();
     if(rect.contains(pos.x, pos.y))
     {
         setBackgroundFillColor(sf::Color::Red);
