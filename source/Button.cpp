@@ -5,7 +5,8 @@ mCategory{category},
 mText{text},
 mBackground{background},
 mIsLocked{false},
-mIsClicked{false}
+mIsClicked{false},
+mIsInputing{false}
 {
     setBackgroundFillColor(sf::Color::Blue);
     
@@ -62,11 +63,20 @@ void Button::handleEvent(const sf::Event& event, sf::RenderWindow* window)
         {
             mIsLocked = true;
         }
+        else
+        {
+            mIsLocked = false;
+        }
     }
 
     if(event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
     {
-        if(!mIsLocked) return;
+        if(!mIsLocked) {
+            if(!rect.contains(pos.x, pos.y)) {
+                mIsInputing = false;
+            }
+            return;
+        }
 
         if(!rect.contains(pos.x, pos.y)) {
             mIsLocked = false;
@@ -77,6 +87,7 @@ void Button::handleEvent(const sf::Event& event, sf::RenderWindow* window)
         if(!mIsLocked) return;
 
         mIsClicked = true;
+        mIsLocked = false;
     }
 }
 
@@ -84,6 +95,16 @@ void Button::handleRealtimeInput(sf::RenderWindow* window)
 {
     auto pos = sf::Mouse::getPosition(*window);
     auto rect = getGlobalBounds();
+    if(mIsInputing)
+    {
+        setBackgroundFillColor(sf::Color::Green);
+        return;
+    }
+    if(mIsLocked)
+    {
+        setBackgroundFillColor(sf::Color::Yellow);
+        return;
+    }
     if(rect.contains(pos.x, pos.y))
     {
         setBackgroundFillColor(sf::Color::Red);
@@ -91,7 +112,6 @@ void Button::handleRealtimeInput(sf::RenderWindow* window)
     else
     {
         setBackgroundFillColor(sf::Color::Blue);
-        mIsLocked = false;
     }
 }
 
@@ -123,4 +143,14 @@ bool Button::isLocked() const
 bool Button::isClicked() const
 {
     return mIsClicked;
+}
+
+void Button::setInputing(bool inputing)
+{
+    mIsInputing = inputing;
+}
+
+bool Button::isInputing() const
+{
+    return mIsInputing;
 }

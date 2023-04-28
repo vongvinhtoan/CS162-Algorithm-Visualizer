@@ -31,6 +31,8 @@ public SceneNode
         void handleEvent(const sf::Event& event, sf::RenderWindow* window);
         void handleRealtimeInput(sf::RenderWindow* window);
         void setLocked(bool locked);
+        void setInputing(bool inputing);
+        bool isInputing() const;
         bool isLocked() const;
         bool isClicked() const;
 
@@ -43,6 +45,7 @@ public SceneNode
     private:
         bool                    mIsLocked;
         bool                    mIsClicked;
+        bool                    mIsInputing;
         sf::RectangleShape      mBackground;
         sf::Text                mText;
         Category                mCategory;

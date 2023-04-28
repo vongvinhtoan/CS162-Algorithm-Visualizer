@@ -23,13 +23,13 @@ bool Stack::handleEvent(const sf::Event& event)
 {
     for(auto &button: mButtons) button->handleEvent(event, mWindow);
     
-    for(auto button: mButtons)
+    for(auto &button: mButtons)
     {
         if(!button->isClicked()) continue;
         switch (button->getCategory())
         {
         case Button::Category::StackPush:
-            push("Node");
+            button->setInputing(true);
             break;
         case Button::Category::StackPop:
             pop();
