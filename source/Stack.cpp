@@ -1,4 +1,5 @@
 #include <States/DataStructures/Stack.hpp>
+#include <iostream>
 
 Stack::Stack(StateStack& stack, Context context) :
 State(stack, context),
@@ -19,31 +20,66 @@ bool Stack::update(sf::Time dt)
 
 bool Stack::handleEvent(const sf::Event& event)
 {
+    // If press escape, trigger the pause screen
+    if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+        for(auto &button: mButtons) {
+            button->setLocked(false);
+        }
+        requestStackPush(States::ID::Pause);
+        return true;
+    }
+
+    // Handle events for all buttons
     for(auto &button: mButtons) {
         button->handleEvent(event, mWindow);
 
         for(auto &child: button->getChildren()) {
             //cast to textbox
             auto textbox = dynamic_cast<Textbox*>(child);
-            if(textbox == nullptr) continue;
-            if(!textbox->isSelected()) continue;
-            textbox->handleEvent(event, mWindow);
+            if(textbox != nullptr) {
+                textbox->handleEvent(event, mWindow);
+            }
+
+            //cast to button
+            auto button = dynamic_cast<Button*>(child);
+            if(button != nullptr) {
+                button->handleEvent(event, mWindow);
+            }
         }
     }
 
+    // Handle clicks
     for(auto &button: mButtons)
     {
         if(!button->isClicked() && !button->isClickedAway()) continue;
+        
+        std::vector<Textbox*> textboxes;
+        std::vector<Button*> buttons;
+        for(auto &child: button->getChildren()) {
+            //cast to textbox
+            auto textbox = dynamic_cast<Textbox*>(child);
+            if(textbox != nullptr) {
+                textboxes.push_back(textbox);
+            }
+
+            //cast to button
+            auto button = dynamic_cast<Button*>(child);
+            if(button != nullptr) {
+                buttons.push_back(button);
+            }
+        }
 
         if(button->getCategory() == Button::Category::StackPush) {
-            bool isNotInputing = button->isClickedAway();
-            for(auto &child: button->getChildren()) {
-                //cast to textbox
-                auto textbox = dynamic_cast<Textbox*>(child);
-                if(textbox == nullptr) continue;
-                
-                isNotInputing = isNotInputing && textbox->isClickedAway();
+
+            bool isNotInputing = true;
+            for(auto &textbox: textboxes) {
+                isNotInputing &= textbox->isClickedAway();
             }
+            for(auto &button: buttons) {
+                isNotInputing &= button->isClickedAway();
+            }
+            isNotInputing &= button->isClickedAway();
+
             button->setInputing(!isNotInputing);
         }
         else if(button->getCategory() == Button::Category::StackPop && button->isClicked()) {
@@ -54,6 +90,48 @@ bool Stack::handleEvent(const sf::Event& event)
         }
     }
 
+    // Handle inputing
+    for(auto &button: mButtons)
+    {
+        if(!button->isInputing()) continue;
+
+        std::vector<Textbox*> textboxes;
+        std::vector<Button*> buttons;
+        for(auto &child: button->getChildren()) {
+            //cast to textbox
+            auto textbox = dynamic_cast<Textbox*>(child);
+            if(textbox != nullptr) {
+                textboxes.push_back(textbox);
+            }
+
+            //cast to button
+            auto button = dynamic_cast<Button*>(child);
+            if(button != nullptr) {
+                buttons.push_back(button);
+            }
+        }
+
+        if(button->getCategory() == Button::Category::StackPush) {    
+            Button* bGo;
+            if(buttons.size() > 0) bGo = buttons[0];
+            else bGo = nullptr;
+
+            // if bGo is clicked or Enter hit, push the value
+            if((bGo != nullptr && bGo->isClicked()) || 
+                (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return)) {
+                std::string val;
+                for(auto &textbox: textboxes) {
+                    val += textbox->getText();
+                }
+                if(val.size() > 0)
+                    push(val);
+
+                button->setInputing(false);
+            }
+        }
+    }
+
+    // Create new nodes
     for(auto &button: mButtons)
     {
         if(!button->isInputing()) {
@@ -64,23 +142,33 @@ bool Stack::handleEvent(const sf::Event& event)
         if(button->getChildren().size() > 0) continue;
 
         if(button->getCategory() == Button::Category::StackPush) {
+            // Create a textbox
             std::unique_ptr<Textbox> textbox(new Textbox(
                 sf::Text("", (*getContext().fonts)[Fonts::Default]),
                 sf::RectangleShape(sf::Vector2f(225, 75))
             ));
-            textbox->setPosition(100, 0);
+            textbox->setPosition(button->getSize().x, 0.f);
             textbox->setLimit(true, 2);
             textbox->setSelection(true);
             textbox->setValidCharFunction([](const std::string &str, char c) {
-                //if not digit
-                if(!std::isdigit(c)) return false;
-                //if first digit is 0
-                if(str.size() == 0 && c == '0') return true;
-                //if first digit is 0 and second digit is 0
-                if(str.size() == 1 && str[0] == '0' && c == '0') return false;
-                return true;
+                return (c >= '0' && c <= '9');
             });
+            textbox->setPushCharFunction([](std::string &str, char c) -> void {
+                if(str.size() == 1 && str == "0") str.pop_back();
+                str += c;
+            });
+
+            // Create a button
+            std::unique_ptr<Button> bGo(new Button(
+                Button::Category::StackPush,
+                sf::Text("Go", (*getContext().fonts)[Fonts::Default]),
+                sf::RectangleShape(sf::Vector2f(225, 75))
+            ));
+            bGo->setPosition(button->getSize().x + textbox->getSize().x, 0.f);
+
+            // Attach 
             button->attachChild(std::move(textbox));
+            button->attachChild(std::move(bGo));
         }
     }
 
@@ -95,9 +183,13 @@ bool Stack::handleRealtimeInput()
         for(auto &child: button->getChildren()) {
             //cast to textbox
             auto textbox = dynamic_cast<Textbox*>(child);
-            if(textbox == nullptr) continue;
-            if(!textbox->isSelected()) continue;
-            textbox->handleRealtimeInput(mWindow);
+            if(textbox != nullptr)
+                textbox->handleRealtimeInput(mWindow);
+
+            //cast to button
+            auto button = dynamic_cast<Button*>(child);
+            if(button != nullptr)
+                button->handleRealtimeInput(mWindow);
         }
     }
     return true;

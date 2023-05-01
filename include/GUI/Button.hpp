@@ -17,9 +17,12 @@ public SceneNode
             CircularLinkedList  = 1 << 4,
             Stack               = 1 << 5,
             Queue               = 1 << 6,
-            StackPush           = 1 << 7,
-            StackPop            = 1 << 8,
-            StackClear          = 1 << 9,
+            Go                  = 1 << 7,
+            Resume              = 1 << 8,
+            Menu                = 1 << 9,
+            StackPush           = 1 << 10,
+            StackPop            = 1 << 11,
+            StackClear          = 1 << 12,
         };
 
     public:
@@ -31,6 +34,8 @@ public SceneNode
         bool isLocked() const;
         bool isClicked() const;
         bool isClickedAway() const;
+        sf::Vector2f getSize() const;
+        sf::FloatRect getGlobalBounds() const;
 
     public:
         void handleEvent(const sf::Event& event, sf::RenderWindow* window);

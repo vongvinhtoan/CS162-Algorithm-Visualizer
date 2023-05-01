@@ -30,7 +30,7 @@ void Application::registerStates()
     mStateStack.registerState<CircularLinkedList>(States::CircularLinkedList);
     mStateStack.registerState<Stack>(States::Stack);
     mStateStack.registerState<Queue>(States::Queue);
-    // mStateStack.registerState<PauseState>(States::Pause);
+    mStateStack.registerState<PauseState>(States::Pause);
 }
 
 void Application::run()

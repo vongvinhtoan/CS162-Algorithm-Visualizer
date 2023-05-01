@@ -1,4 +1,5 @@
 #include <GUI/Button.hpp>
+#include <iostream>
 
 Button::Button(Category category, sf::Text text, sf::RectangleShape background): 
 mCategory{category},
@@ -38,19 +39,11 @@ void Button::handleEvent(const sf::Event& event, sf::RenderWindow* window)
     mIsClickedAway = false;
 
     sf::Vector2i pos(event.mouseButton.x, event.mouseButton.y);
-    pos -= (sf::Vector2i) getWorldPosition(); 
-    auto rect = mBackground.getGlobalBounds();
+    auto rect = getGlobalBounds();
 
     if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
     {
-        if(rect.contains(pos.x, pos.y)) 
-        {
-            mIsLocked = true;
-        }
-        else
-        {
-            mIsLocked = false;
-        }
+        mIsLocked = rect.contains(pos.x, pos.y);
     }
 
     if(event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
@@ -78,8 +71,7 @@ void Button::handleEvent(const sf::Event& event, sf::RenderWindow* window)
 void Button::handleRealtimeInput(sf::RenderWindow* window)
 {
     auto pos = sf::Mouse::getPosition(*window);
-    pos -= (sf::Vector2i) getWorldPosition(); 
-    auto rect = mBackground.getGlobalBounds();
+    auto rect = getGlobalBounds();
 
     if(mIsInputing)
     {
@@ -134,4 +126,17 @@ bool Button::isInputing() const
 bool Button::isClickedAway() const
 {
     return mIsClickedAway;
+}
+
+sf::Vector2f Button::getSize() const
+{
+    return mBackground.getSize();
+}
+
+sf::FloatRect Button::getGlobalBounds() const
+{
+    auto rect = mBackground.getGlobalBounds();
+    rect.left += getWorldPosition().x;
+    rect.top  += getWorldPosition().y;
+    return rect;
 }

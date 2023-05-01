@@ -7,6 +7,7 @@ Textbox::Textbox(
 : mBackground{background},
 mText{text},
 mIsValidChar{[](const std::string &, char) { return true; }},
+mPushChar{[](std::string &s, char c) {s += c;}},
 mHasLimit{false},
 mLimit{0},
 mIsClickedAway{false},
@@ -20,22 +21,24 @@ mIsSelected{false}
 
 void Textbox::handleEvent(const sf::Event& event, sf::RenderWindow* window)
 {
-    if (event.type == sf::Event::TextEntered)
+    if (event.type == sf::Event::TextEntered && mIsSelected)
     {
         if (event.text.unicode == '\b')
         {
-            if (mText.getString().getSize() > 0)
+            if (mString.size() > 0)
             {
-                mText.setString(mText.getString().substring(0, mText.getString().getSize() - 1));
+                mString.pop_back();
+                mText.setString(mString);
             }
         }
-        else if (mIsValidChar(mText.getString(), event.text.unicode))
+        else if (mIsValidChar(mString, event.text.unicode))
         {
-            if(mHasLimit && mText.getString().getSize() >= mLimit) {
+            if(mHasLimit && mString.size() >= mLimit) {
                 // Do nothing
             }
             else {
-                mText.setString(mText.getString() + static_cast<char>(event.text.unicode));
+                mPushChar(mString, static_cast<char>(event.text.unicode));
+                mText.setString(mString);
             }
         }
     }
@@ -44,8 +47,7 @@ void Textbox::handleEvent(const sf::Event& event, sf::RenderWindow* window)
     mIsClickedAway = false;
 
     sf::Vector2i pos(event.mouseButton.x, event.mouseButton.y);
-    pos -= (sf::Vector2i) getWorldPosition(); 
-    auto rect = mBackground.getGlobalBounds();
+    auto rect = getGlobalBounds();
 
     if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
     {
@@ -83,6 +85,11 @@ void Textbox::handleEvent(const sf::Event& event, sf::RenderWindow* window)
 
 void Textbox::handleRealtimeInput(sf::RenderWindow* window)
 {
+    if(!sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    {
+        mIsLocked = false;
+    }
+
     if(mIsSelected) {
         setBackgroundFillColor(sf::Color::Red);
     }
@@ -100,6 +107,11 @@ void Textbox::setLimit(bool hasLimit, int limit)
 void Textbox::setValidCharFunction(std::function<bool(const std::string &, char)> isValidChar)
 {
     mIsValidChar = isValidChar;
+}
+
+void Textbox::setPushCharFunction(std::function<void(std::string &, char)> pushChar)
+{
+    mPushChar = pushChar;
 }
 
 void Textbox::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
@@ -133,4 +145,22 @@ bool Textbox::isSelected() const
 bool Textbox::isClickedAway() const
 {
     return mIsClickedAway;
+}
+
+sf::Vector2f Textbox::getSize() const
+{
+    return mBackground.getSize();
+}
+
+sf::FloatRect Textbox::getGlobalBounds() const
+{
+    auto rect = mBackground.getGlobalBounds();
+    rect.left += getWorldPosition().x;
+    rect.top += getWorldPosition().y;
+    return rect;
+}
+
+std::string Textbox::getText() const
+{
+    return mString;
 }

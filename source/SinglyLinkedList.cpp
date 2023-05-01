@@ -19,6 +19,11 @@ bool SinglyLinkedList::update(sf::Time dt)
 
 bool SinglyLinkedList::handleEvent(const sf::Event& event)
 {
+    // If press escape, trigger the pause screen
+    if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+        requestStackPush(States::ID::Pause);
+        return true;
+    }
     
     return true;
 }

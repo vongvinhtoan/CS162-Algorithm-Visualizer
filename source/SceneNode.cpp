@@ -3,7 +3,9 @@
 #include <assert.h>
 #include <algorithm>
 
-SceneNode::SceneNode()
+SceneNode::SceneNode() :
+mChildren(),
+mParent(nullptr)
 {
     
 }
@@ -103,13 +105,16 @@ void SceneNode::updateChildren(sf::Time dt)
 
 sf::Transform SceneNode::getWorldTransform() const
 {
-    sf::Transform transform = sf::Transform::Identity;
-    for (const SceneNode* node = this; node != nullptr; node = node->mParent)
-        transform = node->getTransform() * transform;
-    return transform;
+	sf::Transform transform = sf::Transform::Identity;
+
+	for (const SceneNode* node = this; node != nullptr; node = node->mParent)
+		transform = node->getTransform() * transform;
+
+	return transform;
 }
 
 sf::Vector2f SceneNode::getWorldPosition() const
 {
+    getWorldTransform();
     return getWorldTransform() * sf::Vector2f();
 }
