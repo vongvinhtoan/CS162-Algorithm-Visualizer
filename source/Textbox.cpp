@@ -41,6 +41,7 @@ void Textbox::handleEvent(const sf::Event& event, sf::RenderWindow* window)
     }
     
     mIsClicked = false;
+    mIsClickedAway = false;
 
     sf::Vector2i pos(event.mouseButton.x, event.mouseButton.y);
     pos -= (sf::Vector2i) getWorldPosition(); 

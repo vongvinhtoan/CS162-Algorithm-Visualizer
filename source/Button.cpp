@@ -32,8 +32,6 @@ void Button::setBackgroundFillColor(const sf::Color &color)
     mBackground.setFillColor(color);
 }
 
-#include <iostream>
-
 void Button::handleEvent(const sf::Event& event, sf::RenderWindow* window)
 {
     mIsClicked = false;
@@ -60,8 +58,6 @@ void Button::handleEvent(const sf::Event& event, sf::RenderWindow* window)
         if(!mIsLocked) {
             if(!rect.contains(pos.x, pos.y)) {
                 mIsClickedAway = true;
-
-                std::cerr << "Button clicked away" << std::endl;
             }
             return;
         }
@@ -75,9 +71,6 @@ void Button::handleEvent(const sf::Event& event, sf::RenderWindow* window)
         if(!mIsLocked) return;
 
         mIsClicked = true;
-
-        std::cerr << "Button clicked" << std::endl;
-
         mIsLocked = false;
     }
 }
