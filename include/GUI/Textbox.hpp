@@ -8,35 +8,34 @@ class Textbox
 {   
     public:
     Textbox(
-            const sf::Vector2f& position = sf::Vector2f(0, 0), 
-            const sf::Vector2f& size = sf::Vector2f(100, 50),
-            const std::string& text = "",
-            const sf::Font& font = sf::Font()
+            const sf::Text& text = sf::Text(),
+            const sf::RectangleShape& background = sf::RectangleShape()
         );
-        void setText(const std::string& text);
-        void setFont(const sf::Font& font);
-        void setSize(const sf::Vector2f& size);
-        void setPosition(const sf::Vector2f& position);
-        void setOutlineThickness(float outlineThickness);
-        void setOutlineColor(const sf::Color& outlineColor);
-        void setFillColor(const sf::Color& fillColor);
-        void setTextColor(const sf::Color& textColor);
-        void setCharacterSize(int characterSize);
-        void setStyle(sf::Uint32 style);
-        void setDontDraw(bool dontDraw);
-        sf::FloatRect getLocalBounds() const;
-        sf::FloatRect getGlobalBounds() const;
-        std::string getText() const;
+        void setValidCharFunction(std::function<bool(const std::string &, char)> isValidChar);
+        void setLimit(bool hasLimit, int limit);
+        void setSelection(bool selected);
+        bool isSelected() const;
+        bool isClicked() const;
+        bool isClickedAway() const;
 
+    public:
+        void setBackgroundFillColor(const sf::Color &color);
+
+    public:
+        void handleEvent(const sf::Event& event, sf::RenderWindow* window);
+        void handleRealtimeInput(sf::RenderWindow* window);
+        
     private:
         virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 
     private:
-        sf::RectangleShape  mBackground;
-        sf::Text            mText;
-        sf::Color           mTextColor;
-        sf::Color           mFillColor;
-        sf::Color           mOutlineColor;
-        sf::Color           mBackgroundColor;
-        bool                mDontDraw;
+        sf::RectangleShape                                  mBackground;
+        sf::Text                                            mText;
+        std::function<bool(const std::string &, char)>      mIsValidChar;
+        bool                                                mHasLimit;
+        bool                                                mIsClickedAway;
+        bool                                                mIsClicked;
+        bool                                                mIsLocked;
+        bool                                                mIsSelected;
+        int                                                 mLimit;
 };

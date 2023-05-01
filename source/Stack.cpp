@@ -14,26 +14,73 @@ void Stack::draw()
 
 bool Stack::update(sf::Time dt)
 {
-    while (!mCommandQueue.isEmpty())
-        mSceneGraph.onCommand(mCommandQueue.pop(), dt);
     return true;
 }
 
 bool Stack::handleEvent(const sf::Event& event)
 {
-    for(auto &button: mButtons) button->handleEvent(event, mWindow);
-    
+    for(auto &button: mButtons) {
+        button->handleEvent(event, mWindow);
+
+        for(auto &child: button->getChildren()) {
+            //cast to textbox
+            auto textbox = dynamic_cast<Textbox*>(child);
+            if(textbox == nullptr) continue;
+            if(!textbox->isSelected()) continue;
+            textbox->handleEvent(event, mWindow);
+        }
+    }
+
     for(auto &button: mButtons)
     {
-        if(!button->isClicked()) continue;
-        switch (button->getCategory())
-        {
-        case Button::Category::StackPush:
-            button->setInputing(true);
-            break;
-        case Button::Category::StackPop:
+        if(!button->isClicked() && !button->isClickedAway()) continue;
+
+        if(button->getCategory() == Button::Category::StackPush) {
+            bool isNotInputing = button->isClickedAway();
+            for(auto &child: button->getChildren()) {
+                //cast to textbox
+                auto textbox = dynamic_cast<Textbox*>(child);
+                if(textbox == nullptr) continue;
+                
+                isNotInputing = isNotInputing && textbox->isClickedAway();
+            }
+            button->setInputing(!isNotInputing);
+        }
+        else if(button->getCategory() == Button::Category::StackPop && button->isClicked()) {
             pop();
-            break;
+        }
+        else if(button->getCategory() == Button::Category::StackClear && button->isClicked()) {
+            clear();
+        }
+    }
+
+    for(auto &button: mButtons)
+    {
+        if(!button->isInputing()) {
+            button->clearChildren();
+            continue;
+        }
+
+        if(button->getChildren().size() > 0) continue;
+
+        if(button->getCategory() == Button::Category::StackPush) {
+            std::unique_ptr<Textbox> textbox(new Textbox(
+                sf::Text("", (*getContext().fonts)[Fonts::Default]),
+                sf::RectangleShape(sf::Vector2f(225, 75))
+            ));
+            textbox->setPosition(100, 0);
+            textbox->setLimit(true, 2);
+            textbox->setSelection(true);
+            textbox->setValidCharFunction([](const std::string &str, char c) {
+                //if not digit
+                if(!std::isdigit(c)) return false;
+                //if first digit is 0
+                if(str.size() == 0 && c == '0') return true;
+                //if first digit is 0 and second digit is 0
+                if(str.size() == 1 && str[0] == '0' && c == '0') return false;
+                return true;
+            });
+            button->attachChild(std::move(textbox));
         }
     }
 
@@ -42,7 +89,17 @@ bool Stack::handleEvent(const sf::Event& event)
 
 bool Stack::handleRealtimeInput()
 {
-    for(auto &button: mButtons) button->handleRealtimeInput(mWindow);
+    for(auto &button: mButtons) {
+        button->handleRealtimeInput(mWindow);
+
+        for(auto &child: button->getChildren()) {
+            //cast to textbox
+            auto textbox = dynamic_cast<Textbox*>(child);
+            if(textbox == nullptr) continue;
+            if(!textbox->isSelected()) continue;
+            textbox->handleRealtimeInput(mWindow);
+        }
+    }
     return true;
 }
 
@@ -65,6 +122,11 @@ void Stack::pop()
     auto &tmp = *mHead->getNext();
     mHead->setNext(mHead->getNext()->getNext());
     mHead->detachChild(tmp);
+}
+
+void Stack::clear() 
+{
+    while(mHead->getNext()) pop();
 }
 
 void Stack::buildScenes()
@@ -106,4 +168,13 @@ void Stack::buildScenes()
     bPop->setPosition(100, 200);
     mButtons.push_back(bPop.get());
     mSceneLayers[Buttons]->attachChild(std::move(bPop));
+
+    std::unique_ptr<Button> bClear (new Button(
+        Button::Category::StackClear, 
+        sf::Text("Clear", (*getContext().fonts)[Fonts::Default]), 
+        sf::RectangleShape(sf::Vector2f(225, 75))
+    ));
+    bClear->setPosition(100, 300);
+    mButtons.push_back(bClear.get());
+    mSceneLayers[Buttons]->attachChild(std::move(bClear));
 }

@@ -1,101 +1,135 @@
 #include <GUI\Textbox.hpp>
 
 Textbox::Textbox(
-    const sf::Vector2f& position, 
-    const sf::Vector2f& size,
-    const std::string& text,
-    const sf::Font& font
+    const sf::Text& text,
+    const sf::RectangleShape& background
 )
-: mBackground(size)
-, mText(text, font)
-, mTextColor(sf::Color::White)
-, mFillColor(sf::Color::Transparent)
-, mOutlineColor(sf::Color::Black)
-, mDontDraw(false)
+: mBackground{background},
+mText{text},
+mIsValidChar{[](const std::string &, char) { return true; }},
+mHasLimit{false},
+mLimit{0},
+mIsClickedAway{false},
+mIsClicked{false},
+mIsLocked{false},
+mIsSelected{false}
 {
-    mBackground.setPosition(position);
-    mText.setPosition(position);
-    mText.setFillColor(mTextColor);
+    mBackground.setFillColor(sf::Color::Blue);
+    mText.setFillColor(sf::Color::Black);
 }
 
-void Textbox::setText(const std::string& text)
+void Textbox::handleEvent(const sf::Event& event, sf::RenderWindow* window)
 {
-    mText.setString(text);
+    if (event.type == sf::Event::TextEntered)
+    {
+        if (event.text.unicode == '\b')
+        {
+            if (mText.getString().getSize() > 0)
+            {
+                mText.setString(mText.getString().substring(0, mText.getString().getSize() - 1));
+            }
+        }
+        else if (mIsValidChar(mText.getString(), event.text.unicode))
+        {
+            if(mHasLimit && mText.getString().getSize() >= mLimit) {
+                // Do nothing
+            }
+            else {
+                mText.setString(mText.getString() + static_cast<char>(event.text.unicode));
+            }
+        }
+    }
+    
+    mIsClicked = false;
+
+    sf::Vector2i pos(event.mouseButton.x, event.mouseButton.y);
+    pos -= (sf::Vector2i) getWorldPosition(); 
+    auto rect = mBackground.getGlobalBounds();
+
+    if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+    {
+        if(rect.contains(pos.x, pos.y)) 
+        {
+            mIsLocked = true;
+        }
+        else
+        {
+            mIsLocked = false;
+        }
+    }
+
+    if(event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
+    {
+        if(!mIsLocked) {
+            if(!rect.contains(pos.x, pos.y)) {
+                mIsClickedAway = true;
+            }
+            return;
+        }
+
+        if(!rect.contains(pos.x, pos.y)) {
+            mIsLocked = false;
+            mIsClicked = false;
+            return;
+        }
+
+        if(!mIsLocked) return;
+
+        mIsClicked = true;
+        mIsLocked = false;
+    }
 }
 
-void Textbox::setFont(const sf::Font& font)
+void Textbox::handleRealtimeInput(sf::RenderWindow* window)
 {
-    mText.setFont(font);
+    if(mIsSelected) {
+        setBackgroundFillColor(sf::Color::Red);
+    }
+    else {
+        setBackgroundFillColor(sf::Color::Blue);
+    }
 }
 
-void Textbox::setSize(const sf::Vector2f& size)
+void Textbox::setLimit(bool hasLimit, int limit)
 {
-    mBackground.setSize(size);
+    mHasLimit = hasLimit;
+    mLimit = limit;
 }
 
-void Textbox::setPosition(const sf::Vector2f& position)
+void Textbox::setValidCharFunction(std::function<bool(const std::string &, char)> isValidChar)
 {
-    mBackground.setPosition(position);
-    mText.setPosition(position);
-}
-
-void Textbox::setOutlineThickness(float outlineThickness)
-{
-    mBackground.setOutlineThickness(outlineThickness);
-}
-
-void Textbox::setOutlineColor(const sf::Color& outlineColor)
-{
-    mBackground.setOutlineColor(outlineColor);
-}
-
-void Textbox::setFillColor(const sf::Color& fillColor)
-{
-    mBackgroundColor = fillColor;
-    mBackground.setFillColor(fillColor);
-}
-
-void Textbox::setTextColor(const sf::Color& textColor)
-{
-    mTextColor = textColor;
-    mText.setFillColor(textColor);
-}
-
-void Textbox::setCharacterSize(int characterSize)
-{
-    mText.setCharacterSize(characterSize);
-}
-
-void Textbox::setStyle(sf::Uint32 style)
-{
-    mText.setStyle(style);
-}
-
-void Textbox::setDontDraw(bool dontDraw)
-{
-    mDontDraw = dontDraw;
-}
-
-sf::FloatRect Textbox::getLocalBounds() const
-{
-    return mBackground.getLocalBounds();
-}
-
-sf::FloatRect Textbox::getGlobalBounds() const
-{
-    return mBackground.getGlobalBounds();
-}
-
-std::string Textbox::getText() const
-{
-    return mText.getString();
+    mIsValidChar = isValidChar;
 }
 
 void Textbox::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    if(!mDontDraw)
-    {
-        target.draw(mBackground, states);
-        target.draw(mText, states);
-    }
+    target.draw(mBackground, states);
+
+    states.transform *= mBackground.getTransform();
+    target.draw(mText, states);
+}
+
+void Textbox::setSelection(bool selected)
+{
+    mIsSelected = selected;
+}
+
+bool Textbox::isClicked() const
+{
+    return mIsClicked;
+}
+
+void Textbox::setBackgroundFillColor(const sf::Color &color)
+{
+    mBackground.setFillColor(color);
+}
+
+bool Textbox::isSelected() const
+{
+    return mIsSelected;
+}
+
+bool Textbox::isClickedAway() const
+{
+    return mIsClickedAway;
 }

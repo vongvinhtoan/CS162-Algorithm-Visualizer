@@ -16,7 +16,6 @@ void SceneNode::onCommand(const Command& command, sf::Time dt)
         child->onCommand(command, dt);
 }
 
-
 unsigned int SceneNode::getCategory() const
 {
     return 0;
@@ -38,6 +37,29 @@ SceneNode::Ptr SceneNode::detachChild(const SceneNode& node)
     result->mParent = nullptr;
     mChildren.erase(found);
     return result;
+}
+
+void SceneNode::clearChildren()
+{
+    mChildren.clear();
+}
+
+int SceneNode::getNumChildren() const
+{
+    return mChildren.size();
+}
+
+SceneNode* SceneNode::getParent() const
+{
+    return mParent;
+}
+
+std::vector<SceneNode*> SceneNode::getChildren() const
+{
+    std::vector<SceneNode*> children;
+    for(const Ptr& child: mChildren)
+        children.push_back(child.get());
+    return children;
 }
 
 void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const

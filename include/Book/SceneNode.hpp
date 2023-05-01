@@ -17,12 +17,15 @@ public:
     SceneNode();
     void attachChild(Ptr child);
     Ptr detachChild(const SceneNode& node);
+    void clearChildren();
+    int getNumChildren() const;
+    SceneNode* getParent() const;
+    std::vector<SceneNode*> getChildren() const;
     void update(sf::Time dt);
     sf::Vector2f getWorldPosition() const;
     sf::Transform getWorldTransform() const;
     virtual unsigned int getCategory() const;
     void onCommand(const Command& command, sf::Time dt);
-
 
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

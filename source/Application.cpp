@@ -5,7 +5,8 @@ mStateStack(State::Context(mWindow, mTextures, mFonts)),
 mWindow(sf::VideoMode(800, 600), "Algorithm Visualizer", sf::Style::Close),
 mIsPaused(false),
 mStatisticsNumFrames(0),
-mStatisticsUpdateTime()
+mStatisticsUpdateTime(),
+mIsShowingStatistics(false)
 {
     mFonts.load(Fonts::Default, "Media/Fonts/Sansation.ttf");
     
@@ -74,6 +75,9 @@ void Application::processInput()
             case sf::Event::LostFocus:
                 mIsPaused = true;
                 break;
+            case sf::Event::KeyPressed:
+                if(event.key.code == sf::Keyboard::F5) mIsShowingStatistics ^= true;
+                break;
         }
     }
     mStateStack.handleRealtimeInput();
@@ -90,7 +94,7 @@ void Application::draw()
     mStateStack.draw();
     
     mWindow.setView(mWindow.getDefaultView());
-    mWindow.draw(mStatisticsText);
+    if(mIsShowingStatistics) mWindow.draw(mStatisticsText);
     mWindow.display();
 }
 

@@ -32,6 +32,7 @@ private:
     TextureHolder       mTextures;
     FontHolder          mFonts;
     bool                mIsPaused;
+    bool                mIsShowingStatistics;
     sf::Text            mStatisticsText;
     sf::Time            mStatisticsUpdateTime;
 	int                 mStatisticsNumFrames;

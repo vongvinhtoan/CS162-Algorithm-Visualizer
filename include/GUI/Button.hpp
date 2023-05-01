@@ -19,33 +19,34 @@ public SceneNode
             Queue               = 1 << 6,
             StackPush           = 1 << 7,
             StackPop            = 1 << 8,
+            StackClear          = 1 << 9,
         };
 
     public:
         Button(Category category, sf::Text text = sf::Text(), sf::RectangleShape background = sf::RectangleShape());
-        void setString(std::string string);
-        void setBackgroundSize(const sf::Vector2f &size);
         void setBackgroundFillColor(const sf::Color &color);
-        void setPosition(float x, float y);
-        sf::FloatRect getGlobalBounds() const;
-        void handleEvent(const sf::Event& event, sf::RenderWindow* window);
-        void handleRealtimeInput(sf::RenderWindow* window);
         void setLocked(bool locked);
         void setInputing(bool inputing);
         bool isInputing() const;
         bool isLocked() const;
         bool isClicked() const;
+        bool isClickedAway() const;
+
+    public:
+        void handleEvent(const sf::Event& event, sf::RenderWindow* window);
+        void handleRealtimeInput(sf::RenderWindow* window);
 
     public:
         virtual unsigned int getCategory() const;
 
     private:
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 
     private:
         bool                    mIsLocked;
         bool                    mIsClicked;
         bool                    mIsInputing;
+        bool                    mIsClickedAway;
         sf::RectangleShape      mBackground;
         sf::Text                mText;
         Category                mCategory;

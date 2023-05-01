@@ -2,8 +2,10 @@
 #include <Book/State.hpp>
 #include <Book/CommandQueue.hpp>
 #include <GUI/Button.hpp>
+#include <GUI/Textbox.hpp>
 #include <array>
 #include <DSEntity/SLLNode.hpp>
+#include <memory>
 
 class Stack : public State
 {
@@ -15,6 +17,7 @@ class Stack : public State
         virtual bool        handleRealtimeInput();
         void                push(std::string val);
         void                pop();
+        void                clear();
 
     private:
         void                buildScenes();
@@ -31,7 +34,6 @@ class Stack : public State
         sf::RenderWindow*                   mWindow;
         SceneNode                           mSceneGraph;
         std::array<SceneNode*, LayerCount>  mSceneLayers;
-        CommandQueue                        mCommandQueue;
         SLLNode*                            mHead;
         std::vector<Button*>                mButtons;
 };

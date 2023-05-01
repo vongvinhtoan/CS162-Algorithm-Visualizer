@@ -6,7 +6,8 @@ mText{text},
 mBackground{background},
 mIsLocked{false},
 mIsClicked{false},
-mIsInputing{false}
+mIsInputing{false},
+mIsClickedAway{false}
 {
     setBackgroundFillColor(sf::Color::Blue);
     
@@ -18,24 +19,7 @@ mIsInputing{false}
     mText.setPosition(backgroundRect.x/2, backgroundRect.y/2);
 }
 
-void Button::setString(std::string string)
-{
-    mText.setString(string);
-
-    auto textRect = mText.getLocalBounds();
-    mText.setOrigin(textRect.left + textRect.width/2.f,
-                    textRect.top  + textRect.height/2.f);
-    
-    auto backgroundRect = mBackground.getSize();
-    mText.setPosition(backgroundRect.x/2, backgroundRect.y/2);
-}
-
-void Button::setBackgroundSize(const sf::Vector2f &size)
-{
-    mBackground.setSize(size);
-}
-
-void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Button::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(mBackground, states);
 
@@ -53,9 +37,11 @@ void Button::setBackgroundFillColor(const sf::Color &color)
 void Button::handleEvent(const sf::Event& event, sf::RenderWindow* window)
 {
     mIsClicked = false;
+    mIsClickedAway = false;
 
     sf::Vector2i pos(event.mouseButton.x, event.mouseButton.y);
-    auto rect = getGlobalBounds();
+    pos -= (sf::Vector2i) getWorldPosition(); 
+    auto rect = mBackground.getGlobalBounds();
 
     if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
     {
@@ -73,7 +59,9 @@ void Button::handleEvent(const sf::Event& event, sf::RenderWindow* window)
     {
         if(!mIsLocked) {
             if(!rect.contains(pos.x, pos.y)) {
-                mIsInputing = false;
+                mIsClickedAway = true;
+
+                std::cerr << "Button clicked away" << std::endl;
             }
             return;
         }
@@ -87,6 +75,9 @@ void Button::handleEvent(const sf::Event& event, sf::RenderWindow* window)
         if(!mIsLocked) return;
 
         mIsClicked = true;
+
+        std::cerr << "Button clicked" << std::endl;
+
         mIsLocked = false;
     }
 }
@@ -94,7 +85,9 @@ void Button::handleEvent(const sf::Event& event, sf::RenderWindow* window)
 void Button::handleRealtimeInput(sf::RenderWindow* window)
 {
     auto pos = sf::Mouse::getPosition(*window);
-    auto rect = getGlobalBounds();
+    pos -= (sf::Vector2i) getWorldPosition(); 
+    auto rect = mBackground.getGlobalBounds();
+
     if(mIsInputing)
     {
         setBackgroundFillColor(sf::Color::Green);
@@ -113,16 +106,6 @@ void Button::handleRealtimeInput(sf::RenderWindow* window)
     {
         setBackgroundFillColor(sf::Color::Blue);
     }
-}
-
-void Button::setPosition(float x, float y)
-{
-    mBackground.setPosition(x, y);
-}
-
-sf::FloatRect Button::getGlobalBounds() const
-{
-    return mBackground.getGlobalBounds();
 }
 
 unsigned int Button::getCategory() const
@@ -153,4 +136,9 @@ void Button::setInputing(bool inputing)
 bool Button::isInputing() const
 {
     return mIsInputing;
+}
+
+bool Button::isClickedAway() const
+{
+    return mIsClickedAway;
 }
