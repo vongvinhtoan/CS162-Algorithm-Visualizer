@@ -134,6 +134,7 @@ license you like.
 
 #include <cstring>
 #include <memory>
+#include <SFML/Graphics.hpp>
 
 #pragma pack(push)
 #pragma pack()
@@ -921,6 +922,8 @@ public:
   float asFloat() const;
   double asDouble() const;
   bool asBool() const;
+  sf::Color asColor() const;
+  sf::Vector2f asVector2f() const;
 
   bool isNull() const;
   bool isBool() const;

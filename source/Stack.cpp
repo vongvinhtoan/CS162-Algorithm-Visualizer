@@ -3,7 +3,8 @@
 
 Stack::Stack(StateStack& stack, Context context) :
 State(stack, context),
-mWindow(context.window)
+mWindow(context.window),
+mData((*context.data)["Stack"])
 {
     buildScenes();
 }
@@ -197,7 +198,13 @@ bool Stack::handleRealtimeInput()
 
 void Stack::push(std::string val) 
 {
-    std::unique_ptr<SLLNode> node(new SLLNode(val, sf::Vector2f(100, 0), 25.f, (*getContext().fonts)[Fonts::Default]));
+    std::unique_ptr<SLLNode> node(new SLLNode(
+        val,
+        (*getContext().fonts)[Fonts::Default],
+        mData["SLLNode"]
+    ));
+    node->setPosition(mData["SLLNode"]["spacing"].asVector2f());
+
     node->setNext(mHead->getNext());
     mHead->setNext(node.get());
     if(node->getNext()) node->attachChild(std::move(mHead->detachChild(*node->getNext())));
@@ -231,7 +238,13 @@ void Stack::buildScenes()
     }
 
     // Nodes layer
-    std::unique_ptr<SLLNode> tmp(new SLLNode("HEAD", sf::Vector2f(0, 100), 25.f, (*getContext().fonts)[Fonts::Default]));
+    std::unique_ptr<SLLNode> tmp(new SLLNode(
+        "HEAD", 
+        (*getContext().fonts)[Fonts::Default],
+        mData["SLLNode"]
+    ));
+    tmp->setPosition(mData["SLLNode"]["position"].asVector2f());
+
     tmp->setDontDraw(true);
     mHead = tmp.get();
     mSceneLayers[Nodes]->attachChild(std::move(tmp));
@@ -243,30 +256,33 @@ void Stack::buildScenes()
     push("5");
 
     // Button layer
+    auto dPush = mData["bPush"];
     std::unique_ptr<Button> bPush (new Button(
         Button::Category::StackPush, 
         sf::Text("Push", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(sf::Vector2f(225, 75))
+        sf::RectangleShape(dPush["size"].asVector2f())
     ));
-    bPush->setPosition(100, 100);
+    bPush->setPosition(dPush["position"].asVector2f());
     mButtons.push_back(bPush.get());
     mSceneLayers[Buttons]->attachChild(std::move(bPush));
 
+    auto dPop = mData["bPop"];
     std::unique_ptr<Button> bPop (new Button(
         Button::Category::StackPop, 
         sf::Text("Pop", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(sf::Vector2f(225, 75))
+        sf::RectangleShape(dPop["size"].asVector2f())
     ));
-    bPop->setPosition(100, 200);
+    bPop->setPosition(dPop["position"].asVector2f());
     mButtons.push_back(bPop.get());
     mSceneLayers[Buttons]->attachChild(std::move(bPop));
 
+    auto dClear = mData["bClear"];
     std::unique_ptr<Button> bClear (new Button(
         Button::Category::StackClear, 
         sf::Text("Clear", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(sf::Vector2f(225, 75))
+        sf::RectangleShape(sf::Vector2f(dClear["size"].asVector2f()))
     ));
-    bClear->setPosition(100, 300);
+    bClear->setPosition(dClear["position"].asVector2f());
     mButtons.push_back(bClear.get());
     mSceneLayers[Buttons]->attachChild(std::move(bClear));
 }

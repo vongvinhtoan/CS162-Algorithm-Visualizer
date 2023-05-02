@@ -3248,6 +3248,15 @@ bool Value::asBool() const {
   JSON_FAIL_MESSAGE("Value is not convertible to bool.");
 }
 
+sf::Color Value::asColor() const {
+  return sf::Color((*this)["r"].asUInt(), (*this)["g"].asUInt(),
+                   (*this)["b"].asUInt(), (*this)["a"].asUInt());
+}
+
+sf::Vector2f Value::asVector2f() const {
+  return sf::Vector2f((*this)["x"].asFloat(), (*this)["y"].asFloat());
+}
+
 bool Value::isConvertibleTo(ValueType other) const {
   switch (other) {
   case nullValue:

@@ -4,6 +4,7 @@
 #include <Book/SceneNode.hpp>
 #include <DSEntity/Arrow.hpp>
 #include <string>
+#include <json/json.h>
 
 class SLLNode : 
 public SceneNode
@@ -11,13 +12,16 @@ public SceneNode
 public:
     SLLNode(
         const std::string& data, 
-        const sf::Vector2f& position = sf::Vector2f(0, 0), 
-        float radius = 50.f,
-        const sf::Font& font = sf::Font()
+        const sf::Font& font = sf::Font(),
+        const Json::Value& dataJson = Json::Value()
     );
     void setData(const std::string& data);
     void setNext(SLLNode* next);
     void setDontDraw(bool dontDraw);
+    void setRadius(float radius);
+    void setFillColor(const sf::Color& color);
+    void setOutlineColor(const sf::Color& color);
+    void setOutlineThickness(float thickness);
     SLLNode* getNext() const;
     std::string getData() const;
 

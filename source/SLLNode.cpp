@@ -1,18 +1,16 @@
 #include <DSEntity/SLLNode.hpp>
 #include <math.h>
 
-SLLNode::SLLNode(const std::string& data, const sf::Vector2f& position, float radius, const sf::Font& font)
+SLLNode::SLLNode(const std::string& data, const sf::Font& font, const Json::Value& dataJson)
 : mData(data, font, 20)
 , mNext(nullptr)
 , mArrow(new Arrow(sf::Vector2f(0, 0), sf::Vector2f(0, 0), 5, 10, 10))
 , mDontDraw(false)
 {
-    mBackground.setRadius(radius);
-    mBackground.setFillColor(sf::Color::Blue);
-    mBackground.setOutlineColor(sf::Color::Red);
-    mBackground.setOutlineThickness(10);
-    mBackground.setOrigin(mBackground.getRadius(), mBackground.getRadius());
-    setPosition(position);
+    setRadius(dataJson["radius"].asFloat());
+    setFillColor(dataJson["fillColor"].asColor());
+    setOutlineColor(dataJson["outlineColor"].asColor());
+    setOutlineThickness(dataJson["outlineThickness"].asFloat());
     mArrow->setFillColor(sf::Color::White);
     
     auto textRect = mData.getLocalBounds();
@@ -67,3 +65,23 @@ std::string SLLNode::getData() const
     return mData.getString();
 }
 
+void SLLNode::setFillColor(const sf::Color& color)
+{
+    mBackground.setFillColor(color);
+}
+
+void SLLNode::setOutlineColor(const sf::Color& color)
+{
+    mBackground.setOutlineColor(color);
+}
+
+void SLLNode::setOutlineThickness(float thickness)
+{
+    mBackground.setOutlineThickness(thickness);
+}
+
+void SLLNode::setRadius(float radius)
+{
+    mBackground.setRadius(radius);
+    mBackground.setOrigin(mBackground.getRadius(), mBackground.getRadius());
+}

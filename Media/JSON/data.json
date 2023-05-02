@@ -1,4 +1,58 @@
 {
-    "name": "Naot",
-    "age": 18
+    "Stack" : {
+        "bPush" : {
+            "position" : {
+                "x" : 100,
+                "y" : 200
+            },
+            "size" : {
+                "x" : 225,
+                "y" : 75
+            }
+        },
+        "bPop" : {
+            "position" : {
+                "x" : 100,
+                "y" : 300
+            },
+            "size" : {
+                "x" : 225,
+                "y" : 75
+            }
+        },
+        "bClear" : {
+            "position" : {
+                "x" : 100,
+                "y" : 400
+            },
+            "size" : {
+                "x" : 225,
+                "y" : 75
+            }
+        },
+        "SLLNode" : {
+            "radius" : 25,
+            "position" : {
+                "x" : 0,
+                "y" : 100
+            },
+            "fillColor" : {
+                "r" : 0,
+                "g" : 0,
+                "b" : 255,
+                "a" : 255
+            },
+            "outlineColor" : {
+                "r" : 255,
+                "g" : 0,
+                "b" : 0,
+                "a" : 255
+            },
+            "outlineThickness" : 10,
+            "spacing" : {
+                "x" : 120,
+                "y" : 0
+            }
+        }
+    }
 }

@@ -36,4 +36,5 @@ class Stack : public State
         std::array<SceneNode*, LayerCount>  mSceneLayers;
         SLLNode*                            mHead;
         std::vector<Button*>                mButtons;
+        Json::Value                         mData;
 };
