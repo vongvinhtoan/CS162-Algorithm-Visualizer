@@ -1,13 +1,14 @@
 #include <Book/Application.hpp>
 
 Application::Application() : 
-mStateStack(State::Context(mWindow, mTextures, mFonts)),
+mStateStack(State::Context(mWindow, mTextures, mFonts, mData)),
 mWindow(sf::VideoMode(800, 600), "Algorithm Visualizer", sf::Style::Close),
 mIsPaused(false),
 mStatisticsNumFrames(0),
 mStatisticsUpdateTime(),
 mIsShowingStatistics(false)
 {
+    readJSON();
     mFonts.load(Fonts::Default, "Media/Fonts/Sansation.ttf");
     
     registerStates();
@@ -17,6 +18,13 @@ mIsShowingStatistics(false)
 	mStatisticsText.setFont(mFonts[Fonts::Default]);
 	mStatisticsText.setPosition(5.f, 5.f);
 	mStatisticsText.setCharacterSize(10);
+}
+
+void Application::readJSON()
+{
+    std::ifstream ifs("Media/JSON/data.json");
+    Json::Reader reader;
+    reader.parse(ifs, mData);
 }
 
 void Application::registerStates()

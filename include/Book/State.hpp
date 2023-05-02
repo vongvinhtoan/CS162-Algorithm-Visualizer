@@ -2,7 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
-#include "ResourceHolder.hpp"
+#include <ResourceHolder.hpp>
+#include <json/json.h>
 
 class StateStack;
 
@@ -32,10 +33,12 @@ class State
         {
             Context(sf::RenderWindow& window,
                     TextureHolder& textures,
-                    FontHolder& fonts);
+                    FontHolder& fonts,
+                    Json::Value& data);
             sf::RenderWindow*  window;
             TextureHolder*     textures;
             FontHolder*        fonts;
+            Json::Value*       data;
         };
     public:
                         State(StateStack& stack, Context context);

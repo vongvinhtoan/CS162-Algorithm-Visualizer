@@ -5,11 +5,13 @@ State::Context::Context
 (
     sf::RenderWindow& window,
     TextureHolder& textures,
-    FontHolder& fonts
+    FontHolder& fonts,
+    Json::Value& data
 ) :
 window(&window),
 textures(&textures),
-fonts(&fonts){}
+fonts(&fonts),
+data(&data){}
 
 
 State::State(StateStack& stack, Context context) : 

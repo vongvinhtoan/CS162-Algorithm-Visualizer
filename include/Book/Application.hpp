@@ -13,6 +13,9 @@
 #include <States/DataStructures/CircularLinkedList.hpp>
 #include <States/DataStructures/Stack.hpp>
 #include <States/DataStructures/Queue.hpp>
+#include <json/json.h>
+#include <fstream>
+#include <iostream>
 
 class Application
 {
@@ -26,6 +29,7 @@ private:
     void update(sf::Time dt);
     void updateStatistics(sf::Time elapsedTime);
     void draw();
+    void readJSON();
 
 private:
     sf::RenderWindow    mWindow;
@@ -37,6 +41,7 @@ private:
     sf::Time            mStatisticsUpdateTime;
 	int                 mStatisticsNumFrames;
     StateStack          mStateStack;
+    Json::Value         mData;
 
 private:
     const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
