@@ -189,12 +189,26 @@ void Stack::handleEventButtonPush(
         ButtonPushCreate(button);
     }
     
-    // if bGo is clicked or Enter hit, push the value
-    Button* bGo;
-    if(buttons.size() > 0) bGo = buttons[0];
-    else bGo = nullptr;
+    for(auto button: buttons) {
+        switch (button->getCategory())
+        {
+        case Button::Category::Go:
+            handleEventButtonPush_Go(button, event, textboxes);
+            break;
+        
+        default:
+            break;
+        }
+    }
 
-    if((bGo != nullptr && bGo->isClicked()) || 
+    if(!button->isInputing()) {
+        button->clearChildren();
+    }
+}
+
+void Stack::handleEventButtonPush_Go(Button *button, const sf::Event& event, std::vector<Textbox*> &textboxes)
+{
+    if((button != nullptr && button->isClicked()) || 
         (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return)) {
         std::string val;
         for(auto &textbox: textboxes) {
@@ -203,12 +217,12 @@ void Stack::handleEventButtonPush(
         if(val.size() > 0)
             push(val);
 
-        button->setInputing(false);
+        auto parent = dynamic_cast<Button*>(button->getParent());
+        if(parent != nullptr) {
+            parent->setInputing(false);
+        }
     }
 
-    if(!button->isInputing()) {
-        button->clearChildren();
-    }
 }
 
 void Stack::handleEventButtonPop(
@@ -423,7 +437,7 @@ void Stack::ButtonPushCreate(Button *button)
     // Create a button
     auto dButton = mData["bPush"]["bGo"];
     std::unique_ptr<Button> bGo(new Button(
-        Button::Category::StackPush,
+        Button::Category::Go,
         sf::Text("Go", (*getContext().fonts)[Fonts::Default]),
         sf::RectangleShape(dButton["size"].asVector2f())
     ));
@@ -434,11 +448,11 @@ void Stack::ButtonPushCreate(Button *button)
     button->attachChild(std::move(bGo));
 }
 
-// Open a dialog window to get input using windows api
-std::string Stack::openDialog(const char* filter, const char* ext) 
+std::string Stack::openDialog(const char* filter, const char* ext)
 {
     HWND hwnd;
-    TCHAR szFileName[MAX_PATH] = {};
+    TCHAR szFileName[MAX_PATH];
+
     OPENFILENAME ofn;
     ZeroMemory(&ofn, sizeof(ofn));
     ofn.lStructSize = sizeof(ofn);
@@ -454,6 +468,6 @@ std::string Stack::openDialog(const char* filter, const char* ext)
         return ofn.lpstrFile;
     } else {
         // User cancelled the dialog
-        return "nyooo";
+        return "";
     }
 }

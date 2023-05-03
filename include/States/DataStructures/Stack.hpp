@@ -19,10 +19,10 @@ class Stack : public State
         void                push(std::string val);
         void                pop();
         void                clear();
-        std::string         openDialog(const char* filter = "Text Files (*.txt)\0*.txt\0", const char* ext = "txt");
 
     private:
         void                buildScenes();
+        std::string         openDialog(const char* filter = "Text Files (*.txt)\0*.txt\0", const char* ext = "txt");
 
     private:
         void handleEventButtonInit(
