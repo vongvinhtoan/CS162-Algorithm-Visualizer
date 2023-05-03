@@ -12,7 +12,7 @@ mIsShowingStatistics(false)
     mFonts.load(Fonts::Default, "Media/Fonts/Sansation.ttf");
     
     registerStates();
-    mStateStack.pushState(States::Stack);
+    mStateStack.pushState(States::Menu);
     mStateStack.draw();
 
 	mStatisticsText.setFont(mFonts[Fonts::Default]);
@@ -115,8 +115,8 @@ void Application::updateStatistics(sf::Time elapsedTime)
 	{
 		mStatisticsText.setString(
 			"FPS = " + std::to_string(mStatisticsNumFrames) + "\n" +
-			"Time / Update = " + std::to_string(mStatisticsUpdateTime.asMicroseconds() / mStatisticsNumFrames) + "us");
-							 
+			"Time / Update = " + std::to_string(mStatisticsUpdateTime.asMicroseconds() / mStatisticsNumFrames) + "us"
+        );					 
 		mStatisticsUpdateTime -= sf::seconds(1.0f);
 		mStatisticsNumFrames = 0;
 	}

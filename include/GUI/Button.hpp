@@ -20,9 +20,11 @@ public SceneNode
             Go                  = 1 << 7,
             Resume              = 1 << 8,
             Menu                = 1 << 9,
-            StackPush           = 1 << 10,
-            StackPop            = 1 << 11,
-            StackClear          = 1 << 12,
+            Quit                = 1 << 10,
+            StackInit           = 1 << 11,
+            StackPush           = 1 << 12,
+            StackPop            = 1 << 13,
+            StackClear          = 1 << 14,
         };
 
     public:
@@ -35,6 +37,7 @@ public SceneNode
         bool isClicked() const;
         bool isClickedAway() const;
         sf::Vector2f getSize() const;
+        sf::FloatRect getLocalBounds() const;
         sf::FloatRect getGlobalBounds() const;
 
     public:

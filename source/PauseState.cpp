@@ -4,7 +4,8 @@
 PauseState::PauseState(StateStack& stack, Context context) :
 State(stack, context),
 mWindow(context.window),
-mPausedText("Paused", (*context.fonts)[Fonts::Default], 70)
+mPausedText("Paused", (*context.fonts)[Fonts::Default], 70),
+mData((*context.data)["PauseState"])
 {
     buildScenes();
 }
@@ -53,6 +54,11 @@ bool PauseState::handleEvent(const sf::Event& event)
             requestStackPop();
             return false;
         }
+
+        if(button->getCategory() == Button::Category::Quit) {
+            mWindow->close();
+            return false;
+        }
     }
     return false;
 }
@@ -80,24 +86,40 @@ void PauseState::buildScenes()
         textRect.left + textRect.width/2.f,
         textRect.top  + textRect.height/2.f
     );
-    mPausedText.setPosition(mWindow->getView().getSize() / 2.f);
+    mPausedText.setPosition(mWindow->getView().getSize().x / 2.f, mData["tPause"]["top"].asFloat());
 
     // Set the buttons
+    auto dResume = mData["bResume"];
     std::unique_ptr<Button> bResume(new Button(
         Button::Category::Resume,
-        sf::Text("Resume", (*getContext().fonts)[Fonts::Default]),
-        sf::RectangleShape(sf::Vector2f(200.f, 50.f))
+        sf::Text("Resume", (*getContext().fonts)[Fonts::Default], dResume["charSize"].asUInt()),
+        sf::RectangleShape(dResume["size"].asVector2f())
     ));
-    bResume->setPosition(mWindow->getView().getSize() / 2.f);
+    bResume->setOrigin(bResume->getLocalBounds().width / 2.f, bResume->getLocalBounds().height / 2.f);
+    bResume->setPosition(mWindow->getView().getSize().x / 2.f, dResume["top"].asFloat());
     mButtons.push_back(bResume.get());
     mSceneLayers[Buttons]->attachChild(std::move(bResume));
 
+    auto dMenu = mData["bMenu"];
     std::unique_ptr<Button> bMenu(new Button(
         Button::Category::Menu,
-        sf::Text("Menu", (*getContext().fonts)[Fonts::Default]),
-        sf::RectangleShape(sf::Vector2f(200.f, 50.f))
+        sf::Text("Menu", (*getContext().fonts)[Fonts::Default], dMenu["charSize"].asUInt()),
+        sf::RectangleShape(dMenu["size"].asVector2f())
     )); 
-    bMenu->setPosition(mWindow->getView().getSize() / 2.f + sf::Vector2f(0.f, 100.f));
+    bMenu->setOrigin(bMenu->getLocalBounds().width / 2.f, bMenu->getLocalBounds().height / 2.f);
+    bMenu->setPosition(mWindow->getView().getSize().x / 2.f, dMenu["top"].asFloat());
     mButtons.push_back(bMenu.get());
     mSceneLayers[Buttons]->attachChild(std::move(bMenu));
+
+    // Quit button
+    auto dQuit = mData["bQuit"];
+    std::unique_ptr<Button> bQuit(new Button(
+        Button::Category::Quit,
+        sf::Text("Quit", (*getContext().fonts)[Fonts::Default], dQuit["charSize"].asUInt()),
+        sf::RectangleShape(dQuit["size"].asVector2f())
+    ));
+    bQuit->setOrigin(bQuit->getLocalBounds().width / 2.f, bQuit->getLocalBounds().height / 2.f);
+    bQuit->setPosition(mWindow->getView().getSize().x / 2.f, dQuit["top"].asFloat());
+    mButtons.push_back(bQuit.get());
+    mSceneLayers[Buttons]->attachChild(std::move(bQuit));
 }

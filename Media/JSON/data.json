@@ -1,33 +1,64 @@
 {
     "Stack" : {
+        "bInit" : {
+            "position" : {
+                "x" : 100,
+                "y" : 245
+            },
+            "size" : {
+                "x" : 200,
+                "y" : 60
+            }
+        },
         "bPush" : {
             "position" : {
                 "x" : 100,
-                "y" : 200
+                "y" : 330
             },
             "size" : {
-                "x" : 225,
-                "y" : 75
+                "x" : 200,
+                "y" : 60
+            },
+            "tInput" : {
+                "limit" : 2,
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bGo" : {
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
             }
         },
         "bPop" : {
             "position" : {
                 "x" : 100,
-                "y" : 300
+                "y" : 415
             },
             "size" : {
-                "x" : 225,
-                "y" : 75
+                "x" : 200,
+                "y" : 60
             }
         },
         "bClear" : {
             "position" : {
                 "x" : 100,
-                "y" : 400
+                "y" : 500
             },
             "size" : {
-                "x" : 225,
-                "y" : 75
+                "x" : 200,
+                "y" : 60
             }
         },
         "SLLNode" : {
@@ -48,10 +79,39 @@
                 "b" : 0,
                 "a" : 255
             },
-            "outlineThickness" : 10,
+            "outlineThickness" : 9,
             "spacing" : {
                 "x" : 120,
                 "y" : 0
+            }
+        }
+    },
+    "PauseState" : {
+        "tPause" : {
+            "top" : 90
+        },
+        "bResume" : {
+            "top" : 240,
+            "charSize" : 40,
+            "size" : {
+                "x" : 250,
+                "y" : 75
+            }
+        },
+        "bMenu" : {
+            "top" : 360,
+            "charSize" : 40,
+            "size" : {
+                "x" : 250,
+                "y" : 75
+            }
+        },
+        "bQuit" : {
+            "top" : 480,
+            "charSize" : 40,
+            "size" : {
+                "x" : 250,
+                "y" : 75
             }
         }
     }

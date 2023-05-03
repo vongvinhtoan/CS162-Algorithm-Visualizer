@@ -133,6 +133,11 @@ sf::Vector2f Button::getSize() const
     return mBackground.getSize();
 }
 
+sf::FloatRect Button::getLocalBounds() const
+{
+    return mBackground.getLocalBounds();
+}
+
 sf::FloatRect Button::getGlobalBounds() const
 {
     auto rect = mBackground.getGlobalBounds();

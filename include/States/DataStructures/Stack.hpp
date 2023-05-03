@@ -6,6 +6,7 @@
 #include <array>
 #include <DSEntity/SLLNode.hpp>
 #include <memory>
+#include <windows.h>
 
 class Stack : public State
 {
@@ -18,9 +19,37 @@ class Stack : public State
         void                push(std::string val);
         void                pop();
         void                clear();
+        std::string         openDialog(const char* filter = "Text Files (*.txt)\0*.txt\0", const char* ext = "txt");
 
     private:
         void                buildScenes();
+
+    private:
+        void handleEventButtonInit(
+            Button *button, 
+            std::vector<Textbox*> &textboxes,
+            std::vector<Button*> &buttons,
+            const sf::Event& event
+        );
+        void handleEventButtonPush(
+            Button *button, 
+            std::vector<Textbox*> &textboxes,
+            std::vector<Button*> &buttons,
+            const sf::Event& event
+        );
+        void ButtonPushCreate(Button *button);
+        void handleEventButtonPop(
+            Button *button, 
+            std::vector<Textbox*> &textboxes,
+            std::vector<Button*> &buttons,
+            const sf::Event& event
+        );
+        void handleEventButtonClear(
+            Button *button, 
+            std::vector<Textbox*> &textboxes,
+            std::vector<Button*> &buttons,
+            const sf::Event& event
+        );
 
     private:
         enum Layers 

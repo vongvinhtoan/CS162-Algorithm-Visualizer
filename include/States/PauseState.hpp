@@ -3,6 +3,7 @@
 #include <GUI/Button.hpp>
 #include <Book/CommandQueue.hpp>
 #include <array>
+#include <json/json.h>
 
 class PauseState : public State
 {
@@ -29,4 +30,5 @@ class PauseState : public State
         sf::Text                            mPausedText;
         std::vector<Button*>                mButtons;
         std::array<SceneNode*, LayerCount>  mSceneLayers;
+        Json::Value                         mData;
 };
