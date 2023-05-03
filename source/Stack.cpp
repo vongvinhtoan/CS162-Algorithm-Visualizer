@@ -100,6 +100,61 @@ void Stack::handleEventButtonInit(
 
         button->setInputing(!isNotInputing);
     }
+
+    if(button->isInputing() && button->getChildren().size() == 0) {
+        ButtonInitCreate(button);
+    }
+
+    for(auto button: buttons) {
+        switch (button->getCategory())
+        {
+        case Button::Category::Go:
+            handleEventButtonInit_Go(button, event, textboxes);
+            break;
+        
+        case Button::Category::Manual:
+            handleEventButtonInit_Manual(button, event);
+            break;
+
+        case Button::Category::Random:
+            handleEventButtonInit_Random(button, event);
+            break;
+
+        case Button::Category::File:
+            handleEventButtonInit_File(button, event);
+            break;
+        
+        default:
+            break;
+        }
+    }
+
+    if(!button->isInputing()) {
+        button->clearChildren();
+    }
+}
+
+void Stack::handleEventButtonInit_Go(Button *button, const sf::Event& event, std::vector<Textbox*> &textboxes)
+{
+    
+}
+
+void Stack::handleEventButtonInit_File(Button *button, const sf::Event& event)
+{
+    if(button->isClicked()) {
+        std::string filepath = openDialog();
+        std::cout << "File path: " << filepath << std::endl;
+    }
+}
+
+void Stack::handleEventButtonInit_Manual(Button *button, const sf::Event& event)
+{
+    
+}
+
+void Stack::handleEventButtonInit_Random(Button *button, const sf::Event& event)
+{
+    
 }
 
 void Stack::handleEventButtonPush(
@@ -129,7 +184,6 @@ void Stack::handleEventButtonPush(
 
         button->setInputing(!isNotInputing);
     }
-
 
     if(button->isInputing() && button->getChildren().size() == 0) {
         ButtonPushCreate(button);
@@ -316,6 +370,37 @@ void Stack::buildScenes()
     mSceneLayers[Buttons]->attachChild(std::move(bClear));
 }
 
+void Stack::ButtonInitCreate(Button *button)
+{
+    // Create buttons
+    auto dManual = mData["bInit"]["bManual"];
+    std::unique_ptr<Button> bManual (new Button(
+        Button::Category::Manual, 
+        sf::Text("Manual", (*getContext().fonts)[Fonts::Default]), 
+        sf::RectangleShape(dManual["size"].asVector2f())
+    ));
+    bManual->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dManual["position"].asVector2f());
+    button->attachChild(std::move(bManual));
+
+    auto dRamdom = mData["bInit"]["bRandom"];
+    std::unique_ptr<Button> bRandom (new Button(
+        Button::Category::Random, 
+        sf::Text("Random", (*getContext().fonts)[Fonts::Default]), 
+        sf::RectangleShape(dRamdom["size"].asVector2f())
+    ));
+    bRandom->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dRamdom["position"].asVector2f());
+    button->attachChild(std::move(bRandom));
+
+    auto dFile = mData["bInit"]["bFile"];
+    std::unique_ptr<Button> bFile (new Button(
+        Button::Category::File, 
+        sf::Text("From File", (*getContext().fonts)[Fonts::Default]), 
+        sf::RectangleShape(dFile["size"].asVector2f())
+    ));
+    bFile->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dFile["position"].asVector2f());
+    button->attachChild(std::move(bFile));
+}
+
 void Stack::ButtonPushCreate(Button *button) 
 {
     // Create a textbox
@@ -369,6 +454,6 @@ std::string Stack::openDialog(const char* filter, const char* ext)
         return ofn.lpstrFile;
     } else {
         // User cancelled the dialog
-        return "";
+        return "nyooo";
     }
 }

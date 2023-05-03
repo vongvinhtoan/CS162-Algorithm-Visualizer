@@ -18,13 +18,16 @@ public SceneNode
             Stack               = 1 << 5,
             Queue               = 1 << 6,
             Go                  = 1 << 7,
-            Resume              = 1 << 8,
-            Menu                = 1 << 9,
-            Quit                = 1 << 10,
-            StackInit           = 1 << 11,
-            StackPush           = 1 << 12,
-            StackPop            = 1 << 13,
-            StackClear          = 1 << 14,
+            Manual              = 1 << 8,
+            Random              = 1 << 9,
+            File                = 1 << 10,
+            Resume              = 1 << 11,
+            Menu                = 1 << 12,
+            Quit                = 1 << 13,
+            StackInit           = 1 << 14,
+            StackPush           = 1 << 15,
+            StackPop            = 1 << 16,
+            StackClear          = 1 << 17,
         };
 
     public:

@@ -31,6 +31,12 @@ class Stack : public State
             std::vector<Button*> &buttons,
             const sf::Event& event
         );
+        void ButtonInitCreate(Button *button);
+        void handleEventButtonInit_Go(Button *button, const sf::Event& event, std::vector<Textbox*> &textboxes);
+        void handleEventButtonInit_Manual(Button *button, const sf::Event& event);
+        void handleEventButtonInit_Random(Button *button, const sf::Event& event);
+        void handleEventButtonInit_File(Button *button, const sf::Event& event);
+
         void handleEventButtonPush(
             Button *button, 
             std::vector<Textbox*> &textboxes,
@@ -38,6 +44,8 @@ class Stack : public State
             const sf::Event& event
         );
         void ButtonPushCreate(Button *button);
+        void handleEventButtonPush_Go(Button *button, const sf::Event& event, std::vector<Textbox*> &textboxes);
+
         void handleEventButtonPop(
             Button *button, 
             std::vector<Textbox*> &textboxes,
