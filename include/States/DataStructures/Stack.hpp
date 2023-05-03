@@ -7,6 +7,7 @@
 #include <DSEntity/SLLNode.hpp>
 #include <memory>
 #include <windows.h>
+#include <Book/DialogOpener.hpp>
 
 class Stack : public State
 {
@@ -22,7 +23,6 @@ class Stack : public State
 
     private:
         void                buildScenes();
-        std::string         openDialog(const char* filter = "Text Files (*.txt)\0*.txt\0", const char* ext = "txt");
 
     private:
         void handleEventButtonInit(
@@ -74,4 +74,5 @@ class Stack : public State
         SLLNode*                            mHead;
         std::vector<Button*>                mButtons;
         Json::Value                         mData;
+        DialogOpener                        mDialogOpener;
 };

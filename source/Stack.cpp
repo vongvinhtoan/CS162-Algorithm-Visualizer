@@ -142,8 +142,8 @@ void Stack::handleEventButtonInit_Go(Button *button, const sf::Event& event, std
 void Stack::handleEventButtonInit_File(Button *button, const sf::Event& event)
 {
     if(button->isClicked()) {
-        std::string filepath = openDialog();
-        std::cout << "File path: " << filepath << std::endl;
+        std::string filepath = mDialogOpener.get();
+        
     }
 }
 
@@ -446,28 +446,4 @@ void Stack::ButtonPushCreate(Button *button)
     // Attach 
     button->attachChild(std::move(textbox));
     button->attachChild(std::move(bGo));
-}
-
-std::string Stack::openDialog(const char* filter, const char* ext)
-{
-    HWND hwnd;
-    TCHAR szFileName[MAX_PATH];
-
-    OPENFILENAME ofn;
-    ZeroMemory(&ofn, sizeof(ofn));
-    ofn.lStructSize = sizeof(ofn);
-    ofn.hwndOwner = hwnd;
-    ofn.lpstrFilter = filter;
-    ofn.lpstrFile = szFileName;
-    ofn.nMaxFile = MAX_PATH;
-    ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
-    ofn.lpstrDefExt = ext;
-
-    if (GetOpenFileName(&ofn) == TRUE) {
-        // User selected a file
-        return ofn.lpstrFile;
-    } else {
-        // User cancelled the dialog
-        return "";
-    }
 }
