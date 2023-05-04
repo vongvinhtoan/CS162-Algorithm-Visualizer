@@ -25,39 +25,23 @@ class Stack : public State
         void                buildScenes();
 
     private:
-        void handleEventButtonInit(
-            Button *button, 
-            std::vector<Textbox*> &textboxes,
-            std::vector<Button*> &buttons,
-            const sf::Event& event
-        );
+        void filterTextboxesAndButtons(Button* button, std::vector<Textbox*> &textboxes, std::vector<Button*> &buttons);
+
+        void handleEventButtonInit(Button *button, const sf::Event& event);
         void ButtonInitCreate(Button *button);
-        void handleEventButtonInit_Go(Button *button, const sf::Event& event, std::vector<Textbox*> &textboxes);
+        void ButtonInitManualCreate(Button* button);
+        void handleEventButtonInit_Go(Button *button, const sf::Event& event);
         void handleEventButtonInit_Manual(Button *button, const sf::Event& event);
         void handleEventButtonInit_Random(Button *button, const sf::Event& event);
         void handleEventButtonInit_File(Button *button, const sf::Event& event);
 
-        void handleEventButtonPush(
-            Button *button, 
-            std::vector<Textbox*> &textboxes,
-            std::vector<Button*> &buttons,
-            const sf::Event& event
-        );
+        void handleEventButtonPush(Button *button, const sf::Event& event);
         void ButtonPushCreate(Button *button);
         void handleEventButtonPush_Go(Button *button, const sf::Event& event, std::vector<Textbox*> &textboxes);
 
-        void handleEventButtonPop(
-            Button *button, 
-            std::vector<Textbox*> &textboxes,
-            std::vector<Button*> &buttons,
-            const sf::Event& event
-        );
-        void handleEventButtonClear(
-            Button *button, 
-            std::vector<Textbox*> &textboxes,
-            std::vector<Button*> &buttons,
-            const sf::Event& event
-        );
+        void handleEventButtonPop(Button *button, const sf::Event& event);
+
+        void handleEventButtonClear(Button *button, const sf::Event& event);
 
     private:
         enum Layers 

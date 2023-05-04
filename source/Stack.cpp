@@ -19,6 +19,25 @@ bool Stack::update(sf::Time dt)
     return true;
 }
 
+void Stack::filterTextboxesAndButtons(Button* button, std::vector<Textbox*> &textboxes, std::vector<Button*> &buttons)
+{
+    textboxes.clear();
+    buttons.clear();
+    for(auto &child: button->getChildren()) {
+        //cast to textbox
+        auto textbox = dynamic_cast<Textbox*>(child);
+        if(textbox != nullptr) {
+            textboxes.push_back(textbox);
+        }
+
+        //cast to button
+        auto button = dynamic_cast<Button*>(child);
+        if(button != nullptr) {
+            buttons.push_back(button);
+        }
+    }
+}
+
 bool Stack::handleEvent(const sf::Event& event)
 {
     // If press escape, trigger the pause screen
@@ -31,38 +50,22 @@ bool Stack::handleEvent(const sf::Event& event)
     }
 
     for(auto &button: mButtons) {
-        std::vector<Textbox*> textboxes;
-        std::vector<Button*> buttons;
-        for(auto &child: button->getChildren()) {
-            //cast to textbox
-            auto textbox = dynamic_cast<Textbox*>(child);
-            if(textbox != nullptr) {
-                textboxes.push_back(textbox);
-            }
-
-            //cast to button
-            auto button = dynamic_cast<Button*>(child);
-            if(button != nullptr) {
-                buttons.push_back(button);
-            }
-        }
-
         switch (button->getCategory())
         {
         case Button::Category::StackInit:
-            handleEventButtonInit(button, textboxes, buttons, event);
+            handleEventButtonInit(button, event);
             break;
 
         case Button::Category::StackPush:
-            handleEventButtonPush(button, textboxes, buttons, event);
+            handleEventButtonPush(button, event);
             break;
 
         case Button::Category::StackPop:
-            handleEventButtonPop(button, textboxes, buttons, event);
+            handleEventButtonPop(button, event);
             break;
 
         case Button::Category::StackClear:
-            handleEventButtonClear(button, textboxes, buttons, event);
+            handleEventButtonClear(button, event);
             break;
         
         default:
@@ -73,13 +76,11 @@ bool Stack::handleEvent(const sf::Event& event)
     return true;
 }
 
-void Stack::handleEventButtonInit(
-    Button *button, 
-    std::vector<Textbox*> &textboxes, 
-    std::vector<Button*> &buttons,
-    const sf::Event& event
-)
+void Stack::handleEventButtonInit(Button *button, const sf::Event& event)
 {
+    std::vector<Textbox*> textboxes;
+    std::vector<Button*> buttons;
+    filterTextboxesAndButtons(button, textboxes, buttons);
     button->handleEvent(event, mWindow);
     for(auto &textbox: textboxes) {
         textbox->handleEvent(event, mWindow);
@@ -106,10 +107,12 @@ void Stack::handleEventButtonInit(
     }
 
     for(auto button: buttons) {
+        // If the button is deallocated, it will be skipped
+        
         switch (button->getCategory())
         {
         case Button::Category::Go:
-            handleEventButtonInit_Go(button, event, textboxes);
+            handleEventButtonInit_Go(button, event);
             break;
         
         case Button::Category::Manual:
@@ -134,7 +137,7 @@ void Stack::handleEventButtonInit(
     }
 }
 
-void Stack::handleEventButtonInit_Go(Button *button, const sf::Event& event, std::vector<Textbox*> &textboxes)
+void Stack::handleEventButtonInit_Go(Button *button, const sf::Event& event)
 {
     
 }
@@ -142,14 +145,25 @@ void Stack::handleEventButtonInit_Go(Button *button, const sf::Event& event, std
 void Stack::handleEventButtonInit_File(Button *button, const sf::Event& event)
 {
     if(button->isClicked()) {
+        auto parent = dynamic_cast<Button*>(button->getParent());
+        if(parent != nullptr) {
+            parent->setInputing(false);
+        }
+
         std::string filepath = mDialogOpener.get();
-        
     }
 }
 
 void Stack::handleEventButtonInit_Manual(Button *button, const sf::Event& event)
 {
-    
+    if(button->isClicked()) {
+        auto parent = dynamic_cast<Button*>(button->getParent());
+        if(parent != nullptr) {
+            parent->clearChildren();
+        }
+
+        // ButtonInitManualCreate(parent);
+    }
 }
 
 void Stack::handleEventButtonInit_Random(Button *button, const sf::Event& event)
@@ -157,13 +171,11 @@ void Stack::handleEventButtonInit_Random(Button *button, const sf::Event& event)
     
 }
 
-void Stack::handleEventButtonPush(
-    Button *button, 
-    std::vector<Textbox*> &textboxes, 
-    std::vector<Button*> &buttons,
-    const sf::Event& event
-)
+void Stack::handleEventButtonPush(Button *button, const sf::Event& event)
 {
+    std::vector<Textbox*> textboxes;
+    std::vector<Button*> buttons;
+    filterTextboxesAndButtons(button, textboxes, buttons);
     button->handleEvent(event, mWindow);
     for(auto &textbox: textboxes) {
         textbox->handleEvent(event, mWindow);
@@ -208,30 +220,28 @@ void Stack::handleEventButtonPush(
 
 void Stack::handleEventButtonPush_Go(Button *button, const sf::Event& event, std::vector<Textbox*> &textboxes)
 {
-    if((button != nullptr && button->isClicked()) || 
-        (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return)) {
+    if(button->isClicked()
+       || event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return) {
         std::string val;
+        auto parent = dynamic_cast<Button*>(button->getParent());
+        if(parent != nullptr) {
+            parent->setInputing(false);
+        }
+
         for(auto &textbox: textboxes) {
             val += textbox->getText();
         }
         if(val.size() > 0)
             push(val);
-
-        auto parent = dynamic_cast<Button*>(button->getParent());
-        if(parent != nullptr) {
-            parent->setInputing(false);
-        }
     }
 
 }
 
-void Stack::handleEventButtonPop(
-    Button *button, 
-    std::vector<Textbox*> &textboxes, 
-    std::vector<Button*> &buttons,
-    const sf::Event& event
-)
+void Stack::handleEventButtonPop(Button *button, const sf::Event& event)
 {
+    std::vector<Textbox*> textboxes;
+    std::vector<Button*> buttons;
+    filterTextboxesAndButtons(button, textboxes, buttons);
     button->handleEvent(event, mWindow);
     for(auto &textbox: textboxes) {
         textbox->handleEvent(event, mWindow);
@@ -244,13 +254,11 @@ void Stack::handleEventButtonPop(
     }
 }
 
-void Stack::handleEventButtonClear(
-    Button *button, 
-    std::vector<Textbox*> &textboxes, 
-    std::vector<Button*> &buttons,
-    const sf::Event& event
-)
+void Stack::handleEventButtonClear(Button *button, const sf::Event& event)
 {
+    std::vector<Textbox*> textboxes;
+    std::vector<Button*> buttons;
+    filterTextboxesAndButtons(button, textboxes, buttons);
     button->handleEvent(event, mWindow);
     for(auto &textbox: textboxes) {
         textbox->handleEvent(event, mWindow);
@@ -413,6 +421,41 @@ void Stack::ButtonInitCreate(Button *button)
     ));
     bFile->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dFile["position"].asVector2f());
     button->attachChild(std::move(bFile));
+}
+
+void Stack::ButtonInitManualCreate(Button* button)
+{
+    // Create a textbox
+    auto dTextbox = mData["bInit"]["tInput"];
+    std::unique_ptr<Textbox> textbox(new Textbox(
+        sf::Text("", (*getContext().fonts)[Fonts::Default]), 
+        sf::RectangleShape(dTextbox["size"].asVector2f())
+    ));
+    textbox->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dTextbox["position"].asVector2f());
+    textbox->setLimit(true, dTextbox["limit"].asInt());
+    textbox->setSelection(true);
+    textbox->setValidCharFunction([](const std::string &str, char c) {
+        return (c >= '0' && c <= '9') 
+            || (c == ' ')
+            || (c == ',');
+    });
+    textbox->setPushCharFunction([](std::string &str, char c) -> void {
+        if(str.size() == 1 && str == "0") str.pop_back();
+        str += c;
+    });
+
+    // Create a button
+    auto dButton = mData["bInit"]["bGo"];
+    std::unique_ptr<Button> bGo (new Button(
+        Button::Category::Go, 
+        sf::Text("Go", (*getContext().fonts)[Fonts::Default]), 
+        sf::RectangleShape(dButton["size"].asVector2f())
+    ));
+    bGo->setPosition(sf::Vector2f(button->getSize().x + textbox->getSize().x, 0.f) + dButton["position"].asVector2f());
+
+    // Attach
+    button->attachChild(std::move(textbox));
+    button->attachChild(std::move(bGo));
 }
 
 void Stack::ButtonPushCreate(Button *button) 
