@@ -5,8 +5,7 @@
 class Randomizer {
     public:
         Randomizer(int min, int max);
-        int get();
-        int get(int min, int max);
+        int getVal();
 
     private:
         std::random_device rd;

@@ -8,7 +8,7 @@ class DialogOpener {
     DialogOpener(std::string filter = "Text Files (*.txt)\0*.txt\0", std::string ext = "txt");
 
   public:
-    std::string get();
+    std::string getPath();
 
   private:
     std::string filter;

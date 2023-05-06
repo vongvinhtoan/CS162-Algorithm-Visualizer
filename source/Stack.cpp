@@ -5,7 +5,8 @@ Stack::Stack(StateStack& stack, Context context) :
 State(stack, context),
 mWindow(context.window),
 mData((*context.data)["Stack"]),
-mRandomizer(0, 99)
+mRandomizer(new Randomizer(0, 99)),
+mDialogOpener(new DialogOpener())
 {
     buildScenes();
 }
@@ -162,7 +163,7 @@ bool Stack::handleEventButtonInit_File(Button *button, const sf::Event& event)
             parent->setInputing(false);
         }
 
-        std::string filepath = mDialogOpener.get();
+        std::string filepath = mDialogOpener->getPath();
         std::ifstream file(filepath);
         if(file.is_open()) {
             std::stringstream ss;
@@ -373,9 +374,9 @@ void Stack::initRandom()
     mHead->clearChildren();
     mHead->setNext(nullptr);
 
-    int n = mRandomizer.get() % 10 + 1;
+    int n = mRandomizer->getVal() % 10 + 1;
     for(int i = 0; i < n; ++i) {
-        push(std::to_string(mRandomizer.get()));
+        push(std::to_string(mRandomizer->getVal()));
     }
 }
 

@@ -2,6 +2,6 @@
 
 Randomizer::Randomizer(int min, int max) : gen(rd()), dis(min, max) {}
 
-int Randomizer::get() {
+int Randomizer::getVal() {
     return dis(gen);
 }

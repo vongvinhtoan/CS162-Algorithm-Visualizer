@@ -6,7 +6,7 @@ DialogOpener::DialogOpener(std::string filter, std::string ext)
 
       };
 
-std::string DialogOpener::get() {
+std::string DialogOpener::getPath() {
     OPENFILENAME ofn;
     ZeroMemory(&ofn, sizeof(ofn));
     ofn.lStructSize = sizeof(ofn);

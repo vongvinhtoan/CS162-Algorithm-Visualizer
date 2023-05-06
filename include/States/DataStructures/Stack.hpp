@@ -62,6 +62,6 @@ class Stack : public State
         SLLNode*                            mHead;
         std::vector<Button*>                mButtons;
         Json::Value                         mData;
-        DialogOpener                        mDialogOpener;
-        Randomizer                          mRandomizer;
+        std::unique_ptr<DialogOpener>       mDialogOpener;
+        std::unique_ptr<Randomizer>         mRandomizer;
 };
