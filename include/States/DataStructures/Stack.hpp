@@ -7,7 +7,9 @@
 #include <DSEntity/SLLNode.hpp>
 #include <memory>
 #include <windows.h>
+#include <fstream>
 #include <Book/DialogOpener.hpp>
+#include <Book/Randomizer.hpp>
 
 class Stack : public State
 {
@@ -20,6 +22,8 @@ class Stack : public State
         void                push(std::string val);
         void                pop();
         void                clear();
+        void                init(std::stringstream &ss);
+        void                initRandom();
 
     private:
         void                buildScenes();
@@ -31,9 +35,9 @@ class Stack : public State
         void ButtonInitCreate(Button *button);
         void ButtonInitManualCreate(Button* button);
         void handleEventButtonInit_Go(Button *button, const sf::Event& event);
-        void handleEventButtonInit_Manual(Button *button, const sf::Event& event);
-        void handleEventButtonInit_Random(Button *button, const sf::Event& event);
-        void handleEventButtonInit_File(Button *button, const sf::Event& event);
+        bool handleEventButtonInit_Manual(Button *button, const sf::Event& event);
+        bool handleEventButtonInit_Random(Button *button, const sf::Event& event);
+        bool handleEventButtonInit_File(Button *button, const sf::Event& event);
 
         void handleEventButtonPush(Button *button, const sf::Event& event);
         void ButtonPushCreate(Button *button);
@@ -59,4 +63,5 @@ class Stack : public State
         std::vector<Button*>                mButtons;
         Json::Value                         mData;
         DialogOpener                        mDialogOpener;
+        Randomizer                          mRandomizer;
 };

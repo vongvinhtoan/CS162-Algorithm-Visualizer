@@ -4,7 +4,8 @@
 Stack::Stack(StateStack& stack, Context context) :
 State(stack, context),
 mWindow(context.window),
-mData((*context.data)["Stack"])
+mData((*context.data)["Stack"]),
+mRandomizer(0, 99)
 {
     buildScenes();
 }
@@ -107,28 +108,23 @@ void Stack::handleEventButtonInit(Button *button, const sf::Event& event)
     }
 
     for(auto button: buttons) {
-        // If the button is deallocated, it will be skipped
-        
-        switch (button->getCategory())
-        {
-        case Button::Category::Go:
+        auto category = button->getCategory();
+        if(category == Button::Category::Manual && !handleEventButtonInit_Manual(button, event)) {
+            break;
+        }
+        else if(category == Button::Category::Random && !handleEventButtonInit_Random(button, event)) {
+            break;
+        }
+        else if(category == Button::Category::File && !handleEventButtonInit_File(button, event)) {
+            break;
+        }
+    }
+
+    filterTextboxesAndButtons(button, textboxes, buttons);
+
+    for(auto button: buttons) {
+        if(button->getCategory() == Button::Category::Go) {
             handleEventButtonInit_Go(button, event);
-            break;
-        
-        case Button::Category::Manual:
-            handleEventButtonInit_Manual(button, event);
-            break;
-
-        case Button::Category::Random:
-            handleEventButtonInit_Random(button, event);
-            break;
-
-        case Button::Category::File:
-            handleEventButtonInit_File(button, event);
-            break;
-        
-        default:
-            break;
         }
     }
 
@@ -139,10 +135,26 @@ void Stack::handleEventButtonInit(Button *button, const sf::Event& event)
 
 void Stack::handleEventButtonInit_Go(Button *button, const sf::Event& event)
 {
-    
+    if(button->isClicked()
+       || event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return) {
+        auto parent = dynamic_cast<Button*>(button->getParent());
+        if(parent != nullptr) {
+            parent->setInputing(false);
+        }
+
+        std::vector<Textbox*> textboxes;
+        std::vector<Button*> buttons;
+        filterTextboxesAndButtons(parent, textboxes, buttons);
+
+        std::stringstream ss;
+        for(auto &textbox: textboxes) {
+            ss << textbox->getText() << " ";
+        }
+        init(ss);
+    }
 }
 
-void Stack::handleEventButtonInit_File(Button *button, const sf::Event& event)
+bool Stack::handleEventButtonInit_File(Button *button, const sf::Event& event)
 {
     if(button->isClicked()) {
         auto parent = dynamic_cast<Button*>(button->getParent());
@@ -151,10 +163,20 @@ void Stack::handleEventButtonInit_File(Button *button, const sf::Event& event)
         }
 
         std::string filepath = mDialogOpener.get();
+        std::ifstream file(filepath);
+        if(file.is_open()) {
+            std::stringstream ss;
+            ss << file.rdbuf();
+            init(ss);
+        }
+        else {
+            std::cout << "Unable to open file" << std::endl;
+        }
     }
+    return 1;
 }
 
-void Stack::handleEventButtonInit_Manual(Button *button, const sf::Event& event)
+bool Stack::handleEventButtonInit_Manual(Button *button, const sf::Event& event)
 {
     if(button->isClicked()) {
         auto parent = dynamic_cast<Button*>(button->getParent());
@@ -162,13 +184,23 @@ void Stack::handleEventButtonInit_Manual(Button *button, const sf::Event& event)
             parent->clearChildren();
         }
 
-        // ButtonInitManualCreate(parent);
+        ButtonInitManualCreate(parent);
+        return 0;
     }
+    return 1;
 }
 
-void Stack::handleEventButtonInit_Random(Button *button, const sf::Event& event)
+bool Stack::handleEventButtonInit_Random(Button *button, const sf::Event& event)
 {
-    
+    if(button->isClicked()) {
+        auto parent = dynamic_cast<Button*>(button->getParent());
+        if(parent != nullptr) {
+            parent->setInputing(false);
+        }
+
+        initRandom();
+    }
+    return 1;
 }
 
 void Stack::handleEventButtonPush(Button *button, const sf::Event& event)
@@ -323,6 +355,30 @@ void Stack::clear()
     while(mHead->getNext()) pop();
 }
 
+void Stack::init(std::stringstream &ss) 
+{
+    mHead->clearChildren();
+    mHead->setNext(nullptr);
+
+    int val;
+    while(ss >> val) {
+        if(val < 0) continue;
+        if(val > 99) continue;
+        push(std::to_string(val));
+    }
+}
+
+void Stack::initRandom()
+{
+    mHead->clearChildren();
+    mHead->setNext(nullptr);
+
+    int n = mRandomizer.get() % 10 + 1;
+    for(int i = 0; i < n; ++i) {
+        push(std::to_string(mRandomizer.get()));
+    }
+}
+
 void Stack::buildScenes()
 {
     for (int i = 0; i < LayerCount; ++i)
@@ -436,11 +492,18 @@ void Stack::ButtonInitManualCreate(Button* button)
     textbox->setSelection(true);
     textbox->setValidCharFunction([](const std::string &str, char c) {
         return (c >= '0' && c <= '9') 
-            || (c == ' ')
-            || (c == ',');
+            || (c == ' ');
     });
     textbox->setPushCharFunction([](std::string &str, char c) -> void {
-        if(str.size() == 1 && str == "0") str.pop_back();
+        if(str.back() == '0') {
+            str.pop_back();
+            if(str.size() > 0 && str.back() != ' ') {
+                str += '0';
+            }
+        }
+        if(c == ' ' && str.size() > 0 && str.back() == ' ') {
+            str.pop_back();
+        }
         str += c;
     });
 
