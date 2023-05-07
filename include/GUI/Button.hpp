@@ -28,6 +28,10 @@ public SceneNode
             StackPush           = 1 << 15,
             StackPop            = 1 << 16,
             StackClear          = 1 << 17,
+            QueueInit           = 1 << 14,
+            QueueAdd            = 1 << 15,
+            QueueRemove         = 1 << 16,
+            QueueClear          = 1 << 17,
         };
 
     public:

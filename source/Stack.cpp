@@ -267,7 +267,6 @@ void Stack::handleEventButtonPush_Go(Button *button, const sf::Event& event, std
         if(val.size() > 0)
             push(val);
     }
-
 }
 
 void Stack::handleEventButtonPop(Button *button, const sf::Event& event)
