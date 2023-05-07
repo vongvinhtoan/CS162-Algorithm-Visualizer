@@ -1,13 +1,18 @@
 #include <Book/Application.hpp>
 
 Application::Application() : 
-mStateStack(State::Context(mWindow, mTextures, mFonts, mData)),
 mWindow(sf::VideoMode(800, 600), "Algorithm Visualizer", sf::Style::Close),
+mStateStack(State::Context(mWindow, mTextures, mFonts, mData, *mDialogOpener, *mRandomizer)),
 mIsPaused(false),
 mStatisticsNumFrames(0),
 mStatisticsUpdateTime(),
-mIsShowingStatistics(false)
+mIsShowingStatistics(false),
+mRandomizer(new Randomizer(1, 1e6)),
+mDialogOpener(new DialogOpener)
 {
+    mStateStack.setDialogOpener(mDialogOpener.get());
+    mStateStack.setRandomizer(mRandomizer.get());
+
     readJSON();
     mFonts.load(Fonts::Default, "Media/Fonts/Sansation.ttf");
     
@@ -18,6 +23,9 @@ mIsShowingStatistics(false)
 	mStatisticsText.setFont(mFonts[Fonts::Default]);
 	mStatisticsText.setPosition(5.f, 5.f);
 	mStatisticsText.setCharacterSize(10);
+    mWindow.setFramerateLimit(60);
+
+    // std::cout << mDialogOpener->getPath() << std::endl;
 }
 
 void Application::readJSON()

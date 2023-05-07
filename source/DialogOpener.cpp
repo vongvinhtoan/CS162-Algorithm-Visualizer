@@ -1,4 +1,5 @@
 #include <Book/DialogOpener.hpp>
+#include <iostream>
 
 DialogOpener::DialogOpener(std::string filter, std::string ext)
     : filter(filter),

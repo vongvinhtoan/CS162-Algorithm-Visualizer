@@ -8,8 +8,6 @@
 #include <memory>
 #include <windows.h>
 #include <fstream>
-#include <Book/DialogOpener.hpp>
-#include <Book/Randomizer.hpp>
 
 class Stack : public State
 {
@@ -62,6 +60,6 @@ class Stack : public State
         SLLNode*                            mHead;
         std::vector<Button*>                mButtons;
         Json::Value                         mData;
-        std::unique_ptr<DialogOpener>       mDialogOpener;
-        std::unique_ptr<Randomizer>         mRandomizer;
+        DialogOpener*                       mDialogOpener;
+        Randomizer*                         mRandomizer;
 };

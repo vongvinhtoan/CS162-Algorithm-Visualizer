@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <Book/ResourceHolder.hpp>
+#include <Book/DialogOpener.hpp>
+#include <Book/Randomizer.hpp>
 #include <json/json.h>
 
 class StateStack;
@@ -34,11 +36,15 @@ class State
             Context(sf::RenderWindow& window,
                     TextureHolder& textures,
                     FontHolder& fonts,
-                    Json::Value& data);
+                    Json::Value& data,
+                    DialogOpener& dialogOpener,
+                    Randomizer& randomizer);
             sf::RenderWindow*  window;
             TextureHolder*     textures;
             FontHolder*        fonts;
             Json::Value*       data;
+            DialogOpener*      dialogOpener;
+            Randomizer*        randomizer;
         };
     public:
                         State(StateStack& stack, Context context);

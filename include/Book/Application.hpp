@@ -13,6 +13,8 @@
 #include <States/DataStructures/CircularLinkedList.hpp>
 #include <States/DataStructures/Stack.hpp>
 #include <States/DataStructures/Queue.hpp>
+#include <Book/DialogOpener.hpp>
+#include <Book/Randomizer.hpp>
 #include <json/json.h>
 #include <fstream>
 #include <iostream>
@@ -32,16 +34,18 @@ private:
     void readJSON();
 
 private:
-    sf::RenderWindow    mWindow;
-    TextureHolder       mTextures;
-    FontHolder          mFonts;
-    bool                mIsPaused;
-    bool                mIsShowingStatistics;
-    sf::Text            mStatisticsText;
-    sf::Time            mStatisticsUpdateTime;
-	int                 mStatisticsNumFrames;
-    StateStack          mStateStack;
-    Json::Value         mData;
+    sf::RenderWindow                mWindow;
+    TextureHolder                   mTextures;
+    FontHolder                      mFonts;
+    bool                            mIsPaused;
+    bool                            mIsShowingStatistics;
+    sf::Text                        mStatisticsText;
+    sf::Time                        mStatisticsUpdateTime;
+	int                             mStatisticsNumFrames;
+    StateStack                      mStateStack;
+    Json::Value                     mData;
+    std::unique_ptr<DialogOpener>   mDialogOpener;
+    std::unique_ptr<Randomizer>     mRandomizer;
 
 private:
     const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);

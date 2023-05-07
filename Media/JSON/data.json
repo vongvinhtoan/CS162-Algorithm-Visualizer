@@ -40,7 +40,7 @@
                 }
             },
             "tInput" : {
-                "limit" : 10,
+                "limit" : 20,
                 "position" : {
                     "x" : 0,
                     "y" : 0

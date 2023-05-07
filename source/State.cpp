@@ -6,12 +6,16 @@ State::Context::Context
     sf::RenderWindow& window,
     TextureHolder& textures,
     FontHolder& fonts,
-    Json::Value& data
+    Json::Value& data,
+    DialogOpener& dialogOpener,
+    Randomizer& randomizer
 ) :
 window(&window),
 textures(&textures),
 fonts(&fonts),
-data(&data){}
+data(&data),
+dialogOpener(&dialogOpener),
+randomizer(&randomizer){}
 
 
 State::State(StateStack& stack, Context context) : 

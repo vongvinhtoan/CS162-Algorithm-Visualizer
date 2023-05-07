@@ -97,3 +97,13 @@ unsigned int StateStack::size() const
 {
     return mStack.size();
 }
+
+void StateStack::setDialogOpener(DialogOpener* dialogOpener)
+{
+    mContext.dialogOpener = dialogOpener;
+}
+
+void StateStack::setRandomizer(Randomizer* randomizer)
+{
+    mContext.randomizer = randomizer;
+}

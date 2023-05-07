@@ -30,6 +30,9 @@ class StateStack : private sf::NonCopyable
         void                clearStates();
         bool                isEmpty() const;
         unsigned int        size() const;
+        void                setDialogOpener(DialogOpener* dialogOpener);
+        void                setRandomizer(Randomizer* randomizer);
+
     private:
         State::Ptr          createState(States::ID stateID);
         void                applyPendingChanges();

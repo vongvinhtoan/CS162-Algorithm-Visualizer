@@ -6,6 +6,7 @@ class Randomizer {
     public:
         Randomizer(int min, int max);
         int getVal();
+        int getVal(int min, int max);
 
     private:
         std::random_device rd;

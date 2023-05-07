@@ -5,8 +5,8 @@ Stack::Stack(StateStack& stack, Context context) :
 State(stack, context),
 mWindow(context.window),
 mData((*context.data)["Stack"]),
-mRandomizer(new Randomizer(0, 99)),
-mDialogOpener(new DialogOpener())
+mRandomizer(context.randomizer),
+mDialogOpener(context.dialogOpener)
 {
     buildScenes();
 }
@@ -374,9 +374,9 @@ void Stack::initRandom()
     mHead->clearChildren();
     mHead->setNext(nullptr);
 
-    int n = mRandomizer->getVal() % 10 + 1;
+    int n = mRandomizer->getVal(1, 10);
     for(int i = 0; i < n; ++i) {
-        push(std::to_string(mRandomizer->getVal()));
+        push(std::to_string(mRandomizer->getVal(0, 99)));
     }
 }
 
@@ -401,11 +401,7 @@ void Stack::buildScenes()
     mHead = tmp.get();
     mSceneLayers[Nodes]->attachChild(std::move(tmp));
 
-    push("1");
-    push("2");
-    push("3");
-    push("4");
-    push("5");
+    initRandom();
 
     // Button layer
     auto dInit = mData["bInit"];
