@@ -134,6 +134,7 @@ void Queue::init(std::stringstream &ss)
 {
     mHead->clearChildren();
     mHead->setNext(nullptr);
+    mTail = mHead;
 
     int val;
     while(ss >> val) {
@@ -147,6 +148,7 @@ void Queue::initRandom()
 {
     mHead->clearChildren();
     mHead->setNext(nullptr);
+    mTail = mHead;
 
     int n = mRandomizer->getVal(1, 10);
     for(int i = 0; i < n; ++i) {
