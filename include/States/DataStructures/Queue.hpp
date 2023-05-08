@@ -60,7 +60,7 @@ class Queue : public State
         SLLNode*                            mHead;
         SLLNode*                            mTail;
         std::vector<Button*>                mButtons;
-        Json::Value                         mData;
+        Json::Value                         &mData;
         DialogOpener*                       mDialogOpener;
         Randomizer*                         mRandomizer;
 };

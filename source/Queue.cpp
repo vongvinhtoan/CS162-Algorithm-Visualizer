@@ -123,6 +123,7 @@ void Queue::remove()
     auto &tmp = *mHead->getNext();
     mHead->setNext(mHead->getNext()->getNext());
     mHead->detachChild(tmp);
+    if(mHead->getNext() == nullptr) mTail = mHead;
 }
 
 void Queue::clear() 

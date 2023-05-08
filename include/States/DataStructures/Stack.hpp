@@ -59,7 +59,7 @@ class Stack : public State
         std::array<SceneNode*, LayerCount>  mSceneLayers;
         SLLNode*                            mHead;
         std::vector<Button*>                mButtons;
-        Json::Value                         mData;
+        Json::Value                         &mData;
         DialogOpener*                       mDialogOpener;
         Randomizer*                         mRandomizer;
 };
