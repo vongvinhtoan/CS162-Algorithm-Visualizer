@@ -9,6 +9,8 @@ mRandomizer(context.randomizer),
 mDialogOpener(context.dialogOpener)
 {
     buildScenes();
+
+    initRandom();
 }
 
 void Queue::draw()
@@ -18,6 +20,7 @@ void Queue::draw()
 
 bool Queue::update(sf::Time dt)
 {
+    mSceneGraph.update(dt);
     return true;
 }
 
@@ -508,8 +511,6 @@ void Queue::buildScenes()
     mHead = tmp.get();
     mTail = tmp.get();
     mSceneLayers[Nodes]->attachChild(std::move(tmp));
-
-    initRandom();
 
     // Button layer
     auto dInit = mData["bInit"];

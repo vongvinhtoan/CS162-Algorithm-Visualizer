@@ -275,6 +275,160 @@
             }
         }
     },
+    "SinglyLinkedList" : {
+        "bInit" : {
+            "position" : {
+                "x" : 100,
+                "y" : 245
+            },
+            "size" : {
+                "x" : 200,
+                "y" : 60
+            },
+            "bManual" : {
+                "position" : {
+                    "x" : 20,
+                    "y" : -80
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bRandom" : {
+                "position" : {
+                    "x" : 20,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bFile" : {
+                "position" : {
+                    "x" : 20,
+                    "y" : 80
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "tInput" : {
+                "limit" : 20,
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bGo" : {
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            }
+        },
+        "bInsert" : {
+            "position" : {
+                "x" : 100,
+                "y" : 330
+            },
+            "size" : {
+                "x" : 200,
+                "y" : 60
+            },
+            "tInput" : {
+                "limit" : 2,
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bGo" : {
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            }
+        },
+        "bDelete" : {
+            "position" : {
+                "x" : 100,
+                "y" : 415
+            },
+            "size" : {
+                "x" : 200,
+                "y" : 60
+            }
+        },
+        "bUpdate" : {
+            "position" : {
+                "x" : 100,
+                "y" : 500
+            },
+            "size" : {
+                "x" : 200,
+                "y" : 60
+            }
+        },
+        "bSearch" : {
+            "position" : {
+                "x" : 100,
+                "y" : 600
+            },
+            "size" : {
+                "x" : 200,
+                "y" : 60
+            }
+        },
+        "SLLNode" : {
+            "radius" : 25,
+            "position" : {
+                "x" : 0,
+                "y" : 100
+            },
+            "fillColor" : {
+                "r" : 0,
+                "g" : 0,
+                "b" : 255,
+                "a" : 255
+            },
+            "highlightColor" : {
+                "r" : 255,
+                "g" : 255,
+                "b" : 0,
+                "a" : 255
+            },
+            "outlineColor" : {
+                "r" : 255,
+                "g" : 0,
+                "b" : 0,
+                "a" : 255
+            },
+            "outlineThickness" : 9,
+            "spacing" : {
+                "x" : 120,
+                "y" : 0
+            }
+        }
+    },
     "PauseState" : {
         "tPause" : {
             "top" : 90

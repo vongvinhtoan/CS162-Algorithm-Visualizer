@@ -21,6 +21,12 @@ public SceneNode
             Manual              = 1 << 8,
             Random              = 1 << 9,
             File                = 1 << 10,
+            First               = 1 << 8,
+            Last                = 1 << 9,
+            Middle              = 1 << 10,
+            Go_First            = 1 << 11,
+            Go_Last             = 1 << 12,
+            Go_Middle           = 1 << 13,
             Resume              = 1 << 11,
             Menu                = 1 << 12,
             Quit                = 1 << 13,
@@ -32,6 +38,11 @@ public SceneNode
             QueueAdd            = 1 << 15,
             QueueRemove         = 1 << 16,
             QueueClear          = 1 << 17,
+            SLLInit             = 1 << 14,
+            SLLInsert           = 1 << 15,
+            SLLDelete           = 1 << 16,
+            SLLUpdate           = 1 << 17,
+            SLLSearch           = 1 << 18,
         };
 
     public:

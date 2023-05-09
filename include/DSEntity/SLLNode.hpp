@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp> 
 #include <Book/SceneNode.hpp>
+#include <Book/Command.hpp>
+#include <Book/CommandQueue.hpp>
 #include <DSEntity/Arrow.hpp>
 #include <string>
 #include <json/json.h>
@@ -20,18 +22,24 @@ public:
     void setDontDraw(bool dontDraw);
     void setRadius(float radius);
     void setFillColor(const sf::Color& color);
+    void setHighlightColor(const sf::Color& color);
     void setOutlineColor(const sf::Color& color);
     void setOutlineThickness(float thickness);
+    void setHighlight(bool highlight);
     SLLNode* getNext() const;
     std::string getData() const;
 
 private:
+    virtual void updateCurrent(sf::Time dt);
     virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
-    sf::CircleShape             mBackground;
-    sf::Text                    mData;
-    SLLNode*                    mNext;
-    std::unique_ptr<Arrow>      mArrow;
-    bool                        mDontDraw;
+    std::unique_ptr<sf::CircleShape>    mBackground;
+    sf::Text                            mData;
+    SLLNode*                            mNext;
+    std::unique_ptr<Arrow>              mArrow;
+    sf::Color                           mDefaultColor;
+    sf::Color                           mHighlightColor;
+    bool                                mDontDraw;
+    bool                                mHighlight;
 };

@@ -9,6 +9,8 @@ mRandomizer(context.randomizer),
 mDialogOpener(context.dialogOpener)
 {
     buildScenes();
+
+    initRandom();
 }
 
 void Stack::draw()
@@ -18,6 +20,8 @@ void Stack::draw()
 
 bool Stack::update(sf::Time dt)
 {
+    std::cout << "Stack::update" << std::endl;
+    mSceneGraph.update(dt);
     return true;
 }
 
@@ -395,12 +399,9 @@ void Stack::buildScenes()
         mData["SLLNode"]
     ));
     tmp->setPosition(mData["SLLNode"]["position"].asVector2f());
-
     tmp->setDontDraw(true);
     mHead = tmp.get();
     mSceneLayers[Nodes]->attachChild(std::move(tmp));
-
-    initRandom();
 
     // Button layer
     auto dInit = mData["bInit"];
