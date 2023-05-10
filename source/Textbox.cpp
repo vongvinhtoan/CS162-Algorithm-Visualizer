@@ -51,14 +51,8 @@ void Textbox::handleEvent(const sf::Event& event, sf::RenderWindow* window)
 
     if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
     {
-        if(rect.contains(pos.x, pos.y)) 
-        {
-            mIsLocked = true;
-        }
-        else
-        {
-            mIsLocked = false;
-        }
+        mIsLocked = rect.contains(pos.x, pos.y);
+        mIsClicked = mIsLocked;
     }
 
     if(event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
@@ -78,18 +72,12 @@ void Textbox::handleEvent(const sf::Event& event, sf::RenderWindow* window)
 
         if(!mIsLocked) return;
 
-        mIsClicked = true;
         mIsLocked = false;
     }
 }
 
 void Textbox::handleRealtimeInput(sf::RenderWindow* window)
 {
-    if(!sf::Mouse::isButtonPressed(sf::Mouse::Left))
-    {
-        mIsLocked = false;
-    }
-
     if(mIsSelected) {
         setBackgroundFillColor(sf::Color::Red);
     }

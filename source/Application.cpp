@@ -1,7 +1,7 @@
 #include <Book/Application.hpp>
 
 Application::Application() : 
-mWindow(sf::VideoMode(800, 600), "Algorithm Visualizer", sf::Style::Close),
+mWindow(sf::VideoMode(1000, 800), "Algorithm Visualizer", sf::Style::Close),
 mStateStack(State::Context(mWindow, mTextures, mFonts, mData, *mDialogOpener, *mRandomizer)),
 mIsPaused(false),
 mStatisticsNumFrames(0),

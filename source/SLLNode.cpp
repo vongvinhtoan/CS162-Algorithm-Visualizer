@@ -26,9 +26,6 @@ SLLNode::SLLNode(const std::string& data, const sf::Font& font, const Json::Valu
 
 void SLLNode::updateCurrent(sf::Time dt)
 {
-    std::cout << "SLLNode::updateCurrent" << std::endl;
-    std::cout << (int) mDefaultColor.r << " " << (int) mDefaultColor.g << " " << (int) mDefaultColor.b << std::endl;
-    std::cout << sizeof(mBackground) << std::endl;
     if(mHighlight) {
         mBackground->setFillColor(mHighlightColor);
     } else {
@@ -49,6 +46,9 @@ void SLLNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) con
 void SLLNode::setData(const std::string& data)
 {
     mData.setString(data);
+    auto textRect = mData.getLocalBounds();
+    mData.setOrigin(textRect.left + textRect.width/2.f,
+                    textRect.top  + textRect.height/2.f);
 }
 
 void SLLNode::setNext(SLLNode* next)

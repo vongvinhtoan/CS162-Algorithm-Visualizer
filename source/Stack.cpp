@@ -20,7 +20,6 @@ void Stack::draw()
 
 bool Stack::update(sf::Time dt)
 {
-    std::cout << "Stack::update" << std::endl;
     mSceneGraph.update(dt);
     return true;
 }
