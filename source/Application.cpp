@@ -30,7 +30,7 @@ mDialogOpener(new DialogOpener)
 
 void Application::readJSON()
 {
-    std::ifstream ifs("Media/JSON/data.json");
+    std::ifstream ifs("Media/JSON/style.json");
     Json::Reader reader;
     reader.parse(ifs, mData);
 }

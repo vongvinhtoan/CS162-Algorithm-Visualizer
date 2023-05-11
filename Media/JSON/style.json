@@ -2047,5 +2047,77 @@
                 "y" : 75
             }
         }
+    },
+    "MenuState" : {
+        "bStaticArray" : {
+            "size" : {
+                "x" : 250,
+                "y" : 75
+            },
+            "position" : {
+                "x" : 100,
+                "y" : 100
+            }
+        },
+        "bDynamicArray" : {
+            "size" : {
+                "x" : 250,
+                "y" : 75
+            },
+            "position" : {
+                "x" : 100,
+                "y" : 200
+            }
+        },
+        "bSinglyLinkedList" : {
+            "size" : {
+                "x" : 250,
+                "y" : 75
+            },
+            "position" : {
+                "x" : 100,
+                "y" : 300
+            }
+        },
+        "bDoublyLinkedList" : {
+            "size" : {
+                "x" : 250,
+                "y" : 75
+            },
+            "position" : {
+                "x" : 100,
+                "y" : 400
+            }
+        },
+        "bCircularLinkedList" : {
+            "size" : {
+                "x" : 250,
+                "y" : 75
+            },
+            "position" : {
+                "x" : 100,
+                "y" : 500
+            }
+        },
+        "bStack" : {
+            "size" : {
+                "x" : 250,
+                "y" : 75
+            },
+            "position" : {
+                "x" : 100,
+                "y" : 600
+            }
+        },
+        "bQueue" : {
+            "size" : {
+                "x" : 250,
+                "y" : 75
+            },
+            "position" : {
+                "x" : 100,
+                "y" : 700
+            }
+        }
     }
 }

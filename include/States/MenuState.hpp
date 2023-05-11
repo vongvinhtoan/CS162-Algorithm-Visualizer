@@ -28,5 +28,5 @@ class MenuState : public State
         SceneNode                           mSceneGraph;
         std::vector<Button*>                mButtons;
         std::array<SceneNode*, LayerCount>  mSceneLayers;
-        CommandQueue                        mCommandQueue;
+        Json::Value                         &mData;
 };

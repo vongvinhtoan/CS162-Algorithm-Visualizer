@@ -2,7 +2,8 @@
 
 MenuState::MenuState(StateStack& stack, Context context) : 
 State(stack, context),
-mWindow(context.window)
+mWindow(context.window),
+mData((*context.data)["MenuState"])
 {
     buildScenes();
 }
@@ -14,13 +15,19 @@ void MenuState::draw()
 
 bool MenuState::update(sf::Time dt)
 {
-    while (!mCommandQueue.isEmpty())
-        mSceneGraph.onCommand(mCommandQueue.pop(), dt);
     return true;
 }
 
 bool MenuState::handleEvent(const sf::Event& event)
 {   
+    if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+        for(auto &button: mButtons) {
+            button->setLocked(false);
+        }
+        requestStackPush(States::ID::Pause);
+        return true;
+    }
+    
     for(auto &button: mButtons) button->handleEvent(event, mWindow);
     
     for(auto button: mButtons)
@@ -86,66 +93,73 @@ void MenuState::buildScenes()
     }
 
     // Button layer
+    auto dStaticArray = mData["bStaticArray"];
     std::unique_ptr<Button> bStaticArray (new Button(
         Button::Category::StaticArray, 
-        sf::Text("Static Array", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(sf::Vector2f(225, 75))
+        sf::Text("StaticArray", (*getContext().fonts)[Fonts::Default]), 
+        sf::RectangleShape(dStaticArray["size"].asVector2f())
     ));
-    bStaticArray->setPosition(100, 100);
+    bStaticArray->setPosition(dStaticArray["position"].asVector2f());
     mButtons.push_back(bStaticArray.get());
     mSceneLayers[Buttons]->attachChild(std::move(bStaticArray));
 
+    auto dDynamicArray = mData["bDynamicArray"];
     std::unique_ptr<Button> bDynamicArray (new Button(
-        Button::Category::DynamicArray,
-        sf::Text("Dynamic Array", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(sf::Vector2f(225, 75))
+        Button::Category::DynamicArray, 
+        sf::Text("DynamicArray", (*getContext().fonts)[Fonts::Default]), 
+        sf::RectangleShape(dDynamicArray["size"].asVector2f())
     ));
-    bDynamicArray->setPosition(100, 200);
+    bDynamicArray->setPosition(dDynamicArray["position"].asVector2f());
     mButtons.push_back(bDynamicArray.get());
     mSceneLayers[Buttons]->attachChild(std::move(bDynamicArray));
-    
+
+    auto dSinglyLinkedList = mData["bSinglyLinkedList"];
     std::unique_ptr<Button> bSinglyLinkedList (new Button(
-        Button::Category::SinglyLinkedList,
-        sf::Text("Singly Linked List", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(sf::Vector2f(225, 75))
+        Button::Category::SinglyLinkedList, 
+        sf::Text("SinglyLinkedList", (*getContext().fonts)[Fonts::Default]), 
+        sf::RectangleShape(dSinglyLinkedList["size"].asVector2f())
     ));
-    bSinglyLinkedList->setPosition(100, 300);
+    bSinglyLinkedList->setPosition(dSinglyLinkedList["position"].asVector2f());
     mButtons.push_back(bSinglyLinkedList.get());
     mSceneLayers[Buttons]->attachChild(std::move(bSinglyLinkedList));
 
+    auto dDoublyLinkedList = mData["bDoublyLinkedList"];
     std::unique_ptr<Button> bDoublyLinkedList (new Button(
-        Button::Category::DoublyLinkedList,
-        sf::Text("Double Linked List", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(sf::Vector2f(225, 75))
+        Button::Category::DoublyLinkedList, 
+        sf::Text("DoublyLinkedList", (*getContext().fonts)[Fonts::Default]), 
+        sf::RectangleShape(dDoublyLinkedList["size"].asVector2f())
     ));
-    bDoublyLinkedList->setPosition(100, 400);
+    bDoublyLinkedList->setPosition(dDoublyLinkedList["position"].asVector2f());
     mButtons.push_back(bDoublyLinkedList.get());
     mSceneLayers[Buttons]->attachChild(std::move(bDoublyLinkedList));
 
+    auto dCircularLinkedList = mData["bCircularLinkedList"];
     std::unique_ptr<Button> bCircularLinkedList (new Button(
-        Button::Category::CircularLinkedList,
-        sf::Text("Circular Linked List", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(sf::Vector2f(225, 75))
+        Button::Category::CircularLinkedList, 
+        sf::Text("CircularLinkedList", (*getContext().fonts)[Fonts::Default]), 
+        sf::RectangleShape(dCircularLinkedList["size"].asVector2f())
     ));
-    bCircularLinkedList->setPosition(400, 100);
+    bCircularLinkedList->setPosition(dCircularLinkedList["position"].asVector2f());
     mButtons.push_back(bCircularLinkedList.get());
     mSceneLayers[Buttons]->attachChild(std::move(bCircularLinkedList));
 
+    auto dStack = mData["bStack"];
     std::unique_ptr<Button> bStack (new Button(
-        Button::Category::Stack,
+        Button::Category::Stack, 
         sf::Text("Stack", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(sf::Vector2f(225, 75))
+        sf::RectangleShape(dStack["size"].asVector2f())
     ));
-    bStack->setPosition(400, 200);
+    bStack->setPosition(dStack["position"].asVector2f());
     mButtons.push_back(bStack.get());
     mSceneLayers[Buttons]->attachChild(std::move(bStack));
 
+    auto dQueue = mData["bQueue"];
     std::unique_ptr<Button> bQueue (new Button(
-        Button::Category::Queue,
+        Button::Category::Queue, 
         sf::Text("Queue", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(sf::Vector2f(225, 75))
+        sf::RectangleShape(dQueue["size"].asVector2f())
     ));
-    bQueue->setPosition(400, 300);
+    bQueue->setPosition(dQueue["position"].asVector2f());
     mButtons.push_back(bQueue.get());
     mSceneLayers[Buttons]->attachChild(std::move(bQueue));
 }
