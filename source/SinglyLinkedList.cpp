@@ -17,6 +17,8 @@ void SinglyLinkedList::insert(int id, std::string val)
 {
     search("X");
 
+    if(val.size() == 0) return;
+
     std::unique_ptr<SLLNode> node(new SLLNode(
         val,
         (*getContext().fonts)[Fonts::Default],
