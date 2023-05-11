@@ -1,5 +1,6 @@
 #include <DSEntity\Arrow.hpp>
 #include <math.h>
+#include <iostream>
 
 Arrow::Arrow(sf::Vector2f start, sf::Vector2f end, float thickness, float headLength, float headWidth) 
 : mThickness(thickness), mHeadLength(headLength), mHeadWidth(headWidth), mStart(start), mEnd(end)
