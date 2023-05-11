@@ -43,6 +43,13 @@ public SceneNode
             SLLDelete           = 1 << 16,
             SLLUpdate           = 1 << 17,
             SLLSearch           = 1 << 18,
+            ArrayAllocate       = 1 << 14,
+            ArrayInit           = 1 << 15,
+            ArrayInsert         = 1 << 16,
+            ArrayDelete         = 1 << 17,
+            ArrayUpdate         = 1 << 18,
+            ArrayAccess         = 1 << 19,
+            ArraySearch         = 1 << 20,
         };
 
     public:
