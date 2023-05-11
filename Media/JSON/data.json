@@ -1637,6 +1637,388 @@
             }
         }
     },
+    "StaticArray" : {
+        "defaultSize" : 10,
+        "bAllocate" : {
+            "position" : {
+                "x" : 100,
+                "y" : 210
+            },
+            "size" : {
+                "x" : 200,
+                "y" : 60
+            },
+            "tInput" : {
+                "limit" : 2,
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bGo" : {
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            }
+        },
+        "bInit" : {
+            "position" : {
+                "x" : 100,
+                "y" : 295
+            },
+            "size" : {
+                "x" : 200,
+                "y" : 60
+            },
+            "bManual" : {
+                "position" : {
+                    "x" : 20,
+                    "y" : -80
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bRandom" : {
+                "position" : {
+                    "x" : 20,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bFile" : {
+                "position" : {
+                    "x" : 20,
+                    "y" : 80
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "tInput" : {
+                "limit" : 20,
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bGo" : {
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            }
+        },
+        "bInsert" : {
+            "position" : {
+                "x" : 100,
+                "y" : 380
+            },
+            "size" : {
+                "x" : 200,
+                "y" : 60
+            },
+            "bFirst" : {
+                "position" : {
+                    "x" : 20,
+                    "y" : -80
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bLast" : {
+                "position" : {
+                    "x" : 20,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bMiddle" : {
+                "position" : {
+                    "x" : 20,
+                    "y" : 80
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "tInput" : {
+                "limit" : 2,
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "tIndex" : {
+                "limit" : 2,
+                "position" : {
+                    "x" : 10,
+                    "y" : -40
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "tValue" : {
+                "limit" : 2,
+                "position" : {
+                    "x" : 10,
+                    "y" : 40
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bGo" : {
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bGo_Middle" : {
+                "position" : {
+                    "x" : 20,
+                    "y" : -40
+                },
+                "size" : {
+                    "x" : 100,
+                    "y" : 140
+                }
+            }
+        },
+        "bDelete" : {
+            "position" : {
+                "x" : 100,
+                "y" : 465
+            },
+            "size" : {
+                "x" : 200,
+                "y" : 60
+            },
+            "bFirst" : {
+                "position" : {
+                    "x" : 20,
+                    "y" : -80
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bLast" : {
+                "position" : {
+                    "x" : 20,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bMiddle" : {
+                "position" : {
+                    "x" : 20,
+                    "y" : 80
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "tInput" : {
+                "limit" : 2,
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bGo" : {
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            }
+        },
+        "bUpdate" : {
+            "position" : {
+                "x" : 100,
+                "y" : 550
+            },
+            "size" : {
+                "x" : 200,
+                "y" : 60
+            },
+            "tIndex" : {
+                "limit" : 2,
+                "position" : {
+                    "x" : 10,
+                    "y" : -40
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "tValue" : {
+                "limit" : 2,
+                "position" : {
+                    "x" : 10,
+                    "y" : 40
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bGo" : {
+                "position" : {
+                    "x" : 20,
+                    "y" : -40
+                },
+                "size" : {
+                    "x" : 100,
+                    "y" : 140
+                }
+            }
+        },
+        "bAccess" : {
+            "position" : {
+                "x" : 100,
+                "y" : 635
+            },
+            "size" : {
+                "x" : 200,
+                "y" : 60
+            },
+            "tInput" : {
+                "limit" : 2,
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bGo" : {
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            }
+        },
+        "bSearch" : {
+            "position" : {
+                "x" : 100,
+                "y" : 720
+            },
+            "size" : {
+                "x" : 200,
+                "y" : 60
+            },
+            "tInput" : {
+                "limit" : 2,
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            },
+            "bGo" : {
+                "position" : {
+                    "x" : 0,
+                    "y" : 0
+                },
+                "size" : {
+                    "x" : 200,
+                    "y" : 60
+                }
+            }
+        },
+        "arrayBlock" : {
+            "outlineThickness" : 9,
+            "size" : {
+                "x" : 50,
+                "y" : 50
+            },
+            "position" : {
+                "x" : 0,
+                "y" : 100
+            },
+            "defaultColor" : {
+                "r" : 0,
+                "g" : 0,
+                "b" : 255,
+                "a" : 255
+            },
+            "highlightColor" : {
+                "r" : 0,
+                "g" : 255,
+                "b" : 115,
+                "a" : 255
+            },
+            "outlineColor" : {
+                "r" : 255,
+                "g" : 0,
+                "b" : 0,
+                "a" : 255
+            }
+        }
+    },
     "PauseState" : {
         "tPause" : {
             "top" : 90
