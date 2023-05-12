@@ -1,7 +1,7 @@
 #include <GUI/Button.hpp>
 #include <iostream>
 
-Button::Button(Category category, sf::Text text, sf::RectangleShape background): 
+Button::Button(Category category, sf::Text text, sf::RectangleShape background, const Json::Value &data): 
 mCategory{category},
 mText{text},
 mBackground{background},
@@ -10,7 +10,13 @@ mIsClicked{false},
 mIsInputing{false},
 mIsClickedAway{false}
 {
-    setBackgroundFillColor(sf::Color::Blue);
+    setBackgroundFillColor(data["background_color"].asColor());
+    setBackgroundColor(data["background_color"].asColor());
+    setInputingColor(data["inputing_color"].asColor());
+    setLockedColor(data["locked_color"].asColor());
+    setHoverColor(data["hover_color"].asColor());
+    mText.setFillColor(data["text_color"].asColor());
+    mText.setCharacterSize(data["character_size"].asUInt());
     
     auto textRect = mText.getLocalBounds();
     mText.setOrigin(textRect.left + textRect.width/2.f,
@@ -75,21 +81,21 @@ void Button::handleRealtimeInput(sf::RenderWindow* window)
 
     if(mIsInputing)
     {
-        setBackgroundFillColor(sf::Color::Green);
+        setBackgroundFillColor(mInputingColor);
         return;
     }
     if(mIsLocked)
     {
-        setBackgroundFillColor(sf::Color::Yellow);
+        setBackgroundFillColor(mLockedColor);
         return;
     }
     if(rect.contains(pos.x, pos.y))
     {
-        setBackgroundFillColor(sf::Color::Red);
+        setBackgroundFillColor(mHoverColor);
     }
     else
     {
-        setBackgroundFillColor(sf::Color::Blue);
+        setBackgroundFillColor(mBackgroundColor);
     }
 }
 
@@ -116,6 +122,26 @@ bool Button::isClicked() const
 void Button::setInputing(bool inputing)
 {
     mIsInputing = inputing;
+}
+
+void Button::setBackgroundColor(const sf::Color &color)
+{
+    mBackgroundColor = color;
+}
+
+void Button::setInputingColor(const sf::Color &color)
+{
+    mInputingColor = color;
+}
+
+void Button::setLockedColor(const sf::Color &color)
+{
+    mLockedColor = color;
+}
+
+void Button::setHoverColor(const sf::Color &color)
+{
+    mHoverColor = color;
 }
 
 bool Button::isInputing() const

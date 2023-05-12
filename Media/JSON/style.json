@@ -1,4 +1,57 @@
 {
+    "textboxes" : {
+        "background_color" : {
+            "r" : 0,
+            "g" : 0,
+            "b" : 225,
+            "a" : 255
+        },
+        "text_color" : {
+            "r" : 255,
+            "g" : 255,
+            "b" : 255,
+            "a" : 255
+        },
+        "selected_color" : {
+            "r" : 255,
+            "g" : 0,
+            "b" : 0,
+            "a" : 255
+        }
+    },
+    "buttons" : {
+        "background_color" : {
+            "r" : 0,
+            "g" : 0,
+            "b" : 0,
+            "a" : 255
+        },
+        "text_color" : {
+            "r" : 255,
+            "g" : 255,
+            "b" : 255,
+            "a" : 255
+        },
+        "inputing_color" : {
+            "r" : 255,
+            "g" : 255,
+            "b" : 255,
+            "a" : 255
+        },
+        "locked_color" : {
+            "r" : 255,
+            "g" : 0,
+            "b" : 0,
+            "a" : 255
+        },
+        "hover_color" : {
+            "r" : 0,
+            "g" : 255,
+            "b" : 0,
+            "a" : 255
+        },
+        "character_size" : 30
+    },
     "Stack" : {
         "bInit" : {
             "position" : {
@@ -543,7 +596,7 @@
                 "y" : 60
             },
             "tInput" : {
-                "limit" : 20,
+                "limit" : 2,
                 "position" : {
                     "x" : 0,
                     "y" : 0
@@ -863,7 +916,7 @@
                 "y" : 60
             },
             "tInput" : {
-                "limit" : 20,
+                "limit" : 2,
                 "position" : {
                     "x" : 0,
                     "y" : 0
@@ -1190,7 +1243,7 @@
                 "y" : 60
             },
             "tInput" : {
-                "limit" : 20,
+                "limit" : 2,
                 "position" : {
                     "x" : 0,
                     "y" : 0

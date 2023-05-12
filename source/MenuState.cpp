@@ -93,11 +93,13 @@ void MenuState::buildScenes()
     }
 
     // Button layer
+    auto dButton = (*getContext().data)["buttons"];
     auto dStaticArray = mData["bStaticArray"];
     std::unique_ptr<Button> bStaticArray (new Button(
         Button::Category::StaticArray, 
         sf::Text("StaticArray", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dStaticArray["size"].asVector2f())
+        sf::RectangleShape(dStaticArray["size"].asVector2f()),
+        dButton
     ));
     bStaticArray->setPosition(dStaticArray["position"].asVector2f());
     mButtons.push_back(bStaticArray.get());
@@ -107,7 +109,8 @@ void MenuState::buildScenes()
     std::unique_ptr<Button> bDynamicArray (new Button(
         Button::Category::DynamicArray, 
         sf::Text("DynamicArray", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dDynamicArray["size"].asVector2f())
+        sf::RectangleShape(dDynamicArray["size"].asVector2f()),
+        dButton
     ));
     bDynamicArray->setPosition(dDynamicArray["position"].asVector2f());
     mButtons.push_back(bDynamicArray.get());
@@ -117,7 +120,8 @@ void MenuState::buildScenes()
     std::unique_ptr<Button> bSinglyLinkedList (new Button(
         Button::Category::SinglyLinkedList, 
         sf::Text("SinglyLinkedList", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dSinglyLinkedList["size"].asVector2f())
+        sf::RectangleShape(dSinglyLinkedList["size"].asVector2f()),
+        dButton
     ));
     bSinglyLinkedList->setPosition(dSinglyLinkedList["position"].asVector2f());
     mButtons.push_back(bSinglyLinkedList.get());
@@ -127,7 +131,8 @@ void MenuState::buildScenes()
     std::unique_ptr<Button> bDoublyLinkedList (new Button(
         Button::Category::DoublyLinkedList, 
         sf::Text("DoublyLinkedList", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dDoublyLinkedList["size"].asVector2f())
+        sf::RectangleShape(dDoublyLinkedList["size"].asVector2f()),
+        dButton
     ));
     bDoublyLinkedList->setPosition(dDoublyLinkedList["position"].asVector2f());
     mButtons.push_back(bDoublyLinkedList.get());
@@ -137,7 +142,8 @@ void MenuState::buildScenes()
     std::unique_ptr<Button> bCircularLinkedList (new Button(
         Button::Category::CircularLinkedList, 
         sf::Text("CircularLinkedList", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dCircularLinkedList["size"].asVector2f())
+        sf::RectangleShape(dCircularLinkedList["size"].asVector2f()),
+        dButton
     ));
     bCircularLinkedList->setPosition(dCircularLinkedList["position"].asVector2f());
     mButtons.push_back(bCircularLinkedList.get());
@@ -147,7 +153,8 @@ void MenuState::buildScenes()
     std::unique_ptr<Button> bStack (new Button(
         Button::Category::Stack, 
         sf::Text("Stack", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dStack["size"].asVector2f())
+        sf::RectangleShape(dStack["size"].asVector2f()),
+        dButton
     ));
     bStack->setPosition(dStack["position"].asVector2f());
     mButtons.push_back(bStack.get());
@@ -157,7 +164,8 @@ void MenuState::buildScenes()
     std::unique_ptr<Button> bQueue (new Button(
         Button::Category::Queue, 
         sf::Text("Queue", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dQueue["size"].asVector2f())
+        sf::RectangleShape(dQueue["size"].asVector2f()),
+        dButton
     ));
     bQueue->setPosition(dQueue["position"].asVector2f());
     mButtons.push_back(bQueue.get());

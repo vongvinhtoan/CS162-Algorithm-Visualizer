@@ -195,7 +195,8 @@ void DoublyLinkedList::ButtonInitCreate(Button *button)
     std::unique_ptr<Button> bManual (new Button(
         Button::Category::Manual, 
         sf::Text("Manual", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dManual["size"].asVector2f())
+        sf::RectangleShape(dManual["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bManual->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dManual["position"].asVector2f());
     button->attachChild(std::move(bManual));
@@ -204,7 +205,8 @@ void DoublyLinkedList::ButtonInitCreate(Button *button)
     std::unique_ptr<Button> bRandom (new Button(
         Button::Category::Random, 
         sf::Text("Random", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dRamdom["size"].asVector2f())
+        sf::RectangleShape(dRamdom["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bRandom->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dRamdom["position"].asVector2f());
     button->attachChild(std::move(bRandom));
@@ -213,7 +215,8 @@ void DoublyLinkedList::ButtonInitCreate(Button *button)
     std::unique_ptr<Button> bFile (new Button(
         Button::Category::File, 
         sf::Text("From File", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dFile["size"].asVector2f())
+        sf::RectangleShape(dFile["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bFile->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dFile["position"].asVector2f());
     button->attachChild(std::move(bFile));
@@ -239,7 +242,8 @@ void DoublyLinkedList::ButtonInitManualCreate(Button* button)
     auto dTextbox = mData["bInit"]["tInput"];
     std::unique_ptr<Textbox> textbox(new Textbox(
         sf::Text("", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dTextbox["size"].asVector2f())
+        sf::RectangleShape(dTextbox["size"].asVector2f()),
+        (*getContext().data)["textboxes"] 
     ));
     textbox->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dTextbox["position"].asVector2f());
     textbox->setLimit(true, dTextbox["limit"].asInt());
@@ -266,7 +270,8 @@ void DoublyLinkedList::ButtonInitManualCreate(Button* button)
     std::unique_ptr<Button> bGo (new Button(
         Button::Category::Go, 
         sf::Text("Go", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dButton["size"].asVector2f())
+        sf::RectangleShape(dButton["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bGo->setPosition(sf::Vector2f(button->getSize().x + textbox->getSize().x, 0.f) + dButton["position"].asVector2f());
 
@@ -426,7 +431,8 @@ void DoublyLinkedList::ButtonInsertCreate(Button *button)
     std::unique_ptr<Button> bFirst (new Button(
         Button::Category::First, 
         sf::Text("First", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dFirst["size"].asVector2f())
+        sf::RectangleShape(dFirst["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bFirst->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dFirst["position"].asVector2f());
     button->attachChild(std::move(bFirst));
@@ -435,7 +441,8 @@ void DoublyLinkedList::ButtonInsertCreate(Button *button)
     std::unique_ptr<Button> bLast (new Button(
         Button::Category::Last, 
         sf::Text("Last", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dLast["size"].asVector2f())
+        sf::RectangleShape(dLast["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bLast->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dLast["position"].asVector2f());
     button->attachChild(std::move(bLast));
@@ -444,7 +451,8 @@ void DoublyLinkedList::ButtonInsertCreate(Button *button)
     std::unique_ptr<Button> bMiddle (new Button(
         Button::Category::Middle, 
         sf::Text("Middle", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dMiddle["size"].asVector2f())
+        sf::RectangleShape(dMiddle["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bMiddle->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dMiddle["position"].asVector2f());
     button->attachChild(std::move(bMiddle));
@@ -470,7 +478,8 @@ void DoublyLinkedList::ButtonInsertFirstCreate(Button *button)
     auto dTextbox = mData["bInsert"]["tInput"];
     std::unique_ptr<Textbox> textbox(new Textbox(
         sf::Text("", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dTextbox["size"].asVector2f())
+        sf::RectangleShape(dTextbox["size"].asVector2f()),
+        (*getContext().data)["textboxes"] 
     ));
     textbox->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dTextbox["position"].asVector2f());
     textbox->setLimit(true, dTextbox["limit"].asInt());
@@ -496,7 +505,8 @@ void DoublyLinkedList::ButtonInsertFirstCreate(Button *button)
     std::unique_ptr<Button> bGo (new Button(
         Button::Category::Go_First, 
         sf::Text("Go", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dButton["size"].asVector2f())
+        sf::RectangleShape(dButton["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bGo->setPosition(sf::Vector2f(button->getSize().x + textbox->getSize().x, 0.f) + dButton["position"].asVector2f());
 
@@ -547,7 +557,8 @@ void DoublyLinkedList::ButtonInsertLastCreate(Button *button)
     auto dTextbox = mData["bInsert"]["tInput"];
     std::unique_ptr<Textbox> textbox(new Textbox(
         sf::Text("", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dTextbox["size"].asVector2f())
+        sf::RectangleShape(dTextbox["size"].asVector2f()),
+        (*getContext().data)["textboxes"] 
     ));
     textbox->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dTextbox["position"].asVector2f());
     textbox->setLimit(true, dTextbox["limit"].asInt());
@@ -573,7 +584,8 @@ void DoublyLinkedList::ButtonInsertLastCreate(Button *button)
     std::unique_ptr<Button> bGo (new Button(
         Button::Category::Go_Last, 
         sf::Text("Go", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dButton["size"].asVector2f())
+        sf::RectangleShape(dButton["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bGo->setPosition(sf::Vector2f(button->getSize().x + textbox->getSize().x, 0.f) + dButton["position"].asVector2f());
 
@@ -624,7 +636,8 @@ void DoublyLinkedList::ButtonInsertMiddleCreate(Button *button)
     auto dIndex = mData["bInsert"]["tIndex"];
     std::unique_ptr<Textbox> tIndex(new Textbox(
         sf::Text("", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dIndex["size"].asVector2f())
+        sf::RectangleShape(dIndex["size"].asVector2f()),
+        (*getContext().data)["textboxes"] 
     ));
     tIndex->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dIndex["position"].asVector2f());
     tIndex->setLimit(true, dIndex["limit"].asInt());
@@ -648,7 +661,8 @@ void DoublyLinkedList::ButtonInsertMiddleCreate(Button *button)
     auto dValue = mData["bInsert"]["tValue"];
     std::unique_ptr<Textbox> tValue(new Textbox(
         sf::Text("", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dValue["size"].asVector2f())
+        sf::RectangleShape(dValue["size"].asVector2f()),
+        (*getContext().data)["textboxes"] 
     ));
     tValue->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dValue["position"].asVector2f());
     tValue->setLimit(true, dValue["limit"].asInt());
@@ -674,7 +688,8 @@ void DoublyLinkedList::ButtonInsertMiddleCreate(Button *button)
     std::unique_ptr<Button> bGo (new Button(
         Button::Category::Go_Middle, 
         sf::Text("Go", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dButton["size"].asVector2f())
+        sf::RectangleShape(dButton["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bGo->setPosition(sf::Vector2f(button->getSize().x + tIndex->getSize().x, 0.f) + dButton["position"].asVector2f());
 
@@ -773,7 +788,8 @@ void DoublyLinkedList::ButtonDeleteCreate(Button *button)
     std::unique_ptr<Button> bFirst (new Button(
         Button::Category::First, 
         sf::Text("First", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dFirst["size"].asVector2f())
+        sf::RectangleShape(dFirst["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bFirst->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dFirst["position"].asVector2f());
     button->attachChild(std::move(bFirst));
@@ -782,7 +798,8 @@ void DoublyLinkedList::ButtonDeleteCreate(Button *button)
     std::unique_ptr<Button> bLast (new Button(
         Button::Category::Last, 
         sf::Text("Last", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dLast["size"].asVector2f())
+        sf::RectangleShape(dLast["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bLast->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dLast["position"].asVector2f());
     button->attachChild(std::move(bLast));
@@ -791,7 +808,8 @@ void DoublyLinkedList::ButtonDeleteCreate(Button *button)
     std::unique_ptr<Button> bMiddle (new Button(
         Button::Category::Middle, 
         sf::Text("Middle", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dMiddle["size"].asVector2f())
+        sf::RectangleShape(dMiddle["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bMiddle->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dMiddle["position"].asVector2f());
     button->attachChild(std::move(bMiddle));
@@ -843,7 +861,8 @@ void DoublyLinkedList::ButtonDeleteMiddleCreate(Button *button)
     auto dTextbox = mData["bDelete"]["tInput"];
     std::unique_ptr<Textbox> textbox(new Textbox(
         sf::Text("", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dTextbox["size"].asVector2f())
+        sf::RectangleShape(dTextbox["size"].asVector2f()),
+        (*getContext().data)["textboxes"] 
     ));
     textbox->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dTextbox["position"].asVector2f());
     textbox->setLimit(true, dTextbox["limit"].asInt());
@@ -869,7 +888,8 @@ void DoublyLinkedList::ButtonDeleteMiddleCreate(Button *button)
     std::unique_ptr<Button> bGo (new Button(
         Button::Category::Go_Middle, 
         sf::Text("Go", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dButton["size"].asVector2f())
+        sf::RectangleShape(dButton["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bGo->setPosition(sf::Vector2f(button->getSize().x + textbox->getSize().x, 0.f) + dButton["position"].asVector2f());
 
@@ -976,7 +996,8 @@ void DoublyLinkedList::ButtonUpdateCreate(Button *button)
     auto dIndex = mData["bUpdate"]["tIndex"];
     std::unique_ptr<Textbox> tIndex(new Textbox(
         sf::Text("", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dIndex["size"].asVector2f())
+        sf::RectangleShape(dIndex["size"].asVector2f()),
+        (*getContext().data)["textboxes"] 
     ));
     tIndex->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dIndex["position"].asVector2f());
     tIndex->setLimit(true, dIndex["limit"].asInt());
@@ -1000,7 +1021,8 @@ void DoublyLinkedList::ButtonUpdateCreate(Button *button)
     auto dValue = mData["bUpdate"]["tValue"];
     std::unique_ptr<Textbox> tValue(new Textbox(
         sf::Text("", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dValue["size"].asVector2f())
+        sf::RectangleShape(dValue["size"].asVector2f()),
+        (*getContext().data)["textboxes"] 
     )); 
     tValue->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dValue["position"].asVector2f());
     tValue->setLimit(true, dValue["limit"].asInt());
@@ -1026,7 +1048,8 @@ void DoublyLinkedList::ButtonUpdateCreate(Button *button)
     std::unique_ptr<Button> bGo (new Button(
         Button::Category::Go, 
         sf::Text("Go", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dButton["size"].asVector2f())
+        sf::RectangleShape(dButton["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bGo->setPosition(sf::Vector2f(button->getSize().x + tIndex->getSize().x, 0.f) + dButton["position"].asVector2f());
 
@@ -1109,7 +1132,8 @@ void DoublyLinkedList::ButtonSearchCreate(Button *button)
     auto dTextbox = mData["bSearch"]["tInput"];
     std::unique_ptr<Textbox> textbox(new Textbox(
         sf::Text("", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dTextbox["size"].asVector2f())
+        sf::RectangleShape(dTextbox["size"].asVector2f()),
+        (*getContext().data)["textboxes"] 
     ));
     textbox->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dTextbox["position"].asVector2f());
     textbox->setLimit(true, dTextbox["limit"].asInt());
@@ -1136,7 +1160,8 @@ void DoublyLinkedList::ButtonSearchCreate(Button *button)
     std::unique_ptr<Button> bGo (new Button(
         Button::Category::Go, 
         sf::Text("Go", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dButton["size"].asVector2f())
+        sf::RectangleShape(dButton["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bGo->setPosition(sf::Vector2f(button->getSize().x + textbox->getSize().x, 0.f) + dButton["position"].asVector2f());
 
@@ -1281,11 +1306,13 @@ void DoublyLinkedList::buildScenes()
     initRandom();
     
     // Button layer
+    auto dButton = (*getContext().data)["buttons"];
     auto dInit = mData["bInit"];
     std::unique_ptr<Button> bInit (new Button(
         Button::Category::SLLInit, 
         sf::Text("Init", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dInit["size"].asVector2f())
+        sf::RectangleShape(dInit["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bInit->setPosition(dInit["position"].asVector2f());
     mButtons.push_back(bInit.get());
@@ -1295,7 +1322,8 @@ void DoublyLinkedList::buildScenes()
     std::unique_ptr<Button> bInsert (new Button(
         Button::Category::SLLInsert, 
         sf::Text("Insert", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dInsert["size"].asVector2f())
+        sf::RectangleShape(dInsert["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bInsert->setPosition(dInsert["position"].asVector2f());
     mButtons.push_back(bInsert.get());
@@ -1305,7 +1333,8 @@ void DoublyLinkedList::buildScenes()
     std::unique_ptr<Button> bDelete (new Button(
         Button::Category::SLLDelete, 
         sf::Text("Delete", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dDelete["size"].asVector2f())
+        sf::RectangleShape(dDelete["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bDelete->setPosition(dDelete["position"].asVector2f());
     mButtons.push_back(bDelete.get());
@@ -1315,7 +1344,8 @@ void DoublyLinkedList::buildScenes()
     std::unique_ptr<Button> bUpdate (new Button(
         Button::Category::SLLUpdate, 
         sf::Text("Update", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dUpdate["size"].asVector2f())
+        sf::RectangleShape(dUpdate["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bUpdate->setPosition(dUpdate["position"].asVector2f());
     mButtons.push_back(bUpdate.get());
@@ -1325,7 +1355,8 @@ void DoublyLinkedList::buildScenes()
     std::unique_ptr<Button> bSearch (new Button(
         Button::Category::SLLSearch, 
         sf::Text("Search", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dSearch["size"].asVector2f())
+        sf::RectangleShape(dSearch["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bSearch->setPosition(dSearch["position"].asVector2f());
     mButtons.push_back(bSearch.get());

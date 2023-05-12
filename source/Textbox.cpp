@@ -2,7 +2,8 @@
 
 Textbox::Textbox(
     const sf::Text& text,
-    const sf::RectangleShape& background
+    const sf::RectangleShape& background,
+    const Json::Value& json
 )
 : mBackground{background},
 mText{text},
@@ -15,8 +16,12 @@ mIsClicked{false},
 mIsLocked{false},
 mIsSelected{false}
 {
-    mBackground.setFillColor(sf::Color::Blue);
-    mText.setFillColor(sf::Color::Black);
+    setBackgroundColor(json["background_color"].asColor());
+    setTextColor(json["text_color"].asColor());
+    setSelectedColor(json["selected_color"].asColor());
+
+    mBackground.setFillColor(mBackgroundColor);
+    mText.setFillColor(mTextColor);
 }
 
 void Textbox::handleEvent(const sf::Event& event, sf::RenderWindow* window)
@@ -79,10 +84,10 @@ void Textbox::handleEvent(const sf::Event& event, sf::RenderWindow* window)
 void Textbox::handleRealtimeInput(sf::RenderWindow* window)
 {
     if(mIsSelected) {
-        setBackgroundFillColor(sf::Color::Red);
+        setBackgroundFillColor(mSelectedColor);
     }
     else {
-        setBackgroundFillColor(sf::Color::Blue);
+        setBackgroundFillColor(mBackgroundColor);
     }
 }
 
@@ -113,6 +118,21 @@ void Textbox::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) con
 void Textbox::setSelection(bool selected)
 {
     mIsSelected = selected;
+}
+
+void Textbox::setBackgroundColor(const sf::Color &color)
+{
+    mBackgroundColor = color;
+}
+
+void Textbox::setTextColor(const sf::Color &color)
+{
+    mTextColor = color;
+}
+
+void Textbox::setSelectedColor(const sf::Color &color)
+{
+    mSelectedColor = color;
 }
 
 bool Textbox::isClicked() const

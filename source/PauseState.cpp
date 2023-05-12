@@ -93,7 +93,8 @@ void PauseState::buildScenes()
     std::unique_ptr<Button> bResume(new Button(
         Button::Category::Resume,
         sf::Text("Resume", (*getContext().fonts)[Fonts::Default], dResume["charSize"].asUInt()),
-        sf::RectangleShape(dResume["size"].asVector2f())
+        sf::RectangleShape(dResume["size"].asVector2f()),
+        (*getContext().data)["buttons"]
     ));
     bResume->setOrigin(bResume->getLocalBounds().width / 2.f, bResume->getLocalBounds().height / 2.f);
     bResume->setPosition(mWindow->getView().getSize().x / 2.f, dResume["top"].asFloat());
@@ -104,7 +105,8 @@ void PauseState::buildScenes()
     std::unique_ptr<Button> bMenu(new Button(
         Button::Category::Menu,
         sf::Text("Menu", (*getContext().fonts)[Fonts::Default], dMenu["charSize"].asUInt()),
-        sf::RectangleShape(dMenu["size"].asVector2f())
+        sf::RectangleShape(dMenu["size"].asVector2f()),
+        (*getContext().data)["buttons"]
     )); 
     bMenu->setOrigin(bMenu->getLocalBounds().width / 2.f, bMenu->getLocalBounds().height / 2.f);
     bMenu->setPosition(mWindow->getView().getSize().x / 2.f, dMenu["top"].asFloat());
@@ -116,7 +118,8 @@ void PauseState::buildScenes()
     std::unique_ptr<Button> bQuit(new Button(
         Button::Category::Quit,
         sf::Text("Quit", (*getContext().fonts)[Fonts::Default], dQuit["charSize"].asUInt()),
-        sf::RectangleShape(dQuit["size"].asVector2f())
+        sf::RectangleShape(dQuit["size"].asVector2f()),
+        (*getContext().data)["buttons"]
     ));
     bQuit->setOrigin(bQuit->getLocalBounds().width / 2.f, bQuit->getLocalBounds().height / 2.f);
     bQuit->setPosition(mWindow->getView().getSize().x / 2.f, dQuit["top"].asFloat());

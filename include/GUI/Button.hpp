@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <Book/SceneNode.hpp>
+#include <json/json.h>
 
 class Button :
 public SceneNode
@@ -53,10 +54,14 @@ public SceneNode
         };
 
     public:
-        Button(Category category, sf::Text text = sf::Text(), sf::RectangleShape background = sf::RectangleShape());
+        Button(Category category, sf::Text text = sf::Text(), sf::RectangleShape background = sf::RectangleShape(), const Json::Value &data = Json::Value());
         void setBackgroundFillColor(const sf::Color &color);
         void setLocked(bool locked);
         void setInputing(bool inputing);
+        void setBackgroundColor(const sf::Color &color);
+        void setInputingColor(const sf::Color &color);
+        void setLockedColor(const sf::Color &color);
+        void setHoverColor(const sf::Color &color);
         bool isInputing() const;
         bool isLocked() const;
         bool isClicked() const;
@@ -80,6 +85,10 @@ public SceneNode
         bool                    mIsClicked;
         bool                    mIsInputing;
         bool                    mIsClickedAway;
+        sf::Color               mBackgroundColor;
+        sf::Color               mInputingColor;
+        sf::Color               mLockedColor;
+        sf::Color               mHoverColor;
         sf::RectangleShape      mBackground;
         sf::Text                mText;
         Category                mCategory;

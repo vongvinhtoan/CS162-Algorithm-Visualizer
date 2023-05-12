@@ -223,7 +223,8 @@ void Queue::ButtonInitCreate(Button *button)
     std::unique_ptr<Button> bManual (new Button(
         Button::Category::Manual, 
         sf::Text("Manual", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dManual["size"].asVector2f())
+        sf::RectangleShape(dManual["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bManual->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dManual["position"].asVector2f());
     button->attachChild(std::move(bManual));
@@ -232,7 +233,8 @@ void Queue::ButtonInitCreate(Button *button)
     std::unique_ptr<Button> bRandom (new Button(
         Button::Category::Random, 
         sf::Text("Random", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dRamdom["size"].asVector2f())
+        sf::RectangleShape(dRamdom["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bRandom->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dRamdom["position"].asVector2f());
     button->attachChild(std::move(bRandom));
@@ -241,7 +243,8 @@ void Queue::ButtonInitCreate(Button *button)
     std::unique_ptr<Button> bFile (new Button(
         Button::Category::File, 
         sf::Text("From File", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dFile["size"].asVector2f())
+        sf::RectangleShape(dFile["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bFile->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dFile["position"].asVector2f());
     button->attachChild(std::move(bFile));
@@ -253,7 +256,8 @@ void Queue::ButtonInitManualCreate(Button* button)
     auto dTextbox = mData["bInit"]["tInput"];
     std::unique_ptr<Textbox> textbox(new Textbox(
         sf::Text("", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dTextbox["size"].asVector2f())
+        sf::RectangleShape(dTextbox["size"].asVector2f()),
+        (*getContext().data)["textboxes"]
     ));
     textbox->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dTextbox["position"].asVector2f());
     textbox->setLimit(true, dTextbox["limit"].asInt());
@@ -280,7 +284,8 @@ void Queue::ButtonInitManualCreate(Button* button)
     std::unique_ptr<Button> bGo (new Button(
         Button::Category::Go, 
         sf::Text("Go", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dButton["size"].asVector2f())
+        sf::RectangleShape(dButton["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bGo->setPosition(sf::Vector2f(button->getSize().x + textbox->getSize().x, 0.f) + dButton["position"].asVector2f());
 
@@ -412,7 +417,8 @@ void Queue::ButtonAddCreate(Button *button)
     auto dTextbox = mData["bAdd"]["tInput"];
     std::unique_ptr<Textbox> textbox(new Textbox(
         sf::Text("", (*getContext().fonts)[Fonts::Default]),
-        sf::RectangleShape(dTextbox["size"].asVector2f())
+        sf::RectangleShape(dTextbox["size"].asVector2f()),
+        (*getContext().data)["textboxes"]
     ));
     textbox->setPosition(sf::Vector2f(button->getSize().x, 0.f) + dTextbox["position"].asVector2f());
     textbox->setLimit(true, dTextbox["limit"].asInt());
@@ -430,7 +436,8 @@ void Queue::ButtonAddCreate(Button *button)
     std::unique_ptr<Button> bGo(new Button(
         Button::Category::Go,
         sf::Text("Go", (*getContext().fonts)[Fonts::Default]),
-        sf::RectangleShape(dButton["size"].asVector2f())
+        sf::RectangleShape(dButton["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bGo->setPosition(sf::Vector2f(button->getSize().x + textbox->getSize().x, 0.f) + dButton["position"].asVector2f());
 
@@ -513,11 +520,13 @@ void Queue::buildScenes()
     mSceneLayers[Nodes]->attachChild(std::move(tmp));
 
     // Button layer
+    auto dButton = (*getContext().data)["buttons"];
     auto dInit = mData["bInit"];
     std::unique_ptr<Button> bInit (new Button(
         Button::Category::QueueInit, 
         sf::Text("Init", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dInit["size"].asVector2f())
+        sf::RectangleShape(dInit["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bInit->setPosition(dInit["position"].asVector2f());
     mButtons.push_back(bInit.get());
@@ -527,7 +536,8 @@ void Queue::buildScenes()
     std::unique_ptr<Button> bAdd (new Button(
         Button::Category::QueueAdd, 
         sf::Text("Add", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dAdd["size"].asVector2f())
+        sf::RectangleShape(dAdd["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bAdd->setPosition(dAdd["position"].asVector2f());
     mButtons.push_back(bAdd.get());
@@ -537,7 +547,8 @@ void Queue::buildScenes()
     std::unique_ptr<Button> bRemove (new Button(
         Button::Category::QueueRemove, 
         sf::Text("Remove", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(dRemove["size"].asVector2f())
+        sf::RectangleShape(dRemove["size"].asVector2f()),
+        (*getContext().data)["buttons"] 
     ));
     bRemove->setPosition(dRemove["position"].asVector2f());
     mButtons.push_back(bRemove.get());
@@ -547,7 +558,8 @@ void Queue::buildScenes()
     std::unique_ptr<Button> bClear (new Button(
         Button::Category::QueueClear, 
         sf::Text("Clear", (*getContext().fonts)[Fonts::Default]), 
-        sf::RectangleShape(sf::Vector2f(dClear["size"].asVector2f()))
+        sf::RectangleShape(sf::Vector2f(dClear["size"].asVector2f())),
+        (*getContext().data)["buttons"] 
     ));
     bClear->setPosition(dClear["position"].asVector2f());
     mButtons.push_back(bClear.get());

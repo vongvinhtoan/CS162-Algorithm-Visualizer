@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <Book/SceneNode.hpp>
+#include <json/json.h>
 
 class Textbox
 : public SceneNode
@@ -9,12 +10,16 @@ class Textbox
     public:
     Textbox(
             const sf::Text& text = sf::Text(),
-            const sf::RectangleShape& background = sf::RectangleShape()
+            const sf::RectangleShape& background = sf::RectangleShape(),
+            const Json::Value& json = Json::Value()
         );
         void setValidCharFunction(std::function<bool(const std::string &, char)> isValidChar);
         void setPushCharFunction(std::function<void(std::string &, char)> pushChar);
         void setLimit(bool hasLimit, int limit);
         void setSelection(bool selected);
+        void setBackgroundColor(const sf::Color &color);
+        void setTextColor(const sf::Color &color);
+        void setSelectedColor(const sf::Color &color);
         bool isSelected() const;
         bool isClicked() const;
         bool isClickedAway() const;
@@ -35,6 +40,9 @@ class Textbox
     private:
         sf::RectangleShape                                  mBackground;
         sf::Text                                            mText;
+        sf::Color                                           mBackgroundColor;
+        sf::Color                                           mTextColor;
+        sf::Color                                           mSelectedColor;
         std::function<bool(const std::string &, char)>      mIsValidChar;
         std::function<void(std::string &, char)>            mPushChar;
         std::string                                         mString;
