@@ -14,6 +14,7 @@ mCLLArrow(sf::Vector2f(), sf::Vector2f(), 5.f)
     initRandom();
 
     mCLLArrow.setDownOffset(mData["CLLArrow"]["downOffset"].asFloat());
+    mCLLArrow.setColor(mData["CLLArrow"]["color"].asColor());
 }
 
 void CircularLinkedList::insert(int id, std::string val)
@@ -24,9 +25,9 @@ void CircularLinkedList::insert(int id, std::string val)
     std::unique_ptr<SLLNode> node(new SLLNode(
         val,
         (*getContext().fonts)[Fonts::Default],
-        mData["SLLNode"]
+        (*getContext().data)["SLLNode"]
     ));
-    node->setPosition(mData["SLLNode"]["spacing"].asVector2f());
+    node->setPosition((*getContext().data)["SLLNode"]["spacing"].asVector2f());
 
     SLLNode* cur = mHead;
     while(cur != nullptr && (id--) > 0) {
@@ -1208,7 +1209,7 @@ bool CircularLinkedList::update(sf::Time dt)
         node = node->getNext();
     }
 
-    mCLLArrow.setAmortized(mData["SLLNode"]["radius"].asFloat() + mData["SLLNode"]["outlineThickness"].asFloat());
+    mCLLArrow.setAmortized((*getContext().data)["SLLNode"]["radius"].asFloat() + (*getContext().data)["SLLNode"]["outlineThickness"].asFloat());
 
     if(mHead->getNext() != nullptr && mHead->getNext()->getNext() == nullptr) {
         node = mHead->getNext();
@@ -1216,7 +1217,7 @@ bool CircularLinkedList::update(sf::Time dt)
         mCLLArrow.setStart(node->getWorldPosition() + spacing);
         mCLLArrow.setEnd(node->getWorldPosition() - spacing);
 
-        float radius = mData["SLLNode"]["radius"].asFloat() + mData["SLLNode"]["outlineThickness"].asFloat();
+        float radius = (*getContext().data)["SLLNode"]["radius"].asFloat() + (*getContext().data)["SLLNode"]["outlineThickness"].asFloat();
 
         radius = std::sqrt(radius * radius - spacing.x * spacing.x);
 
@@ -1323,9 +1324,9 @@ void CircularLinkedList::buildScenes()
     std::unique_ptr<SLLNode> tmp(new SLLNode(
         "HEAD", 
         (*getContext().fonts)[Fonts::Default],
-        mData["SLLNode"]
+        (*getContext().data)["SLLNode"]
     ));
-    tmp->setPosition(mData["SLLNode"]["position"].asVector2f());
+    tmp->setPosition((*getContext().data)["SLLNode"]["position"].asVector2f());
     tmp->setDontDraw(true);
     mHead = tmp.get();
     mSceneLayers[Nodes]->attachChild(std::move(tmp));

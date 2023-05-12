@@ -26,6 +26,13 @@ mIsClickedAway{false}
     mText.setPosition(backgroundRect.x/2, backgroundRect.y/2);
 }
 
+void Button::updateCurrent(sf::Time dt)
+{
+    auto textRect = mText.getLocalBounds();
+    mText.setOrigin(textRect.left + textRect.width/2.f,
+                    textRect.top  + textRect.height/2.f);
+}
+
 void Button::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(mBackground, states);
@@ -142,6 +149,11 @@ void Button::setLockedColor(const sf::Color &color)
 void Button::setHoverColor(const sf::Color &color)
 {
     mHoverColor = color;
+}
+
+void Button::setCharacterSize(unsigned int size)
+{
+    mText.setCharacterSize(size);
 }
 
 bool Button::isInputing() const

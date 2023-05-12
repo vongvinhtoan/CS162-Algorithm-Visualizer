@@ -24,6 +24,14 @@ void PauseState::draw()
 
 bool PauseState::update(sf::Time dt)
 {
+    auto textRect = mPausedText.getLocalBounds();
+    mPausedText.setOrigin(  
+        textRect.left + textRect.width/2.f,
+        textRect.top  + textRect.height/2.f
+    );
+    mPausedText.setPosition(mWindow->getView().getSize().x / 2.f, mData["tPause"]["top"].asFloat());
+
+    mSceneGraph.update(dt);
     return false;
 }
 
@@ -81,12 +89,7 @@ void PauseState::buildScenes()
     }
 
     // Set the paused text
-    auto textRect = mPausedText.getLocalBounds();
-    mPausedText.setOrigin(  
-        textRect.left + textRect.width/2.f,
-        textRect.top  + textRect.height/2.f
-    );
-    mPausedText.setPosition(mWindow->getView().getSize().x / 2.f, mData["tPause"]["top"].asFloat());
+    mPausedText.setCharacterSize(mData["tPause"]["charSize"].asUInt());
 
     // Set the buttons
     auto dResume = mData["bResume"];
@@ -98,6 +101,7 @@ void PauseState::buildScenes()
     ));
     bResume->setOrigin(bResume->getLocalBounds().width / 2.f, bResume->getLocalBounds().height / 2.f);
     bResume->setPosition(mWindow->getView().getSize().x / 2.f, dResume["top"].asFloat());
+    bResume->setCharacterSize(dResume["charSize"].asUInt());
     mButtons.push_back(bResume.get());
     mSceneLayers[Buttons]->attachChild(std::move(bResume));
 
@@ -110,6 +114,7 @@ void PauseState::buildScenes()
     )); 
     bMenu->setOrigin(bMenu->getLocalBounds().width / 2.f, bMenu->getLocalBounds().height / 2.f);
     bMenu->setPosition(mWindow->getView().getSize().x / 2.f, dMenu["top"].asFloat());
+    bMenu->setCharacterSize(dMenu["charSize"].asUInt());
     mButtons.push_back(bMenu.get());
     mSceneLayers[Buttons]->attachChild(std::move(bMenu));
 
@@ -123,6 +128,7 @@ void PauseState::buildScenes()
     ));
     bQuit->setOrigin(bQuit->getLocalBounds().width / 2.f, bQuit->getLocalBounds().height / 2.f);
     bQuit->setPosition(mWindow->getView().getSize().x / 2.f, dQuit["top"].asFloat());
+    bQuit->setCharacterSize(dQuit["charSize"].asUInt());
     mButtons.push_back(bQuit.get());
     mSceneLayers[Buttons]->attachChild(std::move(bQuit));
 }

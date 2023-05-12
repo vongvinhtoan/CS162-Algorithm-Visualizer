@@ -107,9 +107,9 @@ void Queue::add(std::string val)
     std::unique_ptr<SLLNode> node(new SLLNode(
         val,
         (*getContext().fonts)[Fonts::Default],
-        mData["SLLNode"]
+        (*getContext().data)["SLLNode"]
     ));
-    node->setPosition(mData["SLLNode"]["spacing"].asVector2f());
+    node->setPosition((*getContext().data)["SLLNode"]["spacing"].asVector2f());
 
     node->setNext(nullptr);
     mTail->setNext(node.get());
@@ -512,9 +512,9 @@ void Queue::buildScenes()
     std::unique_ptr<SLLNode> tmp(new SLLNode(
         "HEAD", 
         (*getContext().fonts)[Fonts::Default],
-        mData["SLLNode"]
+        (*getContext().data)["SLLNode"]
     ));
-    tmp->setPosition(mData["SLLNode"]["position"].asVector2f());
+    tmp->setPosition((*getContext().data)["SLLNode"]["position"].asVector2f());
     tmp->setDontDraw(true);
     mHead = tmp.get();
     mTail = tmp.get();

@@ -21,7 +21,7 @@ void StaticArray::allocate(int size)
     mSize = 0;
     mHead->clearChildren();
     mAllocatedSize = size;
-    auto dBlock = mData["arrayBlock"];
+    auto dBlock = (*getContext().data)["ArrayBlock"];
 
     ArrayBlock* cur = mHead;
 
@@ -51,7 +51,7 @@ void StaticArray::insert(int id, std::string val)
         return;
     }
 
-    auto dBlock = mData["arrayBlock"];
+    auto dBlock = (*getContext().data)["ArrayBlock"];
     std::unique_ptr<ArrayBlock> block(new ArrayBlock(
         val, 
         (*getContext().fonts)[Fonts::Default], 
@@ -120,7 +120,7 @@ void StaticArray::delete_(int id)
         cur = cur->getNext();
     }
 
-    auto dBlock = mData["arrayBlock"];
+    auto dBlock = (*getContext().data)["ArrayBlock"];
     std::unique_ptr<ArrayBlock> block(new ArrayBlock(
         "#", 
         (*getContext().fonts)[Fonts::Default], 
@@ -1475,7 +1475,7 @@ void StaticArray::buildScenes()
     }
 
     //Block layer
-    auto dBlock = mData["arrayBlock"];
+    auto dBlock = (*getContext().data)["ArrayBlock"];
     std::unique_ptr<ArrayBlock> node(new ArrayBlock(
         "Head",
         (*getContext().fonts)[Fonts::Default],

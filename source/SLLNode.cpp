@@ -15,7 +15,8 @@ SLLNode::SLLNode(const std::string& data, const sf::Font& font, const Json::Valu
     setOutlineColor(dataJson["outlineColor"].asColor());
     setHighlightColor(dataJson["highlightColor"].asColor());
     setOutlineThickness(dataJson["outlineThickness"].asFloat());
-    mArrow->setFillColor(sf::Color::White);
+    mArrow->setFillColor(dataJson["arrowColor"].asColor());
+    mData.setFillColor(dataJson["textColor"].asColor());
     
     auto textRect = mData.getLocalBounds();
     mData.setOrigin(textRect.left + textRect.width/2.f,

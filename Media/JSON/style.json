@@ -9,21 +9,21 @@
     },
     "textboxes" : {
         "background_color" : {
-            "r" : 157,
-            "g" : 192,
-            "b" : 139,
-            "a" : 255
-        },
-        "text_color" : {
-            "r" : 255,
-            "g" : 255,
-            "b" : 255,
-            "a" : 255
-        },
-        "selected_color" : {
             "r" : 96,
             "g" : 153,
             "b" : 102,
+            "a" : 255
+        },
+        "text_color" : {
+            "r" : 47,
+            "g" : 15,
+            "b" : 93,
+            "a" : 255
+        },
+        "selected_color" : {
+            "r" : 157,
+            "g" : 192,
+            "b" : 139,
             "a" : 255
         }
     },
@@ -47,9 +47,9 @@
             "a" : 255
         },
         "locked_color" : {
-            "r" : 255,
-            "g" : 0,
-            "b" : 0,
+            "r" : 179,
+            "g" : 201,
+            "b" : 156,
             "a" : 255
         },
         "hover_color" : { 
@@ -59,6 +59,83 @@
             "a" : 255
         },
         "character_size" : 30
+    },
+    "SLLNode" : {
+        "radius" : 25,
+        "outlineThickness" : 9,
+        "position" : {
+            "x" : 0,
+            "y" : 100
+        },
+        "fillColor" : {
+            "r" : 164,
+            "g" : 208,
+            "b" : 164,
+            "a" : 255
+        },
+        "outlineColor" : {
+            "r" : 97,
+            "g" : 122,
+            "b" : 85,
+            "a" : 255
+        },
+        "arrowColor" : {
+            "r" : 148,
+            "g" : 175,
+            "b" : 159,
+            "a" : 255
+        },
+        "textColor" : {
+            "r" : 33,
+            "g" : 42,
+            "b" : 62,
+            "a" : 255
+        },
+        "spacing" : {
+            "x" : 120,
+            "y" : 0
+        },
+        "highlightColor" : {
+            "r" : 184,
+            "g" : 98,
+            "b" : 27,
+            "a" : 255
+        }
+    },
+    "ArrayBlock" : {
+        "outlineThickness" : 9,
+        "size" : {
+            "x" : 50,
+            "y" : 50
+        },
+        "position" : {
+            "x" : 0,
+            "y" : 100
+        },
+        "defaultColor" : {
+            "r" : 164,
+            "g" : 208,
+            "b" : 164,
+            "a" : 255
+        },
+        "highlightColor" : {
+            "r" : 184,
+            "g" : 98,
+            "b" : 27,
+            "a" : 255
+        },
+        "outlineColor" : {
+            "r" : 97,
+            "g" : 122,
+            "b" : 85,
+            "a" : 255
+        },
+        "textColor" : {
+            "r" : 33,
+            "g" : 42,
+            "b" : 62,
+            "a" : 255
+        }
     },
     "Stack" : {
         "bInit" : {
@@ -171,30 +248,6 @@
             "size" : {
                 "x" : 200,
                 "y" : 60
-            }
-        },
-        "SLLNode" : {
-            "radius" : 25,
-            "position" : {
-                "x" : 0,
-                "y" : 100
-            },
-            "fillColor" : {
-                "r" : 0,
-                "g" : 0,
-                "b" : 255,
-                "a" : 255
-            },
-            "outlineColor" : {
-                "r" : 255,
-                "g" : 0,
-                "b" : 0,
-                "a" : 255
-            },
-            "outlineThickness" : 9,
-            "spacing" : {
-                "x" : 120,
-                "y" : 0
             }
         }
     },
@@ -309,30 +362,6 @@
             "size" : {
                 "x" : 200,
                 "y" : 60
-            }
-        },
-        "SLLNode" : {
-            "radius" : 25,
-            "position" : {
-                "x" : 0,
-                "y" : 100
-            },
-            "fillColor" : {
-                "r" : 0,
-                "g" : 0,
-                "b" : 255,
-                "a" : 255
-            },
-            "outlineColor" : {
-                "r" : 255,
-                "g" : 0,
-                "b" : 0,
-                "a" : 255
-            },
-            "outlineThickness" : 9,
-            "spacing" : {
-                "x" : 120,
-                "y" : 0
             }
         }
     },
@@ -623,36 +652,6 @@
                     "x" : 200,
                     "y" : 60
                 }
-            }
-        },
-        "SLLNode" : {
-            "radius" : 25,
-            "position" : {
-                "x" : 0,
-                "y" : 100
-            },
-            "fillColor" : {
-                "r" : 0,
-                "g" : 0,
-                "b" : 255,
-                "a" : 255
-            },
-            "highlightColor" : {
-                "r" : 0,
-                "g" : 255,
-                "b" : 115,
-                "a" : 255
-            },
-            "outlineColor" : {
-                "r" : 255,
-                "g" : 0,
-                "b" : 0,
-                "a" : 255
-            },
-            "outlineThickness" : 9,
-            "spacing" : {
-                "x" : 120,
-                "y" : 0
             }
         }
     },
@@ -945,42 +944,18 @@
                 }
             }
         },
-        "SLLNode" : {
-            "radius" : 25,
-            "position" : {
-                "x" : 0,
-                "y" : 100
-            },
-            "fillColor" : {
-                "r" : 0,
-                "g" : 0,
-                "b" : 255,
-                "a" : 255
-            },
-            "highlightColor" : {
-                "r" : 0,
-                "g" : 255,
-                "b" : 115,
-                "a" : 255
-            },
-            "outlineColor" : {
-                "r" : 255,
-                "g" : 0,
-                "b" : 0,
-                "a" : 255
-            },
-            "outlineThickness" : 9,
-            "spacing" : {
-                "x" : 120,
-                "y" : 0
-            }
-        },
         "CLLArrow" : {
             "oneNodeSpacing" : {
                 "x" : 20,
                 "y" : 0
             },
-            "downOffset" : 60
+            "downOffset" : 60,
+            "color" : {
+                "r" : 148,
+                "g" : 175,
+                "b" : 159,
+                "a" : 255
+            }
         }
     },
     "DoublyLinkedList" : {
@@ -1277,37 +1252,43 @@
             "outlineThickness" : 9,
             "spacingArrow" : 15,
             "arrowNextColor" : {
-                "r" : 0,
-                "g" : 255,
-                "b" : 115,
+                "r" : 64,
+                "g" : 142,
+                "b" : 145,
+                "a" : 255
+            },
+            "textColor" : {
+                "r" : 33,
+                "g" : 42,
+                "b" : 62,
                 "a" : 255
             },
             "arrowPrevColor" : {
-                "r" : 255,
-                "g" : 0,
-                "b" : 115,
+                "r" : 228,
+                "g" : 147,
+                "b" : 147,
                 "a" : 255
             },
             "position" : {
                 "x" : 0,
-                "y" : 100
+                "y" : 150
             },
             "fillColor" : {
-                "r" : 0,
-                "g" : 0,
-                "b" : 255,
-                "a" : 255
-            },
-            "highlightColor" : {
-                "r" : 0,
-                "g" : 255,
-                "b" : 115,
+                "r" : 164,
+                "g" : 208,
+                "b" : 164,
                 "a" : 255
             },
             "outlineColor" : {
-                "r" : 255,
-                "g" : 0,
-                "b" : 0,
+                "r" : 97,
+                "g" : 122,
+                "b" : 85,
+                "a" : 255
+            },
+            "highlightColor" : {
+                "r" : 184,
+                "g" : 98,
+                "b" : 27,
                 "a" : 255
             },
             "spacing" : {
@@ -1667,35 +1648,6 @@
                     "y" : 60
                 }
             }
-        },
-        "arrayBlock" : {
-            "outlineThickness" : 9,
-            "size" : {
-                "x" : 50,
-                "y" : 50
-            },
-            "position" : {
-                "x" : 0,
-                "y" : 100
-            },
-            "defaultColor" : {
-                "r" : 0,
-                "g" : 0,
-                "b" : 255,
-                "a" : 255
-            },
-            "highlightColor" : {
-                "r" : 0,
-                "g" : 255,
-                "b" : 115,
-                "a" : 255
-            },
-            "outlineColor" : {
-                "r" : 255,
-                "g" : 0,
-                "b" : 0,
-                "a" : 255
-            }
         }
     },
     "StaticArray" : {
@@ -2049,135 +2001,107 @@
                     "y" : 60
                 }
             }
-        },
-        "arrayBlock" : {
-            "outlineThickness" : 9,
-            "size" : {
-                "x" : 50,
-                "y" : 50
-            },
-            "position" : {
-                "x" : 0,
-                "y" : 100
-            },
-            "defaultColor" : {
-                "r" : 0,
-                "g" : 0,
-                "b" : 255,
-                "a" : 255
-            },
-            "highlightColor" : {
-                "r" : 0,
-                "g" : 255,
-                "b" : 115,
-                "a" : 255
-            },
-            "outlineColor" : {
-                "r" : 255,
-                "g" : 0,
-                "b" : 0,
-                "a" : 255
-            }
         }
     },
     "PauseState" : {
         "tPause" : {
-            "top" : 90
+            "top" : 130,
+            "charSize" : 100
         },
         "bResume" : {
-            "top" : 240,
-            "charSize" : 40,
+            "top" : 300,
+            "charSize" : 50,
             "size" : {
-                "x" : 250,
-                "y" : 75
+                "x" : 300,
+                "y" : 110
             }
         },
         "bMenu" : {
-            "top" : 360,
-            "charSize" : 40,
+            "top" : 460,
+            "charSize" : 50,
             "size" : {
-                "x" : 250,
-                "y" : 75
+                "x" : 300,
+                "y" : 110
             }
         },
         "bQuit" : {
-            "top" : 480,
-            "charSize" : 40,
+            "top" : 620,
+            "charSize" : 50,
             "size" : {
-                "x" : 250,
-                "y" : 75
+                "x" : 300,
+                "y" : 110
             }
         }
     },
     "MenuState" : {
         "bStaticArray" : {
             "size" : {
-                "x" : 250,
-                "y" : 75
+                "x" : 260,
+                "y" : 170
             },
             "position" : {
-                "x" : 100,
-                "y" : 100
+                "x" : 210,
+                "y" : 105
             }
         },
         "bDynamicArray" : {
             "size" : {
-                "x" : 250,
-                "y" : 75
+                "x" : 260,
+                "y" : 170
             },
             "position" : {
-                "x" : 100,
-                "y" : 200
+                "x" : 530,
+                "y" : 105
             }
         },
         "bSinglyLinkedList" : {
             "size" : {
-                "x" : 250,
-                "y" : 75
+                "x" : 260,
+                "y" : 170
             },
             "position" : {
-                "x" : 100,
-                "y" : 300
+                "x" : 50,
+                "y" : 315
             }
         },
         "bDoublyLinkedList" : {
             "size" : {
-                "x" : 250,
-                "y" : 75
+                "x" : 260,
+                "y" : 170
             },
             "position" : {
-                "x" : 100,
-                "y" : 400
+                "x" : 370,
+                "y" : 315
             }
         },
         "bCircularLinkedList" : {
             "size" : {
-                "x" : 250,
-                "y" : 75
+                "x" : 260,
+                "y" : 170
             },
             "position" : {
-                "x" : 100,
-                "y" : 500
+                "x" : 690,
+                "y" : 315
             }
         },
         "bStack" : {
             "size" : {
-                "x" : 250,
-                "y" : 75
+                "x" : 260,
+                "y" : 170
             },
             "position" : {
-                "x" : 100,
-                "y" : 600
+                "x" : 210,
+                "y" : 525
             }
         },
         "bQueue" : {
             "size" : {
-                "x" : 250,
-                "y" : 75
+                "x" : 260,
+                "y" : 170
             },
             "position" : {
-                "x" : 100,
-                "y" : 700
+                "x" : 530,
+                "y" : 525
             }
         }
     }

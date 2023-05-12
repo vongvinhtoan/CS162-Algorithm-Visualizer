@@ -62,6 +62,7 @@ public SceneNode
         void setInputingColor(const sf::Color &color);
         void setLockedColor(const sf::Color &color);
         void setHoverColor(const sf::Color &color);
+        void setCharacterSize(unsigned int size);
         bool isInputing() const;
         bool isLocked() const;
         bool isClicked() const;
@@ -75,6 +76,7 @@ public SceneNode
         void handleRealtimeInput(sf::RenderWindow* window);
 
     public:
+        virtual void updateCurrent(sf::Time dt);
         virtual unsigned int getCategory() const;
 
     private:

@@ -22,9 +22,9 @@ void SinglyLinkedList::insert(int id, std::string val)
     std::unique_ptr<SLLNode> node(new SLLNode(
         val,
         (*getContext().fonts)[Fonts::Default],
-        mData["SLLNode"]
+        (*getContext().data)["SLLNode"]
     ));
-    node->setPosition(mData["SLLNode"]["spacing"].asVector2f());
+    node->setPosition((*getContext().data)["SLLNode"]["spacing"].asVector2f());
 
     SLLNode* cur = mHead;
     while(cur != nullptr && (id--) > 0) {
@@ -1277,9 +1277,9 @@ void SinglyLinkedList::buildScenes()
     std::unique_ptr<SLLNode> tmp(new SLLNode(
         "HEAD", 
         (*getContext().fonts)[Fonts::Default],
-        mData["SLLNode"]
+        (*getContext().data)["SLLNode"]
     ));
-    tmp->setPosition(mData["SLLNode"]["position"].asVector2f());
+    tmp->setPosition((*getContext().data)["SLLNode"]["position"].asVector2f());
     tmp->setDontDraw(true);
     mHead = tmp.get();
     mSceneLayers[Nodes]->attachChild(std::move(tmp));

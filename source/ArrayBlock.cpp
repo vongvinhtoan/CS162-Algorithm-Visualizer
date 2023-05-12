@@ -22,6 +22,7 @@ ArrayBlock::ArrayBlock(const std::string& data, const sf::Font& font, const Json
     mBackground->setOutlineThickness(dataJson["outlineThickness"].asFloat());
     mHideBackground->setSize(sf::Vector2f(dataJson["size"].asVector2f()));
     mHideBackground->setFillColor(sf::Color(0, 0, 0, 150));
+    mData.setFillColor(dataJson["textColor"].asColor());
 
     auto textRect = mData.getLocalBounds();
     mData.setOrigin(textRect.left + textRect.width/2.f,

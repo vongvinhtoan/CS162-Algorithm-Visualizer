@@ -20,6 +20,7 @@ DLLNode::DLLNode(const std::string& data, const sf::Font& font, const Json::Valu
     mArrowPrev = std::unique_ptr<Arrow>(new Arrow(sf::Vector2f(0, 0), sf::Vector2f(0, 0), 5, 10, 10));
     mArrowNext->setFillColor(dataJson["arrowNextColor"].asColor());
     mArrowPrev->setFillColor(dataJson["arrowPrevColor"].asColor());
+    mData.setFillColor(dataJson["textColor"].asColor());
 
     auto textRect = mData.getLocalBounds();
     mData.setOrigin(textRect.left + textRect.width/2.f,

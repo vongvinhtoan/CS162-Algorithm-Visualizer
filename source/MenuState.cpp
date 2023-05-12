@@ -99,7 +99,7 @@ void MenuState::buildScenes()
     auto dStaticArray = mData["bStaticArray"];
     std::unique_ptr<Button> bStaticArray (new Button(
         Button::Category::StaticArray, 
-        sf::Text("StaticArray", (*getContext().fonts)[Fonts::Default]), 
+        sf::Text("Static Array", (*getContext().fonts)[Fonts::Default]), 
         sf::RectangleShape(dStaticArray["size"].asVector2f()),
         dButton
     ));
@@ -110,7 +110,7 @@ void MenuState::buildScenes()
     auto dDynamicArray = mData["bDynamicArray"];
     std::unique_ptr<Button> bDynamicArray (new Button(
         Button::Category::DynamicArray, 
-        sf::Text("DynamicArray", (*getContext().fonts)[Fonts::Default]), 
+        sf::Text("Dynamic Array", (*getContext().fonts)[Fonts::Default]), 
         sf::RectangleShape(dDynamicArray["size"].asVector2f()),
         dButton
     ));
@@ -121,7 +121,7 @@ void MenuState::buildScenes()
     auto dSinglyLinkedList = mData["bSinglyLinkedList"];
     std::unique_ptr<Button> bSinglyLinkedList (new Button(
         Button::Category::SinglyLinkedList, 
-        sf::Text("SinglyLinkedList", (*getContext().fonts)[Fonts::Default]), 
+        sf::Text("     Singly\nLinked List", (*getContext().fonts)[Fonts::Default]), 
         sf::RectangleShape(dSinglyLinkedList["size"].asVector2f()),
         dButton
     ));
@@ -132,7 +132,7 @@ void MenuState::buildScenes()
     auto dDoublyLinkedList = mData["bDoublyLinkedList"];
     std::unique_ptr<Button> bDoublyLinkedList (new Button(
         Button::Category::DoublyLinkedList, 
-        sf::Text("DoublyLinkedList", (*getContext().fonts)[Fonts::Default]), 
+        sf::Text("    Doubly\nLinked List", (*getContext().fonts)[Fonts::Default]), 
         sf::RectangleShape(dDoublyLinkedList["size"].asVector2f()),
         dButton
     ));
@@ -143,7 +143,7 @@ void MenuState::buildScenes()
     auto dCircularLinkedList = mData["bCircularLinkedList"];
     std::unique_ptr<Button> bCircularLinkedList (new Button(
         Button::Category::CircularLinkedList, 
-        sf::Text("CircularLinkedList", (*getContext().fonts)[Fonts::Default]), 
+        sf::Text("   Circular\nLinked List", (*getContext().fonts)[Fonts::Default]), 
         sf::RectangleShape(dCircularLinkedList["size"].asVector2f()),
         dButton
     ));
