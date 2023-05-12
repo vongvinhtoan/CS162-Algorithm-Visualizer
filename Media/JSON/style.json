@@ -1,9 +1,17 @@
 {
+    "background" : {
+        "default_color" : {
+            "r" : 237,
+            "g" : 241,
+            "b" : 214,
+            "a" : 255
+        }
+    },
     "textboxes" : {
         "background_color" : {
-            "r" : 0,
-            "g" : 0,
-            "b" : 225,
+            "r" : 157,
+            "g" : 192,
+            "b" : 139,
             "a" : 255
         },
         "text_color" : {
@@ -13,17 +21,17 @@
             "a" : 255
         },
         "selected_color" : {
-            "r" : 255,
-            "g" : 0,
-            "b" : 0,
+            "r" : 96,
+            "g" : 153,
+            "b" : 102,
             "a" : 255
         }
     },
     "buttons" : {
         "background_color" : {
-            "r" : 0,
-            "g" : 0,
-            "b" : 0,
+            "r" : 96,
+            "g" : 153,
+            "b" : 102,
             "a" : 255
         },
         "text_color" : {
@@ -33,9 +41,9 @@
             "a" : 255
         },
         "inputing_color" : {
-            "r" : 255,
-            "g" : 255,
-            "b" : 255,
+            "r" : 64,
+            "g" : 81,
+            "b" : 59,
             "a" : 255
         },
         "locked_color" : {
@@ -44,10 +52,10 @@
             "b" : 0,
             "a" : 255
         },
-        "hover_color" : {
-            "r" : 0,
-            "g" : 255,
-            "b" : 0,
+        "hover_color" : { 
+            "r" : 157,
+            "g" : 192,
+            "b" : 139,
             "a" : 255
         },
         "character_size" : 30

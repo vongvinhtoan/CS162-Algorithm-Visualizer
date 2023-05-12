@@ -1485,6 +1485,7 @@ void DynamicArray::handleEventButtonSearch_Go(Button *button, const sf::Event& e
 
 void DynamicArray::draw()
 {
+    drawBackground();
     mWindow->draw(mSceneGraph);
 }
 

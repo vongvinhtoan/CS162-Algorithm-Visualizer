@@ -1194,6 +1194,7 @@ void DoublyLinkedList::handleEventButtonSearch_Go(Button *button, const sf::Even
 
 void DoublyLinkedList::draw()
 {
+    drawBackground();
     mWindow->draw(mSceneGraph);
 }
 

@@ -15,6 +15,7 @@ mDialogOpener(context.dialogOpener)
 
 void Queue::draw()
 {
+    drawBackground();
     mWindow->draw(mSceneGraph);
 }
 

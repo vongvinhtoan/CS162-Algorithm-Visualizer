@@ -53,12 +53,14 @@ class State
         virtual bool    update(sf::Time dt) = 0;
         virtual bool    handleEvent(const sf::Event& event) = 0;
         virtual bool    handleRealtimeInput() = 0;
+        void            drawBackground();
     protected:
         void            requestStackPush(States::ID stateID);
         void            requestStackPop();
         void            requestStateClear();
         Context         getContext() const;
     private:
-        StateStack*     mStack;
-        Context         mContext;
+        StateStack*         mStack;
+        Context             mContext;
+        sf::RectangleShape  mBackground;
 };

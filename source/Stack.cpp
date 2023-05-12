@@ -15,6 +15,7 @@ mDialogOpener(context.dialogOpener)
 
 void Stack::draw()
 {
+    drawBackground();
     mWindow->draw(mSceneGraph);
 }
 

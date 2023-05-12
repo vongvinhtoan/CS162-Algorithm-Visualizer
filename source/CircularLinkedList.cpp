@@ -1187,6 +1187,7 @@ void CircularLinkedList::handleEventButtonSearch_Go(Button *button, const sf::Ev
 
 void CircularLinkedList::draw()
 {
+    drawBackground();
     mWindow->draw(mCLLArrow);
     mWindow->draw(mSceneGraph);
 }

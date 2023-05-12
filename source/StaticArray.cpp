@@ -1371,6 +1371,7 @@ void StaticArray::handleEventButtonSearch_Go(Button *button, const sf::Event& ev
 
 void StaticArray::draw()
 {
+    drawBackground();
     mWindow->draw(mSceneGraph);
 }
 

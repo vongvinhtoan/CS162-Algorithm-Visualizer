@@ -1,4 +1,5 @@
 #include <States/MenuState.hpp>
+#include <iostream>
 
 MenuState::MenuState(StateStack& stack, Context context) : 
 State(stack, context),
@@ -10,6 +11,7 @@ mData((*context.data)["MenuState"])
 
 void MenuState::draw()
 {
+    drawBackground();
     mWindow->draw(mSceneGraph);
 }
 

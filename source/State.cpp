@@ -1,5 +1,6 @@
 #include <Book/State.hpp>
 #include <Book/StateStack.hpp>
+#include <iostream>
 
 State::Context::Context
 (
@@ -15,12 +16,19 @@ textures(&textures),
 fonts(&fonts),
 data(&data),
 dialogOpener(&dialogOpener),
-randomizer(&randomizer){}
+randomizer(&randomizer)
+{
+}
 
 
 State::State(StateStack& stack, Context context) : 
 mContext(context),
-mStack(&stack) {}
+mStack(&stack) 
+{
+    auto dBackground = (*getContext().data)["background"];
+    mBackground.setSize((sf::Vector2f) getContext().window->getSize());
+    mBackground.setFillColor(dBackground["default_color"].asColor());
+}
 
 State::~State()
 {
@@ -45,4 +53,9 @@ void State::requestStateClear()
 State::Context State::getContext() const
 {
     return mContext;
+}
+
+void State::drawBackground()
+{
+    getContext().window->draw(mBackground);
 }

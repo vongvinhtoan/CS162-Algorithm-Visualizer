@@ -1174,6 +1174,7 @@ void SinglyLinkedList::handleEventButtonSearch_Go(Button *button, const sf::Even
 
 void SinglyLinkedList::draw()
 {
+    drawBackground();
     mWindow->draw(mSceneGraph);
 }
 
