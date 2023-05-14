@@ -50,6 +50,10 @@ void DynamicArray::insert(int id, std::string val)
     if(id < 0 || id > mSize) {
         return;
     }
+    if(val.size() > 2) {
+        return;
+    }
+    if(val.size() == 0) return;
 
     auto dBlock = (*getContext().data)["ArrayBlock"];
     std::unique_ptr<ArrayBlock> block(new ArrayBlock(
